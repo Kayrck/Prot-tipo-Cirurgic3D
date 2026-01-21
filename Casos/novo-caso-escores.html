@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Caso - Cirurgic3D</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/escores-detalhes.css">
+    <style>
+        /* Título fora do container, alinhado à esquerda conforme padrão do sistema */
+        .page-header {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            text-align: left;
+        }
+
+        /* Container do Formulário com Fundo Branco e Bordas Arredondadas */
+        .form-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Área de Upload com Fundo Azul Transparente (ajustado conforme solicitado) */
+        .upload-section {
+            border: 2px dashed #00b8a9;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            background: rgba(0, 184, 169, 0.04); /* Azul/Teal quase transparente */
+            transition: all 0.2s ease;
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 35px;
+        }
+        
+        .upload-icon-circle {
+            width: 50px;
+            height: 50px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 20px;
+            color: #00b8a9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Layout Vertical */
+        .form-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .field-group input, .field-group select {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        /* Campo de Data com largura reduzida (Padrão de mercado) */
+        .date-input {
+            max-width: 200px;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+        #file-input {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        #file-info {
+            display: none;
+            margin-top: 15px;
+            color: #00b8a9;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+  
+  <!-- LOGO -->
+  <div class="navbar-left">
+    <a href="../Home/index.html" class="navbar-logo">
+      <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+    </a>
+  </div>
+
+  <!-- MENU CENTRAL -->
+  <ul class="navbar-menu">
+    <li>
+      <a href="../Home/index.html" class="nav-link">
+        Casos Clínicos
+      </a>
+    </li>
+    <li>
+      <a href="../Escores/index.html" class="nav-link active">
+        Escores Clínicos
+      </a>
+    </li>
+  </ul>
+
+  <!-- PERFIL -->
+  <div class="navbar-right">
+    <div class="user-menu">
+      <span class="user-name">Dr. Silva</span>
+      <img
+        src="../assets/img/perfil.jpg"
+        alt="Usuário"
+        class="user-avatar"
+      />
+    </div>
+  </div>
+</nav>
+
+    <main class="container">
+        <nav class="breadcrumb" style="max-width: 800px; margin: 0 auto 15px auto;">
+            <a href="../Escores/index.html">Escores Clínicos</a> <span>&gt;</span> <strong>Novo Caso Clínico</strong>
+        </nav>
+
+        <header class="page-header">
+            <h1 style="font-size: 28px; font-weight: 700; color: #0f172a;">Adicionar novo caso</h1>
+            <p style="color: #64748b; margin-top: 5px;">Upload de exames e informações do paciente.</p>
+        </header>
+
+        <div class="form-card">
+            <form id="formNovoCaso">
+                
+                <div class="upload-section" id="drop-zone">
+                    <input type="file" id="file-input">
+                    <div id="upload-content">
+                        <div class="upload-icon-circle">↑</div>
+                        <p style="font-size: 16px; color: #334155;">
+                            <span style="color: #00b8a9; font-weight: 700;">Clique para upload</span> ou arraste e solte
+                        </p>
+                        <p style="font-size: 13px; color: #94a3b8; margin-top: 5px;">DICOM, ZIP ou imagens (máx. 500MB)</p>
+                    </div>
+                    <div id="file-info"></div>
+                </div>
+
+                <div class="form-vertical">
+                    <div class="field-group">
+                        <label>Referência do Caso</label>
+                        <input type="text" id="referencia" value="CASO-2025-01-12">
+                        <p class="helper-text">A referência é gerada automaticamente, mas pode ser editada.</p>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Equipe</label>
+                        <select id="equipe">
+                            <option value="" disabled selected>Selecione uma equipe</option>
+                            <option value="Equipe Alpha">Equipe Alpha</option>
+                            <option value="Equipe Beta">Equipe Beta</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Tipo de Modelo *</label>
+                        <select id="orgao" required>
+                            <option value="" disabled selected>Selecione o tipo de modelo</option>
+                            <option value="Rim">Rim</option>
+                            <option value="Próstata">Próstata</option>
+                            <option value="Fígado">Fígado</option>
+                            <option value="Pulmão">Pulmão</option>
+                        </select>
+                        <p class="helper-text">Selecione o órgão ou tipo de modelo a ser reconstruído.</p>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Data do procedimento *</label>
+                        <input type="date" id="data_procedimento" class="date-input" required>
+                    </div>
+                </div>
+
+                <div class="footer-actions" style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 25px; display: flex; justify-content: flex-end; gap: 15px;">
+                   <button type="button" class="btn-back" onclick="window.history.back()" style="background: none; border: none; color: #64748b; font-weight: 600; cursor: pointer;">
+    Cancelar
+</button>
+                    <button type="submit" class="btn-apply" style="margin: 0; background: #00b8a9; padding: 12px 30px; border-radius: 8px; color: white; border: none; font-weight: 600; cursor: pointer;">Criar Caso</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+        <script>
+        
+            const fileInput = document.getElementById('file-input');
+            const fileInfo = document.getElementById('file-info');
+            const uploadContent = document.getElementById('upload-content');
+
+        
+            function ajustarBreadcrumbDinamico() {
+            
+                const breadcrumbLink = document.querySelector('.breadcrumb a');
+                
+                // document.referrer identifica de qual página o usuário veio
+                if (document.referrer.includes('Escores')) {
+                    if (breadcrumbLink) {
+                        // Aqui corrigimos o erro: mudamos o texto e o destino do link
+                        breadcrumbLink.innerText = "Escores Clínicos";
+                        breadcrumbLink.href = "../Escores/index.html";
+                    }
+                }
+            }
+
+            // Executa a correção assim que a página carrega
+            window.addEventListener('DOMContentLoaded', ajustarBreadcrumbDinamico);
+
+            // --- LÓGICA DE UPLOAD ---
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    uploadContent.style.display = 'none';
+                    fileInfo.style.display = 'block';
+                    fileInfo.innerText = "✔️ Arquivo selecionado: " + e.target.files[0].name;
+                }
+            });
+
+            // --- FUNÇÃO VOLTAR (PARA O BOTÃO CANCELAR E APÓS SALVAR) ---
+            function voltarParaOrigem() {
+                if (document.referrer.includes('Escores')) {
+                    window.location.href = "../Escores/index.html";
+                } else {
+                    window.location.href = "../Home/index.html";
+                }
+            }
+
+            // --- SUBMISSÃO DO FORMULÁRIO ---
+            document.getElementById('formNovoCaso').onsubmit = function(e) {
+                e.preventDefault();
+                
+                const ref = document.getElementById('referencia').value;
+                const orgao = document.getElementById('orgao').value;
+                const data = document.getElementById('data_procedimento').value;
+
+                const novoCaso = {
+                    id: ref,
+                    nome: "Paciente " + Math.floor(Math.random() * 9000),
+                    orgao: orgao,
+                    status: "analise",
+                    statusText: "Em análise",
+                    class: "status-blue",
+                    data: data || new Date().toISOString().split('T')[0]
+                };
+
+                let casos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+                casos.unshift(novoCaso);
+                localStorage.setItem('casosClinicos', JSON.stringify(casos));
+
+                alert("Caso criado com sucesso!");
+                
+                // Após o alerta, ele volta para a tela correta (Home ou Escores)
+                voltarParaOrigem();
+            };
+        </script>
+    </body>
+</html>
