@@ -6,7 +6,6 @@
     <title>Cirurgic3D - Gestão de Casos</title>
     <link rel="stylesheet" href="../assets/css/global.css">
     <style>
-        /* Ajuste para as miniaturas quadradas com bordas arredondadas como na imagem */
         .case-img {
             width: 80px;
             height: 80px;
@@ -23,8 +22,6 @@
             height: 100%;
             object-fit: cover;
         }
-
-        /* Correção para o botão não ficar colado na busca */
         .action-bar {
             display: flex;
             align-items: center;
@@ -37,6 +34,7 @@
     </style>
 </head>
 <body>
+
 <nav class="navbar">
   <div class="navbar-left">
     <a href="../Home/index.html" class="navbar-logo">
@@ -64,7 +62,9 @@
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Pesquisar por ID ou descrição...">
         </div>
-        <button class="btn-add"><span>+</span> Adicionar caso</button>
+        <a href="../Casos/novo-caso.html" class="btn-add" style="text-decoration: none;">
+            <span>+</span> Adicionar caso
+        </a>
     </div>
 
     <div class="filters-row">
@@ -102,99 +102,104 @@
 </main>
 
 <script>
-    // 1. Banco de Dados com 8 Casos e novos órgãos
-    const casesData = [
-        { id: 'CASO-2024-001', date: '2024-01-15', desc: 'Reconstrução 3D - Adenocarcinoma de Cólon descendente', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'colon', thumb: '../assets/img/casos/colon-1.jpg' },
-        { id: 'CASO-2024-002', date: '2024-01-14', desc: 'Nódulo pulmonar - Lobo superior direito', status: 'arquivado', statusText: 'Documentos ilegíveis', class: 'status-red', organ: 'pulmao', thumb: '../assets/img/casos/pulmao-1.jpg' },
-        { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', thumb: '../assets/img/casos/rins-1.jpg' },
-        { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', thumb: '../assets/img/casos/figado-1.jpg' },
-        { id: 'CASO-2024-005', date: '2024-01-11', desc: 'Planejamento - Ressecção de Cólon Transverso', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'colon', thumb: '../assets/img/casos/colon-2.jpg' },
-        { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', thumb: '../assets/img/casos/rins-2.jpg' },
-        { id: 'CASO-2024-007', date: '2024-01-09', desc: 'Malformação Arteriovenosa Pulmonar', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'pulmao', thumb: '../assets/img/casos/pulmao-2.jpg' },
-        { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', thumb: '../assets/img/casos/figado-2.jpg' }
-    ];
+// 1. Banco de Dados Base (Atualizado com orgaoNome)
+const casesData = [
+    { id: 'CASO-2024-001', date: '2024-01-15', desc: 'Reconstrução 3D - Adenocarcinoma de Cólon descendente', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/colon-1.jpg' },
+    { id: 'CASO-2024-002', date: '2024-01-14', desc: 'Nódulo pulmonar - Lobo superior direito', status: 'arquivado', statusText: 'Documentos ilegíveis', class: 'status-red', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/pulmao-1.jpg' },
+    { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/rins-1.jpg' },
+    { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/figado-1.jpg' },
+    { id: 'CASO-2024-005', date: '2024-01-11', desc: 'Planejamento - Ressecção de Cólon Transverso', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/colon-2.jpg' },
+    { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/rins-2.jpg' },
+    { id: 'CASO-2024-007', date: '2024-01-09', desc: 'Malformação Arteriovenosa Pulmonar', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/pulmao-2.jpg' },
+    { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/figado-2.jpg' }
+];
 
-    const casesContainer = document.getElementById('cases-list');
-    const searchInput = document.getElementById('searchInput');
-    const organFilter = document.getElementById('organFilter');
-    const dateStart = document.getElementById('dateStart');
-    const dateEnd = document.getElementById('dateEnd');
+// 2. Função para integrar os casos do LocalStorage
+function obterCasosCompletos() {
+    const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+    const casosFormatados = salvos.map(c => ({
+        id: c.id,
+        date: c.data,
+        desc: `Reconstrução 3D - ${c.orgao}`,
+        status: 'analise',
+        statusText: 'Em análise',
+        class: 'status-blue',
+        organ: c.orgao.toLowerCase(),
+        orgaoNome: c.orgao, // Guarda o nome original para os detalhes
+        thumb: '' 
+    }));
+    return [...casosFormatados, ...casesData];
+}
 
-    function renderCases(data) {
-        casesContainer.innerHTML = '';
+const casesContainer = document.getElementById('cases-list');
+const searchInput = document.getElementById('searchInput');
+const organFilter = document.getElementById('organFilter');
+
+// 3. Renderização dos Cards com Link de Detalhes Dinâmico
+function renderCases(data) {
+    casesContainer.innerHTML = '';
+    
+    if (data.length === 0) {
+        casesContainer.innerHTML = '<p style="text-align:center; padding:50px; color:#999;">Nenhum caso encontrado.</p>';
+        return;
+    }
+
+    data.forEach(item => {
+        const dateObj = new Date(item.date + 'T00:00:00');
+        const formattedDate = dateObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
         
-        if (data.length === 0) {
-            casesContainer.innerHTML = '<p style="text-align:center; padding:50px; color:#999;">Nenhum caso encontrado.</p>';
-            return;
-        }
-
-        data.forEach(item => {
-            const dateObj = new Date(item.date + 'T00:00:00');
-            const formattedDate = dateObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
-            const imageSrc = item.thumb || 'https://via.placeholder.com/80x80?text=3D';
-
-            const card = `
-                <div class="case-card">
-                    <div class="case-img">
-                        <img src="${imageSrc}" onerror="this.src='https://via.placeholder.com/80/000000/FFFFFF?text=Vista+3D'" alt="Miniatura">
-                    </div>
-                    <div class="case-info">
-                        <span class="case-date">${formattedDate}</span>
-                        <h3>${item.id}</h3>
-                        <p>${item.desc}</p>
-                        <div class="status-badge ${item.class}">
-                            <span class="dot" style="background: currentColor;"></span> ${item.statusText}
-                        </div>
-                    </div>
-                    <div class="case-actions">
-                        <button class="btn-outline">Detalhes</button>
-                        <button class="btn-solid">Gerar link de pagamento</button>
+        const card = `
+            <div class="case-card">
+                <div class="case-img">
+                    <img src="${item.thumb}" onerror="this.src='https://via.placeholder.com/80/000000/FFFFFF?text=Vista+3D'" alt="Miniatura">
+                </div>
+                <div class="case-info">
+                    <span class="case-date">${formattedDate}</span>
+                    <h3>${item.id}</h3>
+                    <p>${item.desc}</p>
+                    <div class="status-badge ${item.class}">
+                        <span class="dot" style="background: currentColor;"></span> ${item.statusText}
                     </div>
                 </div>
-            `;
-            casesContainer.innerHTML += card;
-        });
-    }
+                <div class="case-actions">
+                    <a href="../Detalhes/index.html?id=${item.id}" class="btn-outline" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">Detalhes</a>
+                    <button class="btn-solid">Gerar link de pagamento</button>
+                </div>
+            </div>
+        `;
+        casesContainer.innerHTML += card;
+    });
+}
 
-    function applyFilters() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const selectedOrgan = organFilter.value;
-        const activeTabElement = document.querySelector('.tab.active');
-        const activeTab = activeTabElement ? activeTabElement.dataset.status : 'todos';
-        const start = dateStart.value;
-        const end = dateEnd.value;
+function applyFilters() {
+    const allData = obterCasosCompletos();
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedOrgan = organFilter.value;
+    const activeTabElement = document.querySelector('.tab.active');
+    const activeTab = activeTabElement ? activeTabElement.dataset.status : 'todos';
 
-        const filtered = casesData.filter(item => {
-            const matchesSearch = item.id.toLowerCase().includes(searchTerm) || item.desc.toLowerCase().includes(searchTerm);
-            const matchesOrgan = selectedOrgan === 'todos' || item.organ === selectedOrgan;
-            const matchesStatus = activeTab === 'todos' || item.status === activeTab;
-            
-            let matchesDate = true;
-            if (start) matchesDate = matchesDate && (item.date >= start);
-            if (end) matchesDate = matchesDate && (item.date <= end);
-
-            return matchesSearch && matchesOrgan && matchesStatus && matchesDate;
-        });
-
-        renderCases(filtered);
-    }
-
-    // Event Listeners
-    searchInput.addEventListener('input', applyFilters);
-    organFilter.addEventListener('change', applyFilters);
-    dateStart.addEventListener('change', applyFilters);
-    dateEnd.addEventListener('change', applyFilters);
-    
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            e.target.classList.add('active');
-            applyFilters();
-        });
+    const filtered = allData.filter(item => {
+        const matchesSearch = item.id.toLowerCase().includes(searchTerm) || item.desc.toLowerCase().includes(searchTerm);
+        const matchesOrgan = selectedOrgan === 'todos' || item.organ.includes(selectedOrgan);
+        const matchesStatus = activeTab === 'todos' || item.status === activeTab;
+        return matchesSearch && matchesOrgan && matchesStatus;
     });
 
-    // Inicialização
-    renderCases(casesData);
+    renderCases(filtered);
+}
+
+// Listeners
+searchInput.addEventListener('input', applyFilters);
+organFilter.addEventListener('change', applyFilters);
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        applyFilters();
+    });
+});
+
+renderCases(obterCasosCompletos());
 </script>
 </body>
 </html>

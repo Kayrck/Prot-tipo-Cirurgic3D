@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirurgic3D - Detalhes do Caso</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <style>
+        /* Estilos específicos para a Dashboard que talvez não estejam no seu global.css */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .viewer-3d {
+            background: #0a0a23; /* Azul escuro profundo */
+            border-radius: 12px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .badge-id-large {
+            background: #e0f2f1;
+            color: #00897b;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            border: 1px solid #b2dfdb;
+        }
+
+        .info-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .exam-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            background: #f8fafc;
+        }
+
+        .exam-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: #000;
+        }
+
+        .timeline {
+            border-left: 2px solid #3b82f6;
+            margin-left: 10px;
+            padding-left: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="../Home/index.html" class="navbar-logo">
+            <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+        </a>
+    </div>
+    <ul class="navbar-menu">
+        <li><a href="../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+        <li><a href="../Escores/index.html" class="nav-link">Escores Clínicos</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+    <nav class="breadcrumb">
+        <a href="../Home/index.html" id="breadcrumb-link">Home</a> <span>&gt;</span> <strong id="breadcrumb-id">Carregando...</strong>
+    </nav>
+
+    <div class="viewer-3d">
+        <button style="position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 5px 12px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+            <span>📦</span> Vista 3D
+        </button>
+        <img src="../assets/img/skull-blue.png" id="main-3d-image" alt="3D Model" style="max-height: 80%; filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));">
+    </div>
+
+    <div style="background: #e9f7f2; color: #10b981; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600; margin-bottom: 25px; border: 1px solid #d1f2e8;">
+        Caso #<span id="display-id">---</span>
+    </div>
+
+    <section class="info-section" style="margin-bottom: 25px;">
+        <h2 style="font-size: 1.1rem; margin-bottom: 25px; color: #1e293b;">Informações do Caso</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div>
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Referência do caso</label>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span id="info-ref" style="font-weight: 600; color: #1e293b;">---</span>
+                        <span style="cursor: pointer; font-size: 0.8rem;">✏️</span>
+                    </div>
+                </div>
+                <div>
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Tipo de modelo</label>
+                    <span id="info-model" style="font-weight: 600; color: #1e293b;">---</span>
+                </div>
+                <div>
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Estado do modelo</label>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></span>
+                        <span style="font-weight: 600; color: #1e293b;">Ativo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div>
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Criado por</label>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="../assets/img/avatar-doctor.png" style="width: 24px; height: 24px; border-radius: 50%; background: #eee;" alt="Avatar">
+                        <span style="font-weight: 600; color: #1e293b;">Dr. Carlos Silva</span>
+                    </div>
+                </div>
+                <div>
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Data de criação</label>
+                    <span id="info-date" style="font-weight: 600; color: #1e293b;">---</span>
+                </div>
+                <div style="grid-column: span 1;">
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Laudo</label>
+                    <p style="font-size: 0.85rem; color: #475569; line-height: 1.4;">Paciente com fratura complexa em região mandibular, demandando abordagem cirúrgica especializada...</p>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div>
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Equipe</label>
+                    <span style="font-weight: 600; color: #1e293b;">Cirurgia Maxilofacial</span>
+                </div>
+                <div>
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Data de vencimento</label>
+                    <span style="font-weight: 600; color: #1e293b;">15 Fev 2024</span>
+                </div>
+                <div>
+                    <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Notas do caso</label>
+                    <p style="font-size: 0.85rem; color: #475569; line-height: 1.4;">Paciente apresenta fratura complexa na região mandibular. Planejamento cirúrgico requer modelo 3D.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; background: #f8fafc; padding: 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-family: monospace; font-size: 0.8rem; color: #64748b;">Identificador único do dispositivo: <strong id="unique-id" style="color: #1e293b;">C3D-2024-0847-MDL-3D-SKULL-001</strong></span>
+            <span style="cursor: pointer; color: #64748b;">📋</span>
+        </div>
+    </section>
+
+    <section class="info-section" style="margin-top: 25px;">
+        <h2 style="font-size: 1.1rem; margin-bottom: 20px; color: #1e293b;">Mensagens</h2>
+        
+        <div id="chat-history" style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 25px;">
+            
+            <div style="display: flex; gap: 12px;">
+                <img src="../assets/img/avatar-doctor-2.png" style="width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0;" alt="Dra. Ana">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <span style="font-weight: 600; font-size: 0.9rem; color: #1e293b;">Dra. Ana Costa</span>
+                        <span style="color: #64748b; font-size: 0.75rem;">12 Jan 2024 às 14:30</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #475569; line-height: 1.5; background: #f8fafc; padding: 12px; border-radius: 0 12px 12px 12px; border: 1px solid #f1f5f9;">
+                        O modelo 3D está perfeito para a visualização da fratura. Poderiam apenas confirmar a escala milimétrica para a impressão da guia?
+                    </p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: #0d9488; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold;">C3D</div>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <span style="font-weight: 600; font-size: 0.9rem; color: #1e293b;">Suporte Técnico Cirurgic3D</span>
+                        <span style="color: #64748b; font-size: 0.75rem;">12 Jan 2024 às 15:10</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #475569; line-height: 1.5; background: #f0fdfa; padding: 12px; border-radius: 0 12px 12px 12px; border: 1px solid #ccfbf1;">
+                        Confirmado, Dra. Ana. A escala está em 1:1 com precisão de 0.02mm. O arquivo final já está disponível para download no dataset.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid #f1f5f9; padding-top: 20px;">
+            <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 10px;">Adicionar novo comentário</label>
+            <div style="position: relative;">
+                <textarea placeholder="Escreva sua mensagem aqui..." style="width: 100%; height: 100px; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; resize: none; font-family: inherit; font-size: 0.9rem;"></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                    <span style="font-size: 0.75rem; color: #94a3b8;">Sua mensagem será visível para toda a equipe médica e técnica.</span>
+                    <button class="btn-solid" style="padding: 8px 20px; font-size: 0.85rem;">Enviar Mensagem</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section" style="margin-top: 25px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="font-size: 1.1rem; color: #1e293b; margin: 0;">Pagamento</h2>
+            <a href="#" style="font-size: 0.85rem; color: #3b82f6; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                Ver link de pagamento 📋
+            </a>
+        </div>
+
+        <div class="payment-timeline">
+            <div class="timeline-item active">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div>
+                        <h4 style="margin: 0; font-size: 0.95rem; color: #1e293b;">Pagamento Iniciado</h4>
+                        <p style="margin: 4px 0 0; font-size: 0.85rem; color: #64748b;">Link de pagamento enviado ao responsável.</p>
+                    </div>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">Há 2 horas</span>
+                </div>
+            </div>
+
+            <div class="timeline-item active">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div>
+                        <h4 style="margin: 0; font-size: 0.95rem; color: #1e293b;">Aguardando Pagamento</h4>
+                        <p style="margin: 4px 0 0; font-size: 0.85rem; color: #64748b;">Confirmação de pagamento em andamento.</p>
+                    </div>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">Há 5 horas</span>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div>
+                        <h4 style="margin: 0; font-size: 0.95rem; color: #94a3b8;">Pagamento Concluído</h4>
+                        <p style="margin: 4px 0 0; font-size: 0.85rem; color: #94a3b8;">Pagamento confirmado com sucesso.</p>
+                    </div>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">---</span>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="info-section" style="margin-top: 25px; margin-bottom: 40px;">
+        <h2 style="font-size: 1.1rem; color: #1e293b; margin-bottom: 25px;">Exames</h2>
+        
+        <div class="exams-container">
+            <div class="exam-card-detailed">
+                <div class="exam-image-wrapper">
+                    <span class="badge-published">Publicado</span>
+                    <img src="../assets/img/exam-1.jpg" alt="CT Scan">
+                </div>
+                <div class="exam-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Data de aquisição</span>
+                        <span class="detail-value">10 Jan 2024</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Modalidade</span>
+                        <span class="detail-value">CT Scan</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Formato</span>
+                        <span class="detail-value">DICOM</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Primeiro carregamento</span>
+                        <span class="detail-value">15 Jan 2024</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">ID</span>
+                        <span class="detail-value">EX-001</span>
+                    </div>
+                    <button class="btn-validate">Validar</button>
+                </div>
+            </div>
+
+            <div class="exam-card-detailed">
+                <div class="exam-image-wrapper">
+                    <span class="badge-published">Publicado</span>
+                    <img src="../assets/img/exam-2.jpg" alt="CT Scan">
+                </div>
+                <div class="exam-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Data de aquisição</span>
+                        <span class="detail-value">10 Jan 2024</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Modalidade</span>
+                        <span class="detail-value">CT Scan</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Formato</span>
+                        <span class="detail-value">DICOM</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Primeiro carregamento</span>
+                        <span class="detail-value">15 Jan 2024</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">ID</span>
+                        <span class="detail-value">EX-002</span>
+                    </div>
+                    <button class="btn-validate">Validar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="display: flex; justify-content: center; gap: 15px; margin: 40px 0; flex-wrap: wrap;">
+        
+        <button style="display: flex; align-items: center; gap: 8px; background: #f0f9ff; color: #007bff; border: 1px solid #007bff; padding: 10px 24px; border-radius: 8px; font-weight: 500; cursor: pointer;">
+            <span style="font-size: 1.1rem;">🔗</span> Link público 3D
+        </button>
+
+        <button style="display: flex; align-items: center; gap: 8px; background: #f8fafc; color: #64748b; border: 1px solid #cbd5e1; padding: 10px 24px; border-radius: 8px; font-weight: 500; cursor: pointer;">
+            <span style="font-size: 1.1rem;">🗑️</span> Arquivar caso
+        </button>
+
+        <button style="display: flex; align-items: center; gap: 8px; background: #3b82f6; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 500; cursor: pointer;">
+            <span style="font-size: 1.1rem;">📥</span> Download dataset
+        </button>
+
+        <button style="display: flex; align-items: center; gap: 8px; background: #3b82f6; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 500; cursor: pointer;">
+            <span style="font-size: 1.1rem;">🖨️</span> Imprimir Nota Fiscal
+        </button>
+
+    </div>
+
+    </main>
+
+<script>
+    function carregarDadosDoCaso() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        // Busca nos dados que você já tem (LocalStorage + Estáticos)
+        const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+        
+        // Simulação de banco de dados estático para teste
+        const estaticos = [
+            { id: 'CASO-2024-001', data: '2024-01-15', orgao: 'Cólon', statusText: 'Pagamento efetuado' },
+            { id: 'CASO-2024-002', data: '2024-01-14', orgao: 'Pulmão', statusText: 'Documentos ilegíveis' },
+            { id: 'CASO-2024-003', data: '2024-01-13', orgao: 'Rins', statusText: 'Aguardando pagamento' }
+        ];
+
+        const todosOsCasos = [...salvos, ...estaticos];
+        const caso = todosOsCasos.find(c => c.id === id || c.id === id); // Busca flexível
+
+        if (caso) {
+            // Preenche os textos na tela
+            document.getElementById('breadcrumb-id').innerText = caso.id;
+            document.getElementById('display-id').innerText = caso.id;
+            document.getElementById('info-ref').innerText = caso.id;
+            document.getElementById('info-organ').innerText = caso.orgao || caso.organ || "Não especificado";
+            document.getElementById('info-date').innerText = caso.data || caso.date;
+            document.getElementById('info-status').innerText = caso.statusText || "Em análise";
+            
+            // Ajuste do Breadcrumb se vier de Escores
+            if (document.referrer.includes('Escores')) {
+                const link = document.getElementById('breadcrumb-link');
+                link.innerText = "Escores Clínicos";
+                link.href = "../Escores/index.html";
+            }
+        } else {
+            document.getElementById('display-id').innerText = "Não encontrado";
+        }
+    }
+
+    window.onload = carregarDadosDoCaso;
+</script>
+
+</body>
+</html>
