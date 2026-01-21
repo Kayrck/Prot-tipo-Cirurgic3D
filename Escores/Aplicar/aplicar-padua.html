@@ -93,5 +93,40 @@
             <button class="btn-apply" style="margin: 0;">Salvar escore no caso</button>
         </div>
     </main>
+    <script>
+    const inputs = document.querySelectorAll('input[type="radio"]');
+    const displayScore = document.querySelector('.interpretation-card h1');
+    const badge = document.querySelector('.badge-complexity');
+
+    function updateScore() {
+        let total = 0;
+        let selectedCount = 0;
+        const groups = new Set();
+
+        inputs.forEach(input => {
+            groups.add(input.name);
+            if (input.checked) {
+                total += parseInt(input.value);
+                selectedCount++;
+            }
+        });
+
+        displayScore.innerText = total;
+
+        // Classificação RENAL (ajuste os limites para PADUA se necessário)
+        if (total <= 6) {
+            badge.innerText = "Baixa complexidade";
+            badge.style.background = "#dcfce7"; badge.style.color = "#166534";
+        } else if (total <= 9) {
+            badge.innerText = "Complexidade moderada";
+            badge.style.background = "#fef9c3"; badge.style.color = "#854d0e";
+        } else {
+            badge.innerText = "Alta complexidade";
+            badge.style.background = "#fee2e2"; badge.style.color = "#b91c1c";
+        }
+    }
+
+    inputs.forEach(input => input.addEventListener('change', updateScore));
+</script>
 </body>
 </html>

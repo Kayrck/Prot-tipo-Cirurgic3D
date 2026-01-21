@@ -86,5 +86,53 @@
             <button class="btn-apply" style="margin: 0; background-color: #ea580c;">Salvar no caso</button>
         </div>
     </main>
+    <script>
+    const apheInputs = document.querySelectorAll('input[name="aphe"]');
+    const sizeInput = document.querySelector('input[type="number"]');
+    const checklist = document.querySelectorAll('input[type="checkbox"]');
+    const displayScore = document.querySelector('.interpretation-card h1');
+    const badge = document.querySelector('.badge-complexity');
+
+    function updateLIRADS() {
+        let hasAPHE = false;
+        apheInputs.forEach(i => { if(i.checked && i.value === "yes") hasAPHE = true; });
+        
+        const size = parseFloat(sizeInput.value) || 0;
+        
+        let extraCount = 0;
+        checklist.forEach(i => { if(i.checked) extraCount++; });
+
+        let result = "LR-3"; // Base inicial
+
+        if (hasAPHE) {
+            if (size < 10) result = "LR-3";
+            else if (size >= 10 && size < 20) {
+                result = extraCount >= 1 ? "LR-5" : "LR-4";
+            } else if (size >= 20) {
+                result = "LR-5";
+            }
+        } else {
+            if (size >= 20 && extraCount >= 1) result = "LR-4";
+            else if (size < 20 && extraCount >= 2) result = "LR-4";
+        }
+
+        displayScore.innerText = result;
+
+        // Atualizar Badge
+        if (result === "LR-5") {
+            badge.innerText = "Definitivamente CHC";
+            badge.style.background = "#fee2e2"; badge.style.color = "#b91c1c";
+        } else if (result === "LR-4") {
+            badge.innerText = "Provável CHC";
+            badge.style.background = "#fef9c3"; badge.style.color = "#854d0e";
+        } else {
+            badge.innerText = "Probabilidade Intermediária";
+            badge.style.background = "#f1f5f9"; badge.style.color = "#475569";
+        }
+    }
+
+    [...apheInputs, ...checklist].forEach(i => i.addEventListener('change', updateLIRADS));
+    sizeInput.addEventListener('input', updateLIRADS);
+</script>
 </body>
 </html>

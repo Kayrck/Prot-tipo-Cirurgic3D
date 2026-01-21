@@ -87,5 +87,32 @@
             <button class="btn-apply" style="margin: 0; background-color: #7c3aed;">Salvar no caso</button>
         </div>
     </main>
+    <script>
+    const primarios = document.querySelectorAll('input[name="primario"]');
+    const secundarios = document.querySelectorAll('input[name="secundario"]');
+    const displaySum = document.querySelector('.interpretation-card h1');
+    const displayFormula = document.querySelector('.interpretation-card span');
+    const badge = document.querySelector('.badge-complexity');
+
+    function updateGleason() {
+        let p = 0, s = 0;
+        primarios.forEach(r => { if(r.checked) p = parseInt(r.value); });
+        secundarios.forEach(r => { if(r.checked) s = parseInt(r.value); });
+
+        if (p > 0 && s > 0) {
+            const sum = p + s;
+            displaySum.innerText = sum;
+            displayFormula.innerText = `(${p} + ${s})`;
+
+            if (sum <= 6) { badge.innerText = "Grupo 1: Baixa agressividade"; }
+            else if (sum == 7 && p == 3) { badge.innerText = "Grupo 2: Intermediário (3+4)"; }
+            else if (sum == 7 && p == 4) { badge.innerText = "Grupo 3: Intermediário (4+3)"; }
+            else if (sum == 8) { badge.innerText = "Grupo 4: Alta agressividade"; }
+            else { badge.innerText = "Grupo 5: Muito agressivo"; }
+        }
+    }
+
+    [...primarios, ...secundarios].forEach(i => i.addEventListener('change', updateGleason));
+</script>
 </body>
 </html>

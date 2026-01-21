@@ -94,5 +94,39 @@
             <button class="btn-apply" style="margin: 0; background-color: #7c3aed;">Salvar no caso</button>
         </div>
     </main>
+    <script>
+    const inputs = document.querySelectorAll('input[name="pirads"]');
+    const displayScore = document.querySelector('.interpretation-card h1');
+    const badge = document.querySelector('.badge-complexity');
+
+    const descricoes = {
+        "1": "Muito baixa probabilidade",
+        "2": "Baixa probabilidade",
+        "3": "Probabilidade equívoca",
+        "4": "Presença de câncer provável",
+        "5": "Presença de câncer altamente provável"
+    };
+
+    function updatePIRADS() {
+        inputs.forEach(input => {
+            if (input.checked) {
+                const valor = input.value;
+                displayScore.innerText = valor;
+                badge.innerText = descricoes[valor];
+
+                // Ajuste de cores conforme a gravidade
+                if (valor <= 2) {
+                    badge.style.background = "#dcfce7"; badge.style.color = "#166534";
+                } else if (valor == 3) {
+                    badge.style.background = "#fef9c3"; badge.style.color = "#854d0e";
+                } else {
+                    badge.style.background = "#fee2e2"; badge.style.color = "#b91c1c";
+                }
+            }
+        });
+    }
+
+    inputs.forEach(input => input.addEventListener('change', updatePIRADS));
+</script>
 </body>
 </html>

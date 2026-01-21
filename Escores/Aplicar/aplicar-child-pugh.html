@@ -87,5 +87,23 @@
             <button class="btn-apply" style="margin: 0; background-color: #ea580c;">Salvar no caso</button>
         </div>
     </main>
+    <script>
+    const inputs = document.querySelectorAll('input[type="radio"]');
+    const displayClasse = document.querySelector('.interpretation-card h1');
+    const displayPontos = document.querySelector('.interpretation-card span');
+
+    function calculateChildPugh() {
+        let total = 0;
+        inputs.forEach(i => { if(i.checked) total += parseInt(i.value); });
+
+        displayPontos.innerText = `(${total} pontos)`;
+
+        if (total <= 6) { displayClasse.innerText = "A"; }
+        else if (total <= 9) { displayClasse.innerText = "B"; }
+        else { displayClasse.innerText = "C"; }
+    }
+
+    inputs.forEach(i => i.addEventListener('change', calculateChildPugh));
+</script>
 </body>
 </html>

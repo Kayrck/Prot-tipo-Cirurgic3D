@@ -91,5 +91,24 @@
             <button class="btn-apply" style="margin: 0; background-color: #db2777;">Salvar no caso</button>
         </div>
     </main>
+    <script>
+    const inputs = document.querySelectorAll('input[type="radio"]');
+    const displayTotal = document.querySelector('.interpretation-card h1');
+    const badge = document.querySelector('.badge-complexity');
+
+    function updateGlasgow() {
+        let total = 0;
+        inputs.forEach(i => { if(i.checked) total += parseInt(i.value); });
+
+        if (total > 0) {
+            displayTotal.innerText = total;
+            if (total >= 13) { badge.innerText = "Traumatismo leve"; badge.className = "badge-complexity status-green"; }
+            else if (total >= 9) { badge.innerText = "Traumatismo moderado"; badge.className = "badge-complexity status-yellow"; }
+            else { badge.innerText = "Traumatismo grave"; badge.className = "badge-complexity status-red"; }
+        }
+    }
+
+    inputs.forEach(i => i.addEventListener('change', updateGlasgow));
+</script>
 </body>
 </html>

@@ -85,5 +85,29 @@
             <button class="btn-apply" style="margin: 0; background-color: #ea580c;">Salvar no caso</button>
         </div>
     </main>
+    <script>
+    const fields = document.querySelectorAll('input[type="number"]');
+    const displayMeld = document.querySelector('.interpretation-card h1');
+
+    function calculateMELD() {
+        const bili = parseFloat(fields[0].value) || 1;
+        const inr = parseFloat(fields[1].value) || 1;
+        const creat = parseFloat(fields[2].value) || 1;
+        const na = parseFloat(fields[3].value) || 137;
+
+        // Fórmula simplificada MELD 2016
+        let meld = (0.378 * Math.log(bili)) + (1.12 * Math.log(inr)) + (0.957 * Math.log(creat)) + 0.643;
+        meld = Math.round(meld * 10);
+        
+        // Ajuste de Sódio (MELD-Na)
+        if (meld > 11) {
+            meld = meld + 1.32 * (137 - na) - (0.033 * meld * (137 - na));
+        }
+
+        displayMeld.innerText = Math.round(meld);
+    }
+
+    fields.forEach(f => f.addEventListener('input', calculateMELD));
+</script>
 </body>
 </html>
