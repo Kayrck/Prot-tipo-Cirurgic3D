@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirurgic3D - Gestão de Casos</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <style>
+        /* Ajuste para as miniaturas quadradas com bordas arredondadas como na imagem */
+        .case-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .case-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Correção para o botão não ficar colado na busca */
+        .action-bar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .search-container {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-left">
+    <a href="../Home/index.html" class="navbar-logo">
+      <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+    </a>
+  </div>
+
+  <ul class="navbar-menu">
+    <li><a href="../Home/index.html" class="nav-link active">Casos Clínicos</a></li>
+    <li><a href="../Escores/index.html" class="nav-link">Escores Clínicos</a></li>
+  </ul>
+
+  <div class="navbar-right">
+    <div class="user-menu">
+      <span class="user-name">Dr. Silva</span>
+      <img src="../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+    <h1>Casos Clínicos</h1>
+
+    <div class="action-bar">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Pesquisar por ID ou descrição...">
+        </div>
+        <button class="btn-add"><span>+</span> Adicionar caso</button>
+    </div>
+
+    <div class="filters-row">
+        <label>Data inicial</label>
+        <input type="date" id="dateStart" value="2024-01-01"> 
+        <label>Data final</label>
+        <input type="date" id="dateEnd" value="2024-01-31">   
+        <label>Órgão</label>
+        <select id="organFilter">
+            <option value="todos">Todos</option>
+            <option value="colon">Cólon</option>
+            <option value="pulmao">Pulmão</option>
+            <option value="rins">Rins</option>
+            <option value="figado">Fígado</option>
+        </select>
+    </div>
+
+    <div class="tabs" id="statusTabs">
+        <div class="tab active" data-status="todos">Todos</div>
+        <div class="tab" data-status="publicado">Publicados</div>
+        <div class="tab" data-status="analise">Em análise</div>
+        <div class="tab" data-status="aguardando">Aguardando pagamento</div>
+        <div class="tab" data-status="pago">Pagamento efetuado</div>
+        <div class="tab" data-status="arquivado">Arquivados</div>
+    </div>
+
+    <div id="cases-list"></div>
+
+    <div class="pagination">
+        <button class="page-btn">&lt;</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">&gt;</button>
+    </div>
+</main>
+
+<script>
+    // 1. Banco de Dados com 8 Casos e novos órgãos
+    const casesData = [
+        { id: 'CASO-2024-001', date: '2024-01-15', desc: 'Reconstrução 3D - Adenocarcinoma de Cólon descendente', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'colon', thumb: '../assets/img/casos/colon-1.jpg' },
+        { id: 'CASO-2024-002', date: '2024-01-14', desc: 'Nódulo pulmonar - Lobo superior direito', status: 'arquivado', statusText: 'Documentos ilegíveis', class: 'status-red', organ: 'pulmao', thumb: '../assets/img/casos/pulmao-1.jpg' },
+        { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', thumb: '../assets/img/casos/rins-1.jpg' },
+        { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', thumb: '../assets/img/casos/figado-1.jpg' },
+        { id: 'CASO-2024-005', date: '2024-01-11', desc: 'Planejamento - Ressecção de Cólon Transverso', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'colon', thumb: '../assets/img/casos/colon-2.jpg' },
+        { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', thumb: '../assets/img/casos/rins-2.jpg' },
+        { id: 'CASO-2024-007', date: '2024-01-09', desc: 'Malformação Arteriovenosa Pulmonar', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'pulmao', thumb: '../assets/img/casos/pulmao-2.jpg' },
+        { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', thumb: '../assets/img/casos/figado-2.jpg' }
+    ];
+
+    const casesContainer = document.getElementById('cases-list');
+    const searchInput = document.getElementById('searchInput');
+    const organFilter = document.getElementById('organFilter');
+    const dateStart = document.getElementById('dateStart');
+    const dateEnd = document.getElementById('dateEnd');
+
+    function renderCases(data) {
+        casesContainer.innerHTML = '';
+        
+        if (data.length === 0) {
+            casesContainer.innerHTML = '<p style="text-align:center; padding:50px; color:#999;">Nenhum caso encontrado.</p>';
+            return;
+        }
+
+        data.forEach(item => {
+            const dateObj = new Date(item.date + 'T00:00:00');
+            const formattedDate = dateObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+            const imageSrc = item.thumb || 'https://via.placeholder.com/80x80?text=3D';
+
+            const card = `
+                <div class="case-card">
+                    <div class="case-img">
+                        <img src="${imageSrc}" onerror="this.src='https://via.placeholder.com/80/000000/FFFFFF?text=Vista+3D'" alt="Miniatura">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-date">${formattedDate}</span>
+                        <h3>${item.id}</h3>
+                        <p>${item.desc}</p>
+                        <div class="status-badge ${item.class}">
+                            <span class="dot" style="background: currentColor;"></span> ${item.statusText}
+                        </div>
+                    </div>
+                    <div class="case-actions">
+                        <button class="btn-outline">Detalhes</button>
+                        <button class="btn-solid">Gerar link de pagamento</button>
+                    </div>
+                </div>
+            `;
+            casesContainer.innerHTML += card;
+        });
+    }
+
+    function applyFilters() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedOrgan = organFilter.value;
+        const activeTabElement = document.querySelector('.tab.active');
+        const activeTab = activeTabElement ? activeTabElement.dataset.status : 'todos';
+        const start = dateStart.value;
+        const end = dateEnd.value;
+
+        const filtered = casesData.filter(item => {
+            const matchesSearch = item.id.toLowerCase().includes(searchTerm) || item.desc.toLowerCase().includes(searchTerm);
+            const matchesOrgan = selectedOrgan === 'todos' || item.organ === selectedOrgan;
+            const matchesStatus = activeTab === 'todos' || item.status === activeTab;
+            
+            let matchesDate = true;
+            if (start) matchesDate = matchesDate && (item.date >= start);
+            if (end) matchesDate = matchesDate && (item.date <= end);
+
+            return matchesSearch && matchesOrgan && matchesStatus && matchesDate;
+        });
+
+        renderCases(filtered);
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', applyFilters);
+    organFilter.addEventListener('change', applyFilters);
+    dateStart.addEventListener('change', applyFilters);
+    dateEnd.addEventListener('change', applyFilters);
+    
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            e.target.classList.add('active');
+            applyFilters();
+        });
+    });
+
+    // Inicialização
+    renderCases(casesData);
+</script>
+</body>
+</html>

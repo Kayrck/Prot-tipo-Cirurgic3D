@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicar Glasgow - Cirurgic3D</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/escores-detalhes.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../../Home/index.html" class="navbar-logo">
+                <img src="../../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="../../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+            <li><a href="../../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+        </ul>
+        <div class="navbar-right">
+            <div class="user-menu">
+                <span class="user-name">Dr. Silva</span>
+                <img src="../../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html" style="color: #db2777;">Escores Clínicos</a> <span>&gt;</span> 
+            <a href="../detalhes-glasgow.html" style="color: #db2777;">Escala de Glasgow</a> <span>&gt;</span> 
+            <strong>Aplicar escore</strong>
+        </nav>
+
+        <section class="score-header-card">
+            <div class="score-title-group">
+                <h1>Aplicar Escala de Coma de Glasgow</h1>
+                <p>Avaliação do nível de consciência e gravidade de lesão cerebral.</p>
+            </div>
+            <div class="score-action-group">
+                <span class="badge-organ" style="background: rgba(219, 39, 119, 0.1); color: #db2777; border: none;">Cérebro</span>
+                <div class="scale-info" style="margin-left: 15px;">
+                    <span class="scale-label">PONTUAÇÃO</span>
+                    <span class="scale-value">3 – 15</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="criteria-item">
+                <h3>Abertura Ocular</h3>
+                <div class="radio-group">
+                    <label><input type="radio" name="ocular" value="4"> Espontânea (4)</label><br>
+                    <label><input type="radio" name="ocular" value="3"> Ao comando verbal (3)</label><br>
+                    <label><input type="radio" name="ocular" value="2"> À pressão (2)</label><br>
+                    <label><input type="radio" name="ocular" value="1"> Ausente (1)</label>
+                </div>
+            </div>
+            <div class="criteria-item">
+                <h3>Resposta Verbal</h3>
+                <div class="radio-group">
+                    <label><input type="radio" name="verbal" value="5"> Orientado (5)</label><br>
+                    <label><input type="radio" name="verbal" value="4"> Confuso (4)</label><br>
+                    <label><input type="radio" name="verbal" value="1"> Ausente (1)</label>
+                </div>
+            </div>
+            <div class="criteria-item">
+                <h3>Resposta Motora</h3>
+                <div class="radio-group">
+                    <label><input type="radio" name="motor" value="6"> Obedece comandos (6)</label><br>
+                    <label><input type="radio" name="motor" value="1"> Ausente (1)</label>
+                </div>
+            </div>
+        </section>
+
+        <section class="interpretation-card" style="background: #fff; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; padding: 30px;">
+            <div>
+                <span class="scale-label">PONTUAÇÃO TOTAL</span>
+                <div style="display: flex; align-items: baseline;">
+                    <h1 style="font-size: 48px; margin: 0; color: #db2777;">13</h1>
+                    <span style="font-size: 24px; color: #94a3b8; margin-left: 10px;">/ 15</span>
+                </div>
+                <span class="badge-complexity" style="background: #dcfce7; color: #166534;">Traumatismo leve</span>
+            </div>
+        </section>
+
+        <div class="footer-actions" style="justify-content: flex-end; gap: 15px;">
+            <button class="btn-back" style="background: #f1f5f9; color: #475569; border: none;">Cancelar</button>
+            <button class="btn-apply" style="margin: 0; background-color: #db2777;">Salvar no caso</button>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro – Cirurgic3D</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Ícones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- Config Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlack: "#000000",
+                        brandDarkBlue: "#192E41",
+                        brandBlue: "#126D83",
+                        brandTurquoise: "#1EB3B2",
+                        brandGreen: "#7FF9C6",
+                        bgSoft: "#F4FAFB",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        soft: "8px",
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body class="font-sans bg-bgSoft flex items-center justify-center min-h-screen p-6">
+
+    <div class="w-full max-w-md bg-white p-10 rounded-soft shadow-xl">
+
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <img src="../assets/img/logo.svg" alt="Cirurgic3D" class="h-12 mx-auto">
+        </div>
+
+        <!-- Form -->
+        <form id="registerForm" class="space-y-6">
+
+            <!-- Nome -->
+            <div>
+                <label class="text-sm font-medium text-brandDarkBlue">Nome completo</label>
+                <div class="relative mt-1">
+                    <i class="fa-regular fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="name"
+                        placeholder="Digite seu nome"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-soft focus:ring-2 focus:ring-brandTurquoise focus:border-brandTurquoise transition"
+                        required>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="text-sm font-medium text-brandDarkBlue">E-mail</label>
+                <div class="relative mt-1">
+                    <i class="fa-regular fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="email" id="email"
+                        placeholder="seu@email.com"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-soft focus:ring-brandTurquoise focus:border-brandTurquoise focus:ring-2 transition"
+                        required>
+                </div>
+            </div>
+
+            <!-- Senha -->
+            <div>
+                <label class="text-sm font-medium text-brandDarkBlue">Senha</label>
+                <div class="relative mt-1">
+                    <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="password" id="password"
+                        placeholder="••••••••"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-soft focus:ring-brandTurquoise focus:border-brandTurquoise focus:ring-2 transition"
+                        required>
+                </div>
+            </div>
+
+            <!-- Confirmar -->
+            <div>
+                <label class="text-sm font-medium text-brandDarkBlue">Confirmar senha</label>
+                <div class="relative mt-1">
+                    <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="password" id="confirm"
+                        placeholder="Repita sua senha"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-soft focus:ring-brandTurquoise focus:border-brandTurquoise focus:ring-2 transition"
+                        required>
+                </div>
+            </div>
+
+            <!-- Termos -->
+            <div class="flex items-start space-x-3 pt-2">
+                <input type="checkbox" id="terms"
+                    class="w-4 h-4 text-brandTurquoise border-gray-300 rounded focus:ring-brandTurquoise">
+                <label for="terms" class="text-xs text-gray-600 leading-relaxed">
+                    Concordo com os <a href="#" class="text-brandTurquoise hover:underline">termos e condições</a> e com a <a href="#" class="text-brandTurquoise hover:underline">política de privacidade</a>.
+                </label>
+            </div>
+
+            <!-- Botão -->
+            <button
+                id="registerBtn"
+                type="submit"
+                disabled
+                class="w-full bg-gray-300 text-gray-500 font-medium py-3.5 rounded-soft transition cursor-not-allowed"
+            >
+                Criar conta
+            </button>
+
+        </form>
+
+        <!-- Link Login -->
+        <div class="text-center mt-8">
+            <p class="text-sm text-gray-600">
+                Já possui conta?
+                <a href="../auth/login.html" class="text-brandTurquoise hover:underline font-medium">
+                    Faça login
+                </a>
+            </p>
+        </div>
+
+    </div>
+
+    <!-- JS: Regras de ativação + navegação -->
+    <script>
+        const form = document.getElementById("registerForm");
+        const inputs = form.querySelectorAll("input[type='text'], input[type='email'], input[type='password']");
+        const terms = document.getElementById("terms");
+        const btn = document.getElementById("registerBtn");
+
+        function validate() {
+            const allFilled = [...inputs].every(input => input.value.trim() !== "");
+            const passwordsMatch = document.getElementById("password").value === document.getElementById("confirm").value;
+
+            if (allFilled && terms.checked && passwordsMatch) {
+                btn.disabled = false;
+                btn.classList.remove("bg-gray-300", "text-gray-500", "cursor-not-allowed");
+                btn.classList.add("bg-brandTurquoise", "text-white", "cursor-pointer");
+            } else {
+                btn.disabled = true;
+                btn.classList.add("bg-gray-300", "text-gray-500", "cursor-not-allowed");
+                btn.classList.remove("bg-brandTurquoise", "text-white", "cursor-pointer");
+            }
+        }
+
+        inputs.forEach(input => input.addEventListener("input", validate));
+        terms.addEventListener("change", validate);
+
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            btn.innerHTML = "<i class='fa-solid fa-spinner fa-spin mr-2'></i>Criando conta...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                window.location.href = "./verificar-email.html";
+            }, 1200);
+        });
+    </script>
+
+</body>
+</html>

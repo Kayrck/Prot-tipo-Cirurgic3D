@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicar Child-Pugh - Cirurgic3D</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/escores-detalhes.css">
+</head>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../../Home/index.html" class="navbar-logo">
+                <img src="../../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="../../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+            <li><a href="../../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+        </ul>
+        <div class="navbar-right">
+            <div class="user-menu">
+                <span class="user-name">Dr. Silva</span>
+                <img src="../../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+            </div>
+        </div>
+    </nav>
+
+<body>
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html" style="color: #ea580c;">Escores Clínicos</a> <span>&gt;</span> 
+            <a href="../detalhes-child-pugh.html" style="color: #ea580c;">Child-Pugh</a> <span>&gt;</span> 
+            <strong>Aplicar escore</strong>
+        </nav>
+
+        <section class="score-header-card">
+            <div class="score-title-group">
+                <h1>Aplicar Child-Pugh a um caso</h1>
+                <p>Avaliação da reserva funcional hepática e prognóstico cirúrgico.</p>
+            </div>
+            <div class="score-action-group">
+                <span class="badge-organ" style="background: rgba(234, 88, 12, 0.1); color: #ea580c; border: none;">Fígado</span>
+                <div class="scale-info" style="margin-left: 15px;">
+                    <span class="scale-label">PONTUAÇÃO</span>
+                    <span class="scale-value">5 – 15</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Parâmetros Clínicos e Laboratoriais</h2>
+            
+            <div class="criteria-item">
+                <h3>Encefalopatia Hepática</h3>
+                <div class="radio-group">
+                    <label><input type="radio" name="encef" value="1"> Ausente → 1 ponto</label><br>
+                    <label><input type="radio" name="encef" value="2"> Grau 1-2 (mínima) → 2 pontos</label><br>
+                    <label><input type="radio" name="encef" value="3"> Grau 3-4 (grave) → 3 pontos</label>
+                </div>
+            </div>
+
+            <div class="criteria-item">
+                <h3>Ascite</h3>
+                <div class="radio-group">
+                    <label><input type="radio" name="ascite" value="1"> Ausente → 1 ponto</label><br>
+                    <label><input type="radio" name="ascite" value="2"> Leve / Moderada → 2 pontos</label><br>
+                    <label><input type="radio" name="ascite" value="3"> Grave / Tensa → 3 pontos</label>
+                </div>
+            </div>
+            
+            </section>
+
+        <section class="interpretation-card" style="background: #fff; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; padding: 30px;">
+            <div>
+                <span class="scale-label">CLASSE CALCULADA</span>
+                <div style="display: flex; align-items: baseline;">
+                    <h1 style="font-size: 48px; margin: 0; color: #ea580c;">B</h1>
+                    <span style="font-size: 24px; color: #94a3b8; margin-left: 10px;">(8 pontos)</span>
+                </div>
+                <span class="badge-complexity" style="background: #fef9c3; color: #854d0e;">Comprometimento funcional moderado</span>
+            </div>
+        </section>
+
+        <div class="footer-actions" style="justify-content: flex-end; gap: 15px;">
+            <button class="btn-back" style="background: #f1f5f9; color: #475569; border: none;">Cancelar</button>
+            <button class="btn-apply" style="margin: 0; background-color: #ea580c;">Salvar no caso</button>
+        </div>
+    </main>
+</body>
+</html>

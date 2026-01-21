@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicar RENAL Score - Cirurgic3D</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/escores-detalhes.css">
+    </head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../../Home/index.html" class="navbar-logo">
+                <img src="../../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="../../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+            <li><a href="../../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+        </ul>
+        <div class="navbar-right">
+            <div class="user-menu">
+                <span class="user-name">Dr. Silva</span>
+                <img src="../../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html" style="color: #00b8a9;">Escores Clínicos</a> <span>&gt;</span> 
+            <a href="../detalhes-renal.html" style="color: #00b8a9;">RENAL Score</a> <span>&gt;</span> 
+            <strong>Aplicar escore</strong>
+        </nav>
+
+        <section class="score-header-card">
+            <div class="score-title-group">
+                <h1>Aplicar RENAL Score a um caso</h1>
+                <p>Selecione um caso clínico e preencha os critérios para calcular o escore.</p>
+            </div>
+            <div class="score-action-group">
+                <span class="badge-organ" style="background: rgba(0, 184, 169, 0.1); color: #00b8a9; border: none;">Rim</span>
+                <div class="scale-info" style="margin-left: 15px;">
+                    <span class="scale-label">ESCALA</span>
+                    <span class="scale-value">4 – 12</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Caso clínico</h2>
+            <select class="filter-select" style="width: 100%; max-width: none; margin-top: 10px;">
+                <option value="" disabled selected>Selecione um caso clínico</option>
+                <option value="1">Paciente: João Silva - ID: #1234</option>
+                <option value="2">Paciente: Maria Oliveira - ID: #5678</option>
+            </select>
+        </section>
+
+        <section class="info-section">
+            <h2>Parâmetros de classificação</h2>
+            
+            <div class="criteria-item">
+                <h3>R - Raio (tamanho do tumor)</h3>
+                <p class="criteria-subtext">Diâmetro máximo do tumor em centímetros</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="raio" value="1"> ≤ 4 cm → 1 ponto</label><br>
+                    <label><input type="radio" name="raio" value="2"> 4 cm e < 7 cm → 2 pontos</label><br>
+                    <label><input type="radio" name="raio" value="3"> ≥ 7 cm → 3 pontos</label>
+                </div>
+            </div>
+
+            <div class="criteria-item">
+                <h3>E - Exofítico / Endofítico</h3>
+                <p class="criteria-subtext">Proporção do tumor que se projeta para fora ou para dentro do rim</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="exofitico" value="1"> ≥ 50% exofítico → 1 ponto</label><br>
+                    <label><input type="radio" name="exofitico" value="2"> < 50% exofítico → 2 pontos</label><br>
+                    <label><input type="radio" name="exofitico" value="3"> Completamente endofítico → 3 pontos</label>
+                </div>
+            </div>
+
+            <div class="criteria-item">
+                <h3>N - Nearness (proximidade do seio renal)</h3>
+                <p class="criteria-subtext">Distância entre o tumor e o sistema coletor ou seio renal</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="nearness" value="1"> ≥ 7 mm do sistema coletor → 1 ponto</label><br>
+                    <label><input type="radio" name="nearness" value="2"> 4 mm a < 7 mm do sistema coletor → 2 pontos</label><br>
+                    <label><input type="radio" name="nearness" value="3"> < 4 mm do sistema coletor → 3 pontos</label>
+                </div>
+            </div>
+
+            </section>
+
+        <section class="interpretation-card" style="background: #fff; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; padding: 30px;">
+            <div>
+                <span class="scale-label">ESCORE CALCULADO</span>
+                <div style="display: flex; align-items: baseline;">
+                    <h1 style="font-size: 48px; margin: 0;">8</h1>
+                    <span style="font-size: 24px; color: #94a3b8; margin-left: 5px;">/ 12</span>
+                </div>
+                <span class="badge-complexity" style="background: #fef9c3; color: #854d0e;">Complexidade moderada</span>
+            </div>
+            <p style="color: #64748b; font-size: 14px; max-width: 300px; text-align: right;">
+                Classificação baseada nos critérios selecionados.
+            </p>
+        </section>
+
+        <div class="footer-actions" style="justify-content: flex-end; gap: 15px; margin-top: 30px;">
+            <button class="btn-back" style="background: #f1f5f9; color: #475569; border: none;">Cancelar</button>
+            <button class="btn-apply" style="margin: 0;">Salvar escore no caso</button>
+        </div>
+    </main>
+</body>
+</html>

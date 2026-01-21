@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNM Pulmonar - Detalhes</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/escores-detalhes.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../Home/index.html" class="navbar-logo">
+                <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+            <li><a href="../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+        </ul>
+        <div class="navbar-right">
+            <div class="user-menu">
+                <span class="user-name">Dr. Silva</span>
+                <img  src="../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">Escores Clínicos</a> <span>&gt;</span> <strong>TNM Pulmonar</strong>
+        </nav>
+
+        <section class="score-header-card">
+            <div class="score-title-group">
+                <h1>Estadiamento TNM Pulmonar</h1>
+                <p>8ª Edição da classificação de Tumores Malignos (Pulmão)</p>
+                <span class="badge-organ" style="background: #3b82f6;">Pulmão</span>
+            </div>
+            <div class="score-action-group">
+                <div class="scale-info">
+                    <span class="scale-label">ESTÁGIO</span>
+                    <span class="scale-value">IA1 – IVB</span>
+                </div>
+                <button class="btn-apply">Aplicar escore a um caso</button>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Descrição clínica</h2>
+            <p>A classificação TNM é o sistema de estadiamento padrão para o câncer de pulmão. O sistema avalia a extensão do tumor primário (T), o envolvimento de linfonodos regionais (N) e a presença de metástases à distância (M) para determinar o prognóstico e o tratamento ideal.</p>
+        </section>
+
+        <section class="info-section">
+            <h2>Componentes TNM</h2>
+            <div class="criteria-item">
+                <h3>T - Tumor Primário</h3>
+                <ul class="points-list">
+                    <li><span>T1 (a, b, c):</span> ≤ 3 cm no maior eixo</li>
+                    <li><span>T2 (a, b):</span> > 3 cm e ≤ 5 cm</li>
+                    <li><span>T3:</span> > 5 cm e ≤ 7 cm (ou invasão de pleura/parede)</li>
+                    <li><span>T4:</span> > 7 cm (ou invasão de órgãos vitais)</li>
+                </ul>
+            </div>
+            <div class="criteria-item">
+                <h3>N - Linfonodos</h3>
+                <ul class="points-list">
+                    <li><span>N0:</span> Sem metástase para linfonodos</li>
+                    <li><span>N1:</span> Ipsilateral peribrônquico/hilar</li>
+                    <li><span>N2:</span> Ipsilateral mediastinal</li>
+                    <li><span>N3:</span> Contralateral mediastinal/hilar</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Grupamento por Estágios</h2>
+            <div class="interpretation-card complexity-low">
+                <strong>Estágio I:</strong> Doença localizada. Tratamento cirúrgico é a primeira opção.
+            </div>
+            <div class="interpretation-card complexity-med">
+                <strong>Estágio II / III:</strong> Doença regional. Frequentemente requer quimio/radioterapia combinada.
+            </div>
+            <div class="interpretation-card complexity-high">
+                <strong>Estágio IV:</strong> Doença metastática. Tratamento paliativo, imunoterapia ou terapia alvo.
+            </div>
+        </section>
+
+        <div class="footer-actions">
+            <a href="index.html" class="btn-back">Voltar para escores</a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login – Cirurgic3D</title>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Ícones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- Configuração Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlack: "#000000",
+                        brandDarkBlue: "#192E41",
+                        brandBlue: "#126D83",
+                        brandTurquoise: "#1EB3B2",
+                        brandGreen: "#7FF9C6",
+                        bgSoft: "#F4FAFB",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        soft: "8px",
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body class="font-sans bg-bgSoft flex items-center justify-center min-h-screen p-6">
+
+    <!-- Card Central -->
+    <div class="w-full max-w-md bg-white p-10 rounded-soft shadow-xl">
+
+        <!-- Logo -->
+        <div class="text-center mb-10">
+            <img src="../assets/img/logo.svg" class="mx-auto h-12" alt="Cirurgic3D">
+        </div>
+
+
+        <!-- Form -->
+        <form id="loginForm" class="space-y-6">
+
+            <!-- Email -->
+            <div>
+                <label for="email" class="text-sm font-medium text-brandDarkBlue">E-mail</label>
+                <div class="relative mt-1">
+                    <i class="fa-regular fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="seu@email.com"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-soft focus:ring-2 focus:ring-brandTurquoise focus:border-brandTurquoise transition"
+                        required
+                    />
+                </div>
+            </div>
+
+            <!-- Senha -->
+            <div>
+                <label for="password" class="text-sm font-medium text-brandDarkBlue">Senha</label>
+                <div class="relative mt-1">
+                    <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="••••••••"
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-soft focus:ring-2 focus:ring-brandTurquoise focus:border-brandTurquoise transition"
+                        required
+                    />
+                </div>
+            </div>
+
+            <!-- Botão -->
+            <button 
+                type="submit"
+                class="w-full bg-brandTurquoise text-white py-3 rounded-soft font-medium shadow-md hover:bg-brandBlue transition-all"
+            >
+                Entrar
+            </button>
+        </form>
+
+        <!-- Links secundários -->
+        <div class="text-center mt-8 space-y-3">
+            <p class="text-sm text-gray-600">
+                Não possui conta?
+                <a href="../auth/cadastro.html" class="text-brandTurquoise font-medium hover:underline">
+                    Cadastre-se
+                </a>
+            </p>
+
+            <a href="../auth/recuperar-senha.html" class="text-xs text-gray-500 hover:underline">
+                Esqueceu sua senha?
+            </a>
+        </div>
+
+        <!-- Rodapé -->
+        <p class="text-center text-xs text-gray-400 mt-10">
+            © 2024 Cirurgic3D. Todos os direitos reservados.
+        </p>
+    </div>
+
+    <!-- Navegação Fake -->
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Simulação de carregamento visual
+            const btn = e.target.querySelector("button");
+            btn.innerHTML = "<i class='fa-solid fa-spinner fa-spin mr-2'></i>Validando...";
+            btn.disabled = true;
+
+            // Redirecionamento simulado
+            setTimeout(() => {
+                window.location.href = "../home/index.html"; // a home virá depois
+            }, 1200);
+        });
+    </script>
+
+</body>
+</html>

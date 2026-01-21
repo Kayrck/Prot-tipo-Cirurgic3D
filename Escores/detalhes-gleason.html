@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gleason Score - Detalhes</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/escores-detalhes.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../Home/index.html" class="navbar-logo">
+                <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+            <li><a href="../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+        </ul>
+        <div class="navbar-right">
+            <div class="user-menu">
+                <span class="user-name">Dr. Silva</span>
+                <img  src="../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">Escores Clínicos</a> <span>&gt;</span> <strong>Gleason Score</strong>
+        </nav>
+
+        <section class="score-header-card">
+            <div class="score-title-group">
+                <h1>Gleason Score</h1>
+                <p>Classificação histopatológica do adenocarcinoma de próstata</p>
+                <span class="badge-organ" style="background: #7c3aed;">Próstata</span>
+            </div>
+            <div class="score-action-group">
+                <div class="scale-info">
+                    <span class="scale-label">SOMA</span>
+                    <span class="scale-value">6 – 10</span>
+                </div>
+                <a href="Aplicar/aplicar-gleason.html" class="btn-apply">Aplicar escore a um caso</a>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Descrição clínica</h2>
+            <p>O escore de Gleason é o principal fator prognóstico para o câncer de próstata. Ele é baseado no padrão arquitetural das células tumorais em biópsias ou peças cirúrgicas, onde a soma dos dois padrões mais prevalentes determina a agressividade do tumor.</p>
+        </section>
+
+        <section class="info-section">
+            <h2>Grupos de Graduação (ISUP)</h2>
+            <div class="criteria-item">
+                <h3>Classificação de Agressividade</h3>
+                <ul class="points-list">
+                    <li><span>Gleason 6 (3+3)</span> <strong>Grupo 1: Baixo grau</strong></li>
+                    <li><span>Gleason 7 (3+4)</span> <strong>Grupo 2: Intermediário</strong></li>
+                    <li><span>Gleason 7 (4+3)</span> <strong>Grupo 3: Intermediário</strong></li>
+                    <li><span>Gleason 8 (4+4)</span> <strong>Grupo 4: Alto grau</strong></li>
+                    <li><span>Gleason 9-10</span> <strong>Grupo 5: Muito alto grau</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Interpretação Prognóstica</h2>
+            <div class="interpretation-card complexity-low">
+                <strong>Gleason ≤ 6:</strong> Tumores de crescimento lento, muitas vezes candidatos à Vigilância Ativa.
+            </div>
+            <div class="interpretation-card complexity-med">
+                <strong>Gleason 7:</strong> Risco intermediário; a diferença entre (3+4) e (4+3) é crucial para o prognóstico.
+            </div>
+            <div class="interpretation-card complexity-high">
+                <strong>Gleason 8 – 10:</strong> Doença agressiva com alto potencial de disseminação; requer tratamento imediato.
+            </div>
+        </section>
+
+        <div class="footer-actions">
+            <a href="index.html" class="btn-back">Voltar para escores</a>
+        </div>
+    </main>
+</body>
+</html>

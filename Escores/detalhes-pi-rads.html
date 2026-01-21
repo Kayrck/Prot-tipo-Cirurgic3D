@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PI-RADS - Detalhes</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/escores-detalhes.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../Home/index.html" class="navbar-logo">
+                <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+            <li><a href="../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+        </ul>
+        <div class="navbar-right">
+            <div class="user-menu">
+                <span class="user-name">Dr. Silva</span>
+                <img  src="../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">Escores Clínicos</a> <span>&gt;</span> <strong>PI-RADS</strong>
+        </nav>
+
+        <section class="score-header-card">
+            <div class="score-title-group">
+                <h1>PI-RADS v2.1</h1>
+                <p>Prostate Imaging-Reporting and Data System para Ressonância Magnética</p>
+                <span class="badge-organ" style="background: #7c3aed;">Próstata</span>
+            </div>
+            <div class="score-action-group">
+                <div class="scale-info">
+                    <span class="scale-label">ESCALA</span>
+                    <span class="scale-value">1 – 5</span>
+                </div>
+               <a href="Aplicar/aplicar-pi-rads.html" class="btn-apply">Aplicar escore a um caso</a>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Descrição clínica</h2>
+            <p>O sistema PI-RADS é utilizado para padronizar a interpretação e o relato de exames de Ressonância Magnética Multiparamétrica (RMmp) da próstata. Seu objetivo principal é identificar lesões com alta probabilidade de serem cânceres clinicamente significativos.</p>
+        </section>
+
+        <section class="info-section">
+            <h2>Categorias de Avaliação</h2>
+            <div class="criteria-item">
+                <h3>Escala de Probabilidade</h3>
+                <ul class="points-list">
+                    <li><span>PI-RADS 1: Muito baixa</span> <strong>Malignidade improvável</strong></li>
+                    <li><span>PI-RADS 2: Baixa</span> <strong>Malignidade pouco provável</strong></li>
+                    <li><span>PI-RADS 3: Intermediária</span> <strong>Presença de câncer equívoca</strong></li>
+                    <li><span>PI-RADS 4: Alta</span> <strong>Presença de câncer provável</strong></li>
+                    <li><span>PI-RADS 5: Muito alta</span> <strong>Presença de câncer altamente provável</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Conduta Sugerida</h2>
+            <div class="interpretation-card complexity-low">
+                <strong>Categorias 1 e 2:</strong> Geralmente não requerem biópsia, apenas seguimento clínico.
+            </div>
+            <div class="interpretation-card complexity-med">
+                <strong>Categoria 3:</strong> Decisão compartilhada sobre biópsia baseada em PSA e outros fatores.
+            </div>
+            <div class="interpretation-card complexity-high">
+                <strong>Categorias 4 e 5:</strong> Fortemente recomendado realizar biópsia dirigida.
+            </div>
+        </section>
+
+        <div class="footer-actions">
+            <a href="index.html" class="btn-back">Voltar para escores</a>
+        </div>
+    </main>
+</body>
+</html>

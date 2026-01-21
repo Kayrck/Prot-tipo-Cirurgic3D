@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirurgic3D - Gestão de Casos</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body>
+<nav class="navbar">
+  
+  <!-- LOGO -->
+  <div class="navbar-left">
+    <a href="../Home/index.html" class="navbar-logo">
+      <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+    </a>
+  </div>
+
+  <!-- MENU CENTRAL -->
+  <ul class="navbar-menu">
+    <li>
+      <a href="../Home/index.html" class="nav-link">
+        Casos Clínicos
+      </a>
+    </li>
+    <li>
+      <a href="../Escores/index.html" class="nav-link active">
+        Escores Clínicos
+      </a>
+    </li>
+  </ul>
+
+  <!-- PERFIL -->
+  <div class="navbar-right">
+    <div class="user-menu">
+      <span class="user-name">Dr. Silva</span>
+      <img
+        src="../assets/img/perfil.jpg"
+        alt="Usuário"
+        class="user-avatar"
+      />
+    </div>
+  </div>
+
+</nav>
+</div>
+
+<main class="container">
+    <div class="header-content">
+        <div>
+            <h1>Escores Clínicos</h1>
+            <p class="subtitle">Classificações clínicas por órgão</p>
+        </div>
+    </div>
+
+    <div class="action-bar-escores">
+        <select id="organSelect" class="filter-select">
+            <option value="todos">Todos os órgãos</option>
+            <option value="rim">Rim</option>
+            <option value="prostata">Próstata</option>
+            </select>
+
+        <div class="search-container">
+            <input type="text" id="escoreSearch" placeholder="Pesquisar escore">
+        </div>
+
+        <button class="btn-add"><span>+</span> Adicionar caso</button>
+    </div>
+
+   
+
+    <div class="escores-grid" id="escoresGrid">
+        </div>
+
+    <div class="pagination">
+        <button class="page-btn">&lt;</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">4</button>
+        <button class="page-btn">&gt;</button>
+    </div>
+</main>
+
+<script>
+    const escoresData = [
+        { title: 'RENAL Score', organ: 'Rim', class: 'bg-rim', desc: 'Classificação da complexidade anatômica de tumores renais', escala: '4 - 12', link: 'detalhes-renal.html' },
+        { title: 'PADUA Score', organ: 'Rim', class: 'bg-rim', desc: 'Avaliação pré-operatória de nefrectomia parcial', escala: '6 - 14', link: 'detalhes-padua.html' },
+        { title: 'PI-RADS', organ: 'Próstata', class: 'bg-prostata', desc: 'Sistema de classificação de lesões prostáticas em RM', escala: '1 - 5', link: 'detalhes-pi-rads.html' },
+        { title: 'Gleason Score', organ: 'Próstata', class: 'bg-prostata', desc: 'Graduação histológica do adenocarcinoma prostático', escala: '6 - 10', link: 'detalhes-gleason.html' },
+        { title: 'Child-Pugh', organ: 'Fígado', class: 'bg-figado', desc: 'Classificação da gravidade da cirrose hepática', escala: 'A / B / C', link: 'detalhes-child-pugh.html' },
+        { title: 'MELD Score', organ: 'Fígado', class: 'bg-figado', desc: 'Priorização para transplante hepático', escala: '6 - 40', link: 'detalhes-meld.html' },
+        { title: 'LI-RADS', organ: 'Fígado', class: 'bg-figado', desc: 'Padronização diagnóstica de lesões hepáticas em pacientes de risco', escala: '1 - 5', link: 'detalhes-li-rads.html' },
+        { title: 'TNM Pulmonar', organ: 'Pulmão', class: 'bg-pulmao', desc: 'Estadiamento de câncer de pulmão de células não pequenas', escala: 'I - IV', link: 'detalhes-tnm-pulmonar.html' },
+        { title: 'Glasgow Coma Scale', organ: 'Cérebro', class: 'bg-cerebro', desc: 'Avaliação do nível de consciência e gravidade de lesão cerebral', escala: '3 - 15', link: 'detalhes-glasgow.html' }
+    ];
+
+    function renderEscores(data) {
+        const grid = document.getElementById('escoresGrid');
+        grid.innerHTML = data.map(item => `
+            <div class="escore-card">
+                <span class="organ-badge ${item.class}">${item.organ}</span>
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+                <div class="escore-footer">
+                    <div>
+                        <span>Escala</span>
+                        <strong>${item.escala}</strong>
+                    </div>
+                    <a href="${item.link}" class="btn-details">Ver detalhes →</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+// Eventos de Filtro
+document.getElementById('organSelect').addEventListener('change', (e) => {
+    const filtered = e.target.value === 'todos' 
+        ? escoresData 
+        : escoresData.filter(i => i.organ.toLowerCase() === e.target.value);
+    renderEscores(filtered);
+});
+
+renderEscores(escoresData);
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENAL Score - Detalhes</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/escores-detalhes.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../Home/index.html" class="navbar-logo">
+                <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+            <li><a href="../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+        </ul>
+        <div class="navbar-right">
+            <div class="user-menu">
+                <span class="user-name">Dr. Silva</span>
+                <img  src="../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">Escores Clínicos</a> <span>&gt;</span> <strong>RENAL Score</strong>
+        </nav>
+
+        <section class="score-header-card">
+            <div class="score-title-group">
+                <h1>RENAL Score</h1>
+                <p>Sistema de classificação nefrométrica para avaliação da complexidade anatômica de massas renais</p>
+                <span class="badge-organ organ-rim">Rim</span>
+            </div>
+            <div class="score-action-group">
+                <div class="scale-info">
+                    <span class="scale-label">ESCALA</span>
+                    <span class="scale-value">4 – 12</span>
+                </div>
+               <a href="Aplicar/aplicar-renal.html" class="btn-apply">Aplicar escore a um caso</a>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Descrição clínica</h2>
+            <p>O RENAL Nephrometry Score é um sistema padronizado desenvolvido para quantificar a complexidade anatômica de massas renais sólidas. Este escore auxilia cirurgiões urologistas na tomada de decisão cirúrgica, planejamento pré-operatório e predição de desfechos perioperatórios.</p>
+            <p>Baseado em características anatômicas mensuráveis através de exames de imagem (TC ou RM), o sistema avalia cinco componentes principais: raio tumoral, exofítico/endofítico, nearness (proximidade do sistema coletor), anterior/posterior e localização em relação às linhas polares.</p>
+            <p>A pontuação total varia de 4 a 12 pontos, classificando as massas em baixa (4-6), moderada (7-9) ou alta complexidade (10-12), com impacto direto na escolha da técnica cirúrgica e prognóstico do paciente.</p>
+        </section>
+
+        <section class="info-section">
+            <h2>Critérios de classificação</h2>
+            
+            <div class="criteria-item">
+                <div class="criteria-header">
+                    <h3>R - Raio (tamanho máximo do tumor)</h3>
+                    <span class="points-label">PONTUAÇÃO</span>
+                </div>
+                <p class="criteria-subtext">Diâmetro máximo da lesão medido em qualquer plano</p>
+                <ul class="points-list">
+                    <li><span>≤ 4 cm</span> <strong>1 ponto</strong></li>
+                    <li><span>> 4 cm e < 7 cm</span> <strong>2 pontos</strong></li>
+                    <li><span>≥ 7 cm</span> <strong>3 pontos</strong></li>
+                </ul>
+            </div>
+
+            <div class="criteria-item">
+                <h3>E - Exofítico/Endofítico</h3>
+                <p class="criteria-subtext">Porcentagem da massa que se projeta para fora do contorno renal</p>
+                <ul class="points-list">
+                    <li><span>≥ 50% exofítico</span> <strong>1 ponto</strong></li>
+                    <li><span>< 50% exofítico</span> <strong>2 pontos</strong></li>
+                    <li><span>Completamente endofítico</span> <strong>3 pontos</strong></li>
+                </ul>
+            </div>
+
+            <div class="criteria-item">
+                <h3>N - Nearness (proximidade ao sistema coletor)</h3>
+                <p class="criteria-subtext">Distância da massa ao sistema coletor ou seio renal</p>
+                <ul class="points-list">
+                    <li><span>≥ 7 mm</span> <strong>1 ponto</strong></li>
+                    <li><span>> 4 mm e < 7 mm</span> <strong>2 pontos</strong></li>
+                    <li><span>≤ 4 mm</span> <strong>3 pontos</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Interpretação dos resultados</h2>
+            <div class="interpretation-card complexity-low">
+                <div class="interpretation-header">
+                    <strong>4 – 6 pontos</strong> <span class="badge-complexity">Baixa complexidade</span>
+                </div>
+                <p>Massas de baixa complexidade anatômica. Candidatas ideais para nefrectomia parcial, incluindo abordagem laparoscópica ou robótica. Menor risco de complicações perioperatórias e melhor preservação da função renal.</p>
+            </div>
+
+            <div class="interpretation-card complexity-med">
+                <div class="interpretation-header">
+                    <strong>7 – 9 pontos</strong> <span class="badge-complexity">Complexidade moderada</span>
+                </div>
+                <p>Massas de complexidade intermediária. Nefrectomia parcial ainda é viável, mas requer maior experiência cirúrgica. Risco moderado de complicações. Considerar experiência do cirurgião e recursos disponíveis.</p>
+            </div>
+
+            <div class="interpretation-card complexity-high">
+                <div class="interpretation-header">
+                    <strong>10 – 12 pontos</strong> <span class="badge-complexity">Alta complexidade</span>
+                </div>
+                <p>Massas de alta complexidade anatômica. Cirurgia de preservação renal tecnicamente desafiadora. Considerar nefrectomia radical em casos selecionados. Maior risco de complicações, perda sanguínea e conversão cirúrgica.</p>
+            </div>
+        </section>
+
+        <div class="footer-actions">
+            <a href="index.html" class="btn-back">Voltar para escores</a>
+        </div>
+    </main>
+</body>
+</html>

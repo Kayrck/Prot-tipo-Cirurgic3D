@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicar TNM Pulmonar - Cirurgic3D</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/escores-detalhes.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../../Home/index.html" class="navbar-logo">
+                <img src="../../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="../../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+            <li><a href="../../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+        </ul>
+        <div class="navbar-right">
+            <div class="user-menu">
+                <span class="user-name">Dr. Silva</span>
+                <img src="../../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html" style="color: #10b981;">Escores Clínicos</a> <span>&gt;</span> 
+            <a href="../detalhes-tnm-pulmonar.html" style="color: #10b981;">TNM Pulmonar</a> <span>&gt;</span> 
+            <strong>Aplicar escore</strong>
+        </nav>
+
+        <section class="score-header-card">
+            <div class="score-title-group">
+                <h1>Aplicar TNM Pulmonar</h1>
+                <p>Estadiamento de câncer de pulmão (8ª edição).</p>
+            </div>
+            <div class="score-action-group">
+                <span class="badge-organ" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: none;">Pulmão</span>
+                <div class="scale-info" style="margin-left: 15px;">
+                    <span class="scale-label">ESTÁDIO</span>
+                    <span class="scale-value">I – IV</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="criteria-item">
+                <h3>T - Tumor Primário</h3>
+                <select class="filter-select" style="width: 100%; max-width: none;">
+                    <option>T1a (≤ 1 cm)</option>
+                    <option>T1b (> 1 a ≤ 2 cm)</option>
+                    <option>T2 (Invasão da pleura visceral...)</option>
+                </select>
+            </div>
+            <div class="criteria-item">
+                <h3>N - Linfonodos Regionais</h3>
+                <select class="filter-select" style="width: 100%; max-width: none;">
+                    <option>N0 (Sem metástase regional)</option>
+                    <option>N1 (Ipsilateral peribrônquico/hilar)</option>
+                </select>
+            </div>
+            <div class="criteria-item">
+                <h3>M - Metástase à Distância</h3>
+                <select class="filter-select" style="width: 100%; max-width: none;">
+                    <option>M0 (Sem metástase)</option>
+                    <option>M1a (Derrame pleural maligno)</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="interpretation-card" style="background: #fff; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; padding: 30px;">
+            <div>
+                <span class="scale-label">ESTADIAMENTO FINAL</span>
+                <div style="display: flex; align-items: baseline;">
+                    <h1 style="font-size: 48px; margin: 0; color: #10b981;">Estádio IIA</h1>
+                </div>
+                <span class="badge-complexity" style="background: #fef9c3; color: #854d0e;">T2b N0 M0</span>
+            </div>
+        </section>
+
+        <div class="footer-actions" style="justify-content: flex-end; gap: 15px;">
+            <button class="btn-back" style="background: #f1f5f9; color: #475569; border: none;">Cancelar</button>
+            <button class="btn-apply" style="margin: 0; background-color: #10b981;">Salvar no caso</button>
+        </div>
+    </main>
+</body>
+</html>
