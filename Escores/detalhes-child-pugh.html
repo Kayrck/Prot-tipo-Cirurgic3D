@@ -5,26 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Child-Pugh Score - Detalhes</title>
     <link rel="stylesheet" href="../assets/css/global.css">
-    <link rel="stylesheet" href="../assets/css/escores-detalhes.css">
+    <style>
+        .case-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .case-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .action-bar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .search-container {
+            flex: 1;
+        }
+    </style>
+    
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar-left">
-            <a href="../Home/index.html" class="navbar-logo">
-                <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
-            </a>
-        </div>
-        <ul class="navbar-menu">
-            <li><a href="../Home/index.html" class="nav-link">Casos Clínicos</a></li>
-            <li><a href="../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
-        </ul>
-        <div class="navbar-right">
-            <div class="user-menu">
-                <span class="user-name">Dr. Silva</span>
-                <img  src="../assets/img/perfil.jpg" alt="Usuário" class="user-avatar" />
+    <div class="navbar-left">
+        <a href="../Home/index.html" class="navbar-logo">
+            <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+        </a>
+    </div>
+    
+     <ul class="navbar-menu">
+    <li>
+      <a href="../Home/index.html" class="nav-link">
+        Casos Clínicos
+      </a>
+    </li>
+    <li>
+      <a href="../Escores/index.html" class="nav-link active">
+        Escores Clínicos
+      </a>
+    </li>
+  </ul>
+
+        <div class="user-menu-container" style="position: relative;">
+            <img src="../assets/img/perfil.jpg" 
+                 id="avatar-toggle" 
+                 alt="Perfil" 
+                 style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
+            
+            <div id="user-dropdown" class="dropdown-menu">
+                <a href="../Perfil/index.html" class="dropdown-item">
+                    Meu Perfil
+                </a>
+                <a href="../Perfil/ajuda.html" class="dropdown-item">
+                   Ajuda
+                </a>
+                <a href="../Perfil/sobre.html" class="dropdown-item">
+                    Sobre
+                </a>
+                <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
+                <a href="../auth/login.html" class="dropdown-item" style="color: #ef4444;">
+                    Sair
+                </a>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <main class="container">
         <nav class="breadcrumb">
@@ -82,5 +136,26 @@
             <a href="index.html" class="btn-back">Voltar para escores</a>
         </div>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const avatarToggle = document.getElementById('avatar-toggle');
+    const userDropdown = document.getElementById('user-dropdown');
+
+    if (avatarToggle && userDropdown) {
+        // Abre/Fecha o menu ao clicar no avatar
+        avatarToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('show');
+        });
+
+        // Fecha o menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!userDropdown.contains(e.target) && e.target !== avatarToggle) {
+                userDropdown.classList.remove('show');
+            }
+        });
+    }
+});
+    </script>
 </body>
 </html>
