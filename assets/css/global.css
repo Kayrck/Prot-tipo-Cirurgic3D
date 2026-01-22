@@ -1,5 +1,5 @@
 /* ======================================================
-   VARIÁVEIS GLOBAIS
+   1. VARIÁVEIS GLOBAIS E RESET
 ====================================================== */
 :root {
     --primary-teal: #0eb3a6;
@@ -11,9 +11,6 @@
     --white: #ffffff;
 }
 
-/* ======================================================
-   RESET E BASE
-====================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -24,10 +21,12 @@
 body {
     background-color: var(--bg-light);
     color: var(--text-dark);
+    margin: 0;
+    padding: 0;
 }
 
 /* ======================================================
-   NAVBAR
+   2. NAVEGAÇÃO (NAVBAR & LOGO)
 ====================================================== */
 .navbar {
     display: flex;
@@ -40,7 +39,6 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-/* Logo */
 .navbar-left,
 .nav-left {
     display: flex;
@@ -65,7 +63,7 @@ body {
     color: var(--primary-teal);
 }
 
-/* Menu */
+/* Links e Menu */
 .navbar-menu {
     display: flex;
     list-style: none;
@@ -75,6 +73,11 @@ body {
 .navbar-menu li {
     display: flex;
     align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
 }
 
 .nav-link,
@@ -97,18 +100,13 @@ body {
     border-bottom: 3px solid var(--primary-teal);
 }
 
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-
 .nav-links a.active {
     color: var(--text-dark);
     border-bottom: 2px solid var(--primary-teal);
     padding-bottom: 5px;
 }
 
-/* Perfil */
+/* Perfil do Usuário e Dropdown */
 .navbar-right,
 .user-profile {
     display: flex;
@@ -138,8 +136,43 @@ body {
     border: 1px solid var(--border-color);
 }
 
+.dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: white;
+    min-width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    padding: 8px 0;
+    z-index: 1000;
+    display: none;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #475569;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+    background: #f8fafc;
+    color: #3b82f6;
+}
+
 /* ======================================================
-   LAYOUT PRINCIPAL
+   3. LAYOUT E ESTRUTURA PRINCIPAL
 ====================================================== */
 .container {
     max-width: 1100px;
@@ -166,11 +199,117 @@ h1 {
     margin-top: -15px;
 }
 
+.breadcrumb { 
+    margin: 20px 0; 
+    color: #64748b; 
+    font-size: 14px; 
+}
+
+.breadcrumb strong { 
+    color: var(--primary-teal); 
+}
+
+.breadcrumb a {
+    color: #0c968b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 /* ======================================================
-   ACTION BAR / BUSCA / FILTROS
+   4. ELEMENTOS DE UI (BOTÕES, INPUTS, TABS)
 ====================================================== */
+/* Botões */
+.btn-add {
+    background-color: #0fbba4; 
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;      
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-add:hover {
+    background-color: #0da38f;
+}
+
+.btn-outline {
+    padding: 8px 15px;
+    border: 1px solid var(--primary-teal);
+    background: transparent;
+    color: var(--primary-teal);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-solid {
+    padding: 8px 15px;
+    background: var(--primary-teal);
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-apply, .btn-generate {
+    background-color: #0fbba4;
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-solid,
+.btn-solid:link,
+.btn-solid:visited,
+.btn-solid:hover,
+.btn-solid:active {
+    text-decoration: none !important;
+}
+
+
+.btn-generate { flex: 1; padding: 12px; }
+
+.btn-validate {
+    width: 100%;
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.btn-validate:hover { background: #059669; }
+
+.btn-back, .btn-cancel {
+    text-decoration: none;
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.btn-cancel { padding: 12px 30px; }
+
+/* Busca e Filtros */
 .action-bar {
-   display: flex;
+    display: flex;
     align-items: center;      
     justify-content: flex-start; 
     gap: 20px;               
@@ -194,29 +333,9 @@ h1 {
 .search-container input {
     width: 100%;
     padding: 10px 40px;
-    border-radius: 8px;
     border: 1px solid var(--border-color);
     outline: none;
     border-radius: 8px;
-}
-
-.btn-add {
-    background-color: #0fbba4; 
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;      
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.2s;
-}
-
-.btn-add:hover {
-    background-color: #0da38f;
 }
 
 .filter-select {
@@ -268,18 +387,33 @@ h1 {
     border-color: var(--primary-teal);
 }
 
-/* ======================================================
-   ESCORES (GRID)
-====================================================== */
-.escores-filters {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
+/* Formulários Genéricos */
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
 }
 
-.escores-filters select {
-    width: 200px;
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
 }
+
+.form-group input:focus { border-color: #3b82f6; }
+.required { color: #ef4444; margin-left: 2px; }
+
+/* ======================================================
+   5. ESCORES E CARDS DE CONTEÚDO
+====================================================== */
+.escores-filters { display: flex; gap: 20px; margin-bottom: 30px; }
+.escores-filters select { width: 200px; }
 
 .escores-grid {
     display: grid;
@@ -302,38 +436,9 @@ h1 {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.escore-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
-}
+.escore-card h3 { font-size: 18px; margin-bottom: 10px; color: #333; }
+.escore-card p { font-size: 13px; color: #666; line-height: 1.4; height: 40px; }
 
-.escore-card p {
-    font-size: 13px;
-    color: #666;
-    line-height: 1.4;
-    height: 40px;
-}
-
-/* Badge órgão */
-.organ-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-weight: 600;
-}
-
-/* Cores dos Badges */
-.bg-rim { background: #e0f2fe; color: #0369a1; }
-.bg-prostata { background: #f5f3ff; color: #6d28d9; }
-.bg-figado { background: #fef3c7; color: #92400e; }
-.bg-pulmao { background: #dcfce7; color: #166534; }
-.bg-cerebro { background: #fce7f3; color: #9d174d; }
-
-/* Footer escore */
 .escore-footer {
     display: flex;
     justify-content: space-between;
@@ -341,16 +446,8 @@ h1 {
     margin-top: 20px;
 }
 
-.escore-footer span {
-    font-size: 11px;
-    color: #999;
-    text-transform: uppercase;
-}
-
-.escore-footer strong {
-    font-size: 16px;
-    color: #333;
-}
+.escore-footer span { font-size: 11px; color: #999; text-transform: uppercase; }
+.escore-footer strong { font-size: 16px; color: #333; }
 
 .btn-details {
     color: var(--primary-teal);
@@ -362,66 +459,24 @@ h1 {
     gap: 5px;
 }
 
-/* ======================================================
-   CASE CARDS
-====================================================== */
-.case-card {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    position: relative;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-}
-
-.case-card.hidden {
-    display: none;
-}
-
-.case-img {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    background: #000;
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.case-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.case-info {
-    flex-grow: 1;
-}
-
-.case-info h3 {
-    font-size: 15px;
-    margin-bottom: 4px;
-}
-
-.case-info p {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 8px;
-}
-
-.case-date {
+/* Badges de Órgãos e Status */
+.organ-badge {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 12px;
-    color: #999;
+    top: 20px;
+    right: 20px;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-weight: 600;
 }
 
-/* Status */
+.bg-rim { background: #e0f2fe; color: #0369a1; }
+.bg-prostata { background: #f5f3ff; color: #6d28d9; }
+.bg-figado { background: #fef3c7; color: #92400e; }
+.bg-pulmao { background: #dcfce7; color: #166534; }
+.bg-cerebro { background: #fce7f3; color: #9d174d; }
+.badge-organ { background-color: transparent !important; color: #666; padding: 0; font-weight: normal; }
+
 .status-badge {
     font-size: 11px;
     padding: 4px 10px;
@@ -436,42 +491,35 @@ h1 {
 .status-orange { background: #ffedd5; color: #f97316; }
 .status-green { background: #dcfce7; color: #22c55e; }
 .status-blue { background: #dbeafe; color: #3b82f6; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-/* Ações */
-.case-actions {
+/* Case Cards */
+.case-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
     display: flex;
-    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
-.btn-outline {
-    padding: 8px 15px;
-    border: 1px solid var(--primary-teal);
-    background: transparent;
-    color: var(--primary-teal);
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
+.case-card.hidden { display: none; }
+.case-img {
+    width: 60px; height: 60px; border-radius: 8px;
+    background: #000; margin-right: 15px;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
-
-.btn-solid {
-    padding: 8px 15px;
-    background: var(--primary-teal);
-    border: none;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-}
+.case-img img { width: 100%; height: 100%; object-fit: cover; }
+.case-info { flex-grow: 1; }
+.case-info h3 { font-size: 15px; margin-bottom: 4px; }
+.case-info p { font-size: 13px; color: #888; margin-bottom: 8px; }
+.case-date { position: absolute; top: 15px; right: 15px; font-size: 12px; color: #999; }
+.case-actions { display: flex; gap: 10px; }
 
 /* ======================================================
-   PAGINAÇÃO
+   6. PAGINAÇÃO E TABELAS
 ====================================================== */
 .pagination {
     display: flex;
@@ -481,16 +529,10 @@ h1 {
 }
 
 .page-btn {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    background: white;
-    cursor: pointer;
-    font-size: 13px;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px; border: 1px solid var(--border-color);
+    background: white; cursor: pointer; font-size: 13px;
 }
 
 .page-btn.active {
@@ -499,469 +541,8 @@ h1 {
     border-color: var(--primary-teal);
 }
 
-.breadcrumb { margin: 20px 0; color: #64748b; font-size: 14px; }
-.breadcrumb strong { color: var(--primary-teal); }
-
-.breadcrumb a {
-    color: #0c968b;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.badge-organ {
-    background-color: transparent !important; 
-    color: #666; 
-    padding: 0;  
-    font-weight: normal;
-}
-
-.score-header-card {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.score-title-group h1 { font-size: 28px; margin-bottom: 8px; color: #1e293b; }
-.score-title-group p { color: #64748b; margin-bottom: 15px; max-width: 600px; }
-
-.score-action-group { text-align: right; }
-.scale-info { margin-bottom: 15px; }
-.scale-label { display: block; font-size: 12px; color: #94a3b8; font-weight: 700; }
-.scale-value { font-size: 24px; font-weight: 700; color: #334155; }
-
-.btn-apply {
-    background-color: #0fbba4;
-    color: white;
-    text-decoration: none;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.info-section {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.info-section h2 { font-size: 20px; color: #1e293b; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
-.info-section p { color: #475569; line-height: 1.6; margin-bottom: 15px; }
-
-.criteria-item { margin-bottom: 30px; }
-.criteria-header { display: flex; justify-content: space-between; align-items: center; }
-.points-label { font-size: 11px; color: #94a3b8; font-weight: 700; }
-
-.points-list { list-style: none; padding: 0; margin-top: 10px; }
-.points-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px dashed #e2e8f0;
-    color: #475569;
-}
-
-.interpretation-card {
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    border-left: 5px solid #ccc;
-}
-
-.complexity-low { background: #f0fdf4; border-left-color: #22c55e; }
-.complexity-med { background: #fffbeb; border-left-color: #f59e0b; }
-.complexity-high { background: #fef2f2; border-left-color: #ef4444; }
-
-.interpretation-header { margin-bottom: 10px; display: flex; gap: 15px; align-items: center; }
-.badge-complexity { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: white; border: 1px solid currentColor; }
-
-.footer-actions { display: flex; justify-content: flex-end; padding: 20px 0; }
-.btn-back { text-decoration: none; background: white; border: 1px solid #e2e8f0; padding: 10px 20px; border-radius: 8px; color: #64748b; }
-
-/* Estilos para a Timeline de Pagamento */
-.payment-timeline {
-    position: relative;
-    padding-left: 30px;
-    margin-top: 20px;
-}
-
-.payment-timeline::before {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 5px;
-    bottom: 5px;
-    width: 2px;
-    background: #e2e8f0; /* Cor da linha */
-}
-
-.timeline-item {
-    position: relative;
-    padding-bottom: 25px;
-}
-
-.timeline-marker {
-    position: absolute;
-    left: -30px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #cbd5e1; /* Cor padrão (inativo) */
-    border: 2px solid white;
-    z-index: 1;
-}
-
-.timeline-item.active .timeline-marker {
-    background: #3b82f6; /* Azul para status atual/concluído */
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
-.timeline-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.exams-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.exam-card-detailed {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.2s;
-}
-
-.exam-card-detailed:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-.exam-image-wrapper {
-    position: relative;
-    height: 180px;
-    background: #000;
-}
-
-.exam-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.badge-published {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: #10b981;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.exam-details {
-    padding: 16px;
-}
-
-.detail-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 0.85rem;
-}
-
-.detail-label {
-    color: #64748b;
-}
-
-.detail-value {
-    color: #1e293b;
-    font-weight: 500;
-}
-
-.btn-validate {
-    width: 100%;
-    background: #10b981;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.2s;
-}
-
-.btn-validate:hover {
-    background: #059669;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 8px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    outline: none;
-}
-
-.form-group input:focus {
-    border-color: #3b82f6;
-}
-
-.required {
-    color: #ef4444;
-    margin-left: 2px;
-}
-
-.input-readonly {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    padding: 10px 12px;
-    border-radius: 6px;
-    color: #64748b;
-    display: flex;
-    justify-content: space-between;
-}
-
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.85rem;
-    color: #475569;
-    margin-bottom: 12px;
-    cursor: pointer;
-}
-
-.btn-generate {
-    flex: 1;
-    background: #10b981; /* Verde conforme imagem */
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.btn-cancel {
-    padding: 12px 30px;
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    color: #64748b;
-    cursor: pointer;
-}
-
-/* Estilo do Menu Dropdown */
-.dropdown-menu {
-    position: absolute;
-    top: 120%; /* Fica logo abaixo do avatar */
-    right: 0;
-    background: white;
-    min-width: 180px;
-    border-radius: 8px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
-    padding: 8px 0;
-    z-index: 1000;
-    display: none; /* Começa escondido */
-    animation: fadeIn 0.2s ease-out;
-}
-
-/* Classe que o JS vai adicionar para mostrar o menu */
-.dropdown-menu.show {
-    display: block;
-}
-
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    text-decoration: none;
-    color: #475569;
-    font-size: 0.85rem;
-    transition: background 0.2s;
-}
-
-.dropdown-item:hover {
-    background: #f8fafc;
-    color: #3b82f6;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.profile-card {
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    max-width: 800px;
-    margin: 20px auto;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.profile-title { font-size: 1.5rem; margin-bottom: 8px; color: #1e293b; }
-
-.email-badge {
-    display: inline-flex;
-    align-items: center;
-    background: #f1f5f9;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: #64748b;
-    margin-bottom: 30px;
-}
-
-.section-label {
-    text-align: left;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1e293b;
-    margin: 25px 0 15px 0;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 15px;
-}
-
-.form-group { text-align: left; margin-bottom: 15px; }
-
-.form-group label {
-    display: block;
-    font-size: 0.8rem;
-    color: #64748b;
-    margin-bottom: 8px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    background: #fcfcfc;
-}
-
-/* Estilo dos Botões de Idioma */
-.language-options { display: flex; gap: 10px; flex-wrap: wrap; }
-
-.lang-btn {
-    padding: 8px 20px;
-    border: 1px solid #e2e8f0;
-    background: white;
-    border-radius: 6px;
-    cursor: pointer;
-    color: #64748b;
-}
-
-.lang-btn.active {
-    background: #38bdf8; /* Azul claro conforme a imagem */
-    color: white;
-    border-color: #38bdf8;
-}
-
-/* Estilo da Foto */
-.avatar-preview {
-    width: 120px;
-    height: 120px;
-    border-radius: 12px;
-    object-fit: cover;
-    margin-bottom: 15px;
-}
-
-.btn-upload {
-    background: #38bdf8;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 auto;
-}
-
-/* Adicione ao seu arquivo CSS */
-.lang-btn {
-    transition: all 0.2s ease; /* Transição suave na troca de cor */
-}
-
-.btn-upload:active {
-    transform: scale(0.98); /* Efeito de clique no botão de foto */
-}
-
-/* Botão Eliminar Conta */
-.btn-delete-account {
-    width: 100%;
-    padding: 12px;
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    color: #64748b;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-}
-
-.btn-delete-account:hover {
-    background: #fff1f2;
-    color: #ef4444;
-    border-color: #fecaca;
-}
-
-/* Tabela de Notificações */
-.section-description {
-    text-align: left;
-    font-size: 0.85rem;
-    color: #64748b;
-    margin-bottom: 20px;
-}
-
-.notification-table {
-    border-top: 1px solid #f1f5f9;
-}
-
+/* Notificações */
+.notification-table { border-top: 1px solid #f1f5f9; }
 .table-header, .table-row {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
@@ -970,312 +551,214 @@ h1 {
     text-align: left;
     font-size: 0.9rem;
 }
+.table-header { color: #94a3b8; font-size: 0.8rem; }
+.table-row { border-top: 1px solid #f8fafc; color: #1e293b; }
 
-.table-header {
-    color: #94a3b8;
-    font-size: 0.8rem;
+/* ======================================================
+   7. DETALHES DE ESCORE E CRITÉRIOS
+====================================================== */
+.score-header-card {
+    background: white; padding: 30px; border-radius: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.table-row {
-    border-top: 1px solid #f8fafc;
-    color: #1e293b;
+.score-title-group h1 { font-size: 28px; margin-bottom: 8px; color: #1e293b; }
+.score-title-group p { color: #64748b; margin-bottom: 15px; max-width: 600px; }
+.score-action-group { text-align: right; }
+
+.scale-info { margin-bottom: 15px; }
+.scale-label { display: block; font-size: 12px; color: #94a3b8; font-weight: 700; }
+.scale-value { font-size: 24px; font-weight: 700; color: #334155; }
+
+.info-section {
+    background: white; padding: 30px; border-radius: 12px;
+    margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.info-section h2 { font-size: 20px; color: #1e293b; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
+.info-section p { color: #475569; line-height: 1.6; margin-bottom: 15px; }
+
+.criteria-item { margin-bottom: 30px; }
+.criteria-header { display: flex; justify-content: space-between; align-items: center; }
+.points-label { font-size: 11px; color: #94a3b8; font-weight: 700; }
+.points-list { list-style: none; padding: 0; margin-top: 10px; }
+.points-list li {
+    display: flex; justify-content: space-between;
+    padding: 10px 0; border-bottom: 1px dashed #e2e8f0; color: #475569;
 }
 
-.center { text-align: center; justify-content: center; display: flex; }
+.interpretation-card { padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid #ccc; }
+.complexity-low { background: #f0fdf4; border-left-color: #22c55e; }
+.complexity-med { background: #fffbeb; border-left-color: #f59e0b; }
+.complexity-high { background: #fef2f2; border-left-color: #ef4444; }
+.interpretation-header { margin-bottom: 10px; display: flex; gap: 15px; align-items: center; }
+.badge-complexity { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: white; border: 1px solid currentColor; }
 
-/* Custom Checkbox (Azul conforme imagem) */
+/* ======================================================
+   8. EXAMES E TIMELINE
+====================================================== */
+.exams-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; margin-top: 20px;
+}
+
+.exam-card-detailed {
+    background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+    overflow: hidden; transition: transform 0.2s;
+}
+.exam-card-detailed:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+.exam-image-wrapper { position: relative; height: 180px; background: #000; }
+.exam-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.badge-published {
+    position: absolute; top: 12px; right: 12px; background: #10b981; color: white;
+    padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+}
+.exam-details { padding: 16px; }
+.detail-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
+.detail-label { color: #64748b; }
+.detail-value { color: #1e293b; font-weight: 500; }
+
+.payment-timeline { position: relative; padding-left: 30px; margin-top: 20px; }
+.payment-timeline::before {
+    content: ''; position: absolute; left: 4px; top: 5px; bottom: 5px; width: 2px; background: #e2e8f0;
+}
+.timeline-item { position: relative; padding-bottom: 25px; }
+.timeline-marker {
+    position: absolute; left: -30px; width: 10px; height: 10px; border-radius: 50%;
+    background: #cbd5e1; border: 2px solid white; z-index: 1;
+}
+.timeline-item.active .timeline-marker {
+    background: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+.timeline-content { display: flex; justify-content: space-between; align-items: flex-start; }
+
+/* ======================================================
+   9. PERFIL E CONFIGURAÇÕES
+====================================================== */
+.profile-card {
+    background: white; border-radius: 16px; padding: 40px;
+    max-width: 800px; margin: 20px auto; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.profile-title { font-size: 1.5rem; margin-bottom: 8px; color: #1e293b; }
+.email-badge {
+    display: inline-flex; align-items: center; background: #f1f5f9;
+    padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #64748b; margin-bottom: 30px;
+}
+.section-label { text-align: left; font-size: 1rem; font-weight: 600; color: #1e293b; margin: 25px 0 15px 0; }
+.section-description { text-align: left; font-size: 0.85rem; color: #64748b; margin-bottom: 20px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px; }
+.avatar-preview { width: 120px; height: 120px; border-radius: 12px; object-fit: cover; margin-bottom: 15px; }
+.btn-upload {
+    background: #38bdf8; color: white; border: none; padding: 10px 20px;
+    border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto;
+}
+.btn-upload:active { transform: scale(0.98); }
+
+.language-options { display: flex; gap: 10px; flex-wrap: wrap; }
+.lang-btn {
+    padding: 8px 20px; border: 1px solid #e2e8f0; background: white;
+    border-radius: 6px; cursor: pointer; color: #64748b; transition: all 0.2s ease;
+}
+.lang-btn.active { background: #38bdf8; color: white; border-color: #38bdf8; }
+
+.btn-delete-account {
+    width: 100%; padding: 12px; background: white; border: 1px solid #e2e8f0;
+    border-radius: 8px; color: #64748b; cursor: pointer; display: flex;
+    align-items: center; justify-content: center; gap: 10px; font-size: 0.9rem; transition: all 0.2s;
+}
+.btn-delete-account:hover { background: #fff1f2; color: #ef4444; border-color: #fecaca; }
+
+/* Custom Checkbox */
 .custom-checkbox input { display: none; }
-
 .checkmark {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #cbd5e1;
-    border-radius: 4px;
-    display: inline-block;
-    cursor: pointer;
-    position: relative;
+    width: 20px; height: 20px; border: 2px solid #cbd5e1;
+    border-radius: 4px; display: inline-block; cursor: pointer; position: relative;
 }
-
-.custom-checkbox input:checked + .checkmark {
-    background: #3b82f6; /* Azul vibrante das imagens */
-    border-color: #3b82f6;
-}
-
+.custom-checkbox input:checked + .checkmark { background: #3b82f6; border-color: #3b82f6; }
 .custom-checkbox input:checked + .checkmark::after {
-    content: '✓';
-    color: white;
-    position: absolute;
-    left: 3px;
-    top: -2px;
-    font-size: 14px;
+    content: '✓'; color: white; position: absolute; left: 3px; top: -2px; font-size: 14px;
 }
 
-.team-card {
-    background: #f8fafc; /* Fundo levemente cinza */
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
+/* ======================================================
+   10. EQUIPE E TIME
+====================================================== */
+.team-card, .team-container {
+    background: #f8fafc; border-radius: 12px; padding: 24px; margin-bottom: 24px;
 }
-
-.team-header h4 {
-    margin: 0 0 20px 0;
-    color: #1e293b;
-    font-size: 1.1rem;
+.team-header h4, .team-name { margin: 0 0 20px 0; color: #1e293b; font-size: 1.1rem; }
+.member-item, .member-row {
+    display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #e2e8f0;
 }
+.member-avatar, .member-img { width: 36px; height: 36px; border-radius: 50%; margin-right: 12px; }
+.member-name, .member-details .name { font-size: 0.9rem; font-weight: 600; margin: 0; }
+.member-email, .member-status, .member-details .email, .member-details .status { font-size: 0.75rem; color: #64748b; }
 
-.member-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #e2e8f0;
-}
+.btn-remove-member, .delete-member { margin-left: auto; background: none; border: none; cursor: pointer; color: #94a3b8; }
+.member-item.pending { background: #fefce8; padding: 12px; border-radius: 8px; border: none; }
+.pending-invite { display: flex; align-items: center; background: #fffbeb; padding: 12px; border-radius: 8px; margin: 10px 0; }
 
-.member-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    margin-right: 12px;
-}
+.invite-input, .invite-field { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; margin: 20px 0; background: white; }
+.clock-icon { background: #fef08a; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
 
-.member-name { font-size: 0.9rem; font-weight: 600; margin: 0; }
-.member-email, .member-status { font-size: 0.75rem; color: #64748b; margin: 0; }
-
-.btn-remove-member {
-    margin-left: auto;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #94a3b8;
-}
-
-/* Estilo para convite pendente */
-.member-item.pending {
-    background: #fefce8; /* Amarelo clarinho */
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-}
-
-.invite-input {
-    width: 100%;
-    padding: 10px;
-    margin: 20px 0;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-}
-
-.chart-placeholder {
-    width: 100%;
-    height: 150px;
-    margin-top: 15px;
-}
-
-.team-container {
-    background: #f8fafc; /* Fundo cinza suave */
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 24px;
-    text-align: left;
-}
-
-.team-name { font-size: 1rem; margin-bottom: 20px; color: #1e293b; }
-
-.member-row {
-    display: flex;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.member-img { width: 32px; height: 32px; border-radius: 50%; margin-right: 12px; }
-
-.member-details { display: flex; flex-direction: column; }
-.member-details .name { font-size: 0.85rem; font-weight: 600; color: #1e293b; }
-.member-details .email, .member-details .status { font-size: 0.75rem; color: #64748b; }
-
-.delete-member { margin-left: auto; background: none; border: none; cursor: pointer; color: #94a3b8; }
-
-.pending-invite {
-    display: flex;
-    align-items: center;
-    background: #fffbeb; /* Amarelo de alerta */
-    padding: 12px;
-    border-radius: 8px;
-    margin: 10px 0;
-}
-
-.clock-icon {
-    background: #fef08a;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-}
-
-.invite-field {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    margin: 20px 0;
-    background: white;
-}
-
+/* Gráficos em Time */
+.chart-placeholder, .chart-container { width: 100%; height: 150px; margin-top: 15px; }
+.chart-container { height: 120px; }
 .team-history h5 { font-size: 0.9rem; margin: 25px 0 5px 0; }
 .cases-count { font-size: 0.75rem; color: #64748b; margin-bottom: 15px; }
-.chart-container { height: 120px; width: 100%; }
 
-/* Estilos para a Tela de Ajuda */
-.help-section {
-    text-align: left;
-    padding: 20px 0;
-}
+/* ======================================================
+   11. AJUDA E SOBRE
+====================================================== */
+.help-section { text-align: left; padding: 20px 0; }
+.help-subtitle { font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 12px; }
+.help-description { font-size: 0.9rem; color: #64748b; line-height: 1.5; margin-bottom: 20px; }
+.help-link { color: #00b4d8; text-decoration: none; font-weight: 500; }
+.help-divider, .sobre-divider { border: 0; border-top: 1px solid #f1f5f9; margin: 30px 0; }
 
-.help-subtitle {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 12px;
-}
-
-.help-description {
-    font-size: 0.9rem;
-    color: #64748b;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.help-link {
-    color: #00b4d8; /* Tom de ciano da marca */
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.help-divider {
-    border: 0;
-    border-top: 1px solid #f1f5f9;
-    margin: 10px 0;
-}
-
-/* Botão Estilizado (Ciano) */
 .btn-help {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #00b4d8; /* Cor exata da imagem */
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s;
+    display: inline-flex; align-items: center; gap: 8px; background-color: #00b4d8;
+    color: white; border: none; padding: 12px 24px; border-radius: 8px;
+    font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; transition: background 0.2s;
 }
+.btn-help:hover { background-color: #0096b4; }
 
-.btn-help:hover {
-    background-color: #0096b4;
+/* Sobre / Software */
+.sobre-container { max-width: 800px; margin: 40px auto; background: #ffffff; padding: 40px; border-radius: 12px; text-align: center; }
+.tagline, .brand-subtitle { font-size: 0.75rem; color: #94a3b8; letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; }
+.software-name, .brand-title { font-size: 2.2rem; color: #00b4d8; margin: 0 0 10px 0; }
+.software-desc, .brand-description { font-size: 1rem; color: #64748b; margin-bottom: 40px; }
+
+.fabricante-info-box, .info-box { background: #f8fafc; border-radius: 8px; padding: 24px; text-align: left; border: 1px solid #f1f5f9; margin-bottom: 20px; }
+.info-row, .info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; font-size: 0.85rem; }
+.info-row .icon, .info-icon { font-size: 1.2rem; color: #00b4d8; margin-top: 2px; }
+.details strong { display: block; font-size: 0.95rem; color: #1e293b; margin-bottom: 4px; }
+
+/* Certificações e UDI */
+.certificacoes-wrapper, .cert-row, .certificacoes { display: flex; justify-content: center; gap: 60px; margin: 40px 0; }
+.cert-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.cert-icon-circle, .cert-badge, .cert-item .icon {
+    width: 64px; height: 64px; background-color: #e0f7fa; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
 }
+.cert-badge { width: 50px; height: 50px; background: #e2e8f0; color: #00b4d8; font-weight: bold; }
+.cert-item .icon { width: 60px; height: 60px; background: #dff3f3; font-size: 22px; }
+.cert-text-bold { color: #00b4d8; font-weight: 700; font-size: 1.1rem; }
+.cert-label { font-size: 0.75rem; color: #64748b; font-weight: 500; }
 
-.btn-help .icon {
-    font-size: 1rem;
-}
-
-/* Estilos para a Tela de Ajuda */
-.help-section {
-    text-align: left;
-    padding: 20px 0;
-}
-
-.help-subtitle {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 12px;
-}
-
-.help-description {
-    font-size: 0.9rem;
-    color: #64748b;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.help-link {
-    color: #00b4d8; /* Tom de ciano da marca */
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.help-divider {
-    border: 0;
-    border-top: 1px solid #f1f5f9;
-    margin: 10px 0;
-}
-
-/* Botão Estilizado (Ciano) */
-.btn-help {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #00b4d8; /* Cor exata da imagem */
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s;
-}
-
-.btn-help:hover {
-    background-color: #0096b4;
-}
-
-.btn-help .icon {
-    font-size: 1rem;
-}
-
-.brand-subtitle { font-size: 0.75rem; color: #94a3b8; letter-spacing: 1px; margin-bottom: 5px; }
-.brand-title { font-size: 2rem; color: #00b4d8; margin: 0; }
-.brand-description { font-size: 0.9rem; color: #64748b; margin-bottom: 30px; }
-
-.info-box {
-    background: #f8fafc;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.info-item { display: flex; gap: 15px; margin-bottom: 15px; font-size: 0.85rem; color: #334155; }
-.info-icon { font-size: 1.2rem; }
-
-.cert-row { display: flex; justify-content: center; gap: 40px; margin: 30px 0; }
-.cert-item { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; color: #64748b; }
-.cert-badge {
-    width: 50px; height: 50px; border-radius: 50%; background: #e2e8f0;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: bold; font-size: 1rem; color: #00b4d8; margin-bottom: 8px;
-}
-
-.udi-box { text-align: center; }
+.udi-box, .udi { text-align: center; }
 .udi-label { font-size: 0.7rem; font-weight: bold; color: #94a3b8; margin-bottom: 10px; }
-.barcode { font-family: monospace; font-size: 2rem; letter-spacing: -2px; }
-.udi-code { font-size: 0.75rem; color: #64748b; margin-top: 10px; }
+.barcode { 
+    font-family: monospace; font-size: 2rem; letter-spacing: -2px; 
+    width: 200px; height: 60px; margin: 20px auto;
+    background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 5px);
+}
+.udi-code, .udi-text { font-size: 0.75rem; color: #64748b; margin-top: 10px; text-align: center; }
 
-.rep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.rep-card { font-size: 0.8rem; }
-
-/* Estilos das Notas de Versão */
+/* Release Notes */
 .release-notes { max-width: 800px; margin: 40px auto; text-align: left; }
 .notes-title { font-size: 1.2rem; color: #1e293b; margin-bottom: 20px; text-align: center; }
 .version-card { background: #f8fafc; border-radius: 8px; padding: 25px; margin-bottom: 15px; }
@@ -1283,237 +766,12 @@ h1 {
 .version-card ul { padding-left: 20px; color: #475569; font-size: 0.85rem; }
 .version-card li { margin-bottom: 8px; }
 
-/* Container Principal (centralizado como no perfil) */
-.sobre-container {
-    max-width: 800px;
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 12px;
-    text-align: center;
+/* ======================================================
+   12. ANIMAÇÕES E AUXILIARES
+====================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Cabeçalho */
-.tagline {
-    font-size: 0.75rem;
-    color: #94a3b8;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.software-name {
-    font-size: 2.2rem;
-    color: #00b4d8; /* Azul Ciano Cirurgic3D */
-    margin: 0 0 10px 0;
-}
-
-.software-desc {
-    font-size: 1rem;
-    color: #64748b;
-    margin-bottom: 40px;
-}
-
-/* Box do Fabricante */
-.fabricante-info-box {
-    background: #f8fafc; /* Fundo cinza bem claro */
-    border-radius: 8px;
-    padding: 24px;
-    text-align: left;
-    border: 1px solid #f1f5f9;
-}
-
-.info-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.info-row:last-child { margin-bottom: 0; }
-
-.info-row .icon {
-    font-size: 1.2rem;
-    color: #00b4d8;
-    margin-top: 2px;
-}
-
-.details strong {
-    display: block;
-    font-size: 0.95rem;
-    color: #1e293b;
-    margin-bottom: 4px;
-}
-
-.details p, .email-text, .label-text {
-    font-size: 0.85rem;
-    color: #475569;
-    line-height: 1.5;
-}
-
-.certificacoes-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 60px; /* Espaçamento amplo entre os selos */
-    margin: 40px 0;
-}
-
-.cert-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.cert-icon-circle {
-    width: 64px;
-    height: 64px;
-    background-color: #e0f7fa; /* Ciano clarinho de fundo */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-}
-
-.cert-text-bold {
-    color: #00b4d8; /* Azul da marca */
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
-.cert-plus-icon {
-    color: #00b4d8;
-    font-size: 1.2rem;
-}
-
-.cert-label {
-    font-size: 0.75rem;
-    color: #64748b; /* Cinza médio para as legendas */
-    font-weight: 500;
-}
-
-.sobre-divider {
-    border: 0;
-    border-top: 1px solid #f1f5f9;
-    margin: 30px 0;
-}
-
-body {
-margin: 0;
-padding: 0;
-font-family: Arial, sans-serif;
-background-color: #eef7f7;
-color: #2b3a42;
-}
-
-
-.container {
-max-width: 900px;
-margin: 0 auto;
-padding: 20px;
-}
-
-
-.header-section {
-text-align: center;
-margin-bottom: 40px;
-}
-
-
-.header-section h4 {
-color: #6aa9a9;
-margin: 0;
-}
-
-
-.header-section h1 {
-margin: 5px 0 10px;
-color: #009688;
-}
-
-
-.card {
-background: #f5fbfb;
-padding: 20px;
-border-radius: 12px;
-margin-bottom: 20px;
-box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-
-.tag {
-display: inline-block;
-margin-top: 10px;
-background-color: #009688;
-color: white;
-padding: 4px 10px;
-border-radius: 8px;
-font-size: 14px;
-}
-
-
-.certificacoes {
-display: flex;
-justify-content: center;
-gap: 40px;
-margin: 40px 0;
-}
-
-
-.cert-item {
-text-align: center;
-}
-
-
-.cert-item .icon {
-width: 60px;
-height: 60px;
-display: flex;
-align-items: center;
-justify-content: center;
-border-radius: 50%;
-background: #dff3f3;
-font-size: 22px;
-margin: 0 auto 10px;
-}
-
-
-.udi h3 {
-text-align: center;
-}
-
-
-.barcode {
-width: 200px;
-height: 60px;
-background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 5px);
-margin: 20px auto;
-}
-
-
-.udi-text {
-text-align: center;
-font-size: 14px;
-}
-
-
-.representantes {
-display: flex;
-gap: 20px;
-flex-wrap: wrap;
-}
-
-
-.rep-card {
-flex: 1 1 45%;
-}
-
-
-.release-notes h2 {
-margin-top: 40px;
-}
-
-
-.version-card h3 {
-margin-top: 0;
-}
+.center { text-align: center; justify-content: center; display: flex; }
