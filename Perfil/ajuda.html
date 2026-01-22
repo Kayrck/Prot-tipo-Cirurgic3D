@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirurgic3D - Ajuda</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="../Home/index.html" class="navbar-logo">
+            <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+        </a>
+    </div>
+    
+     <ul class="navbar-menu">
+    <li>
+      <a href="../Home/index.html" class="nav-link active">
+        Casos Clínicos
+      </a>
+    </li>
+    <li>
+      <a href="../Escores/index.html" class="nav-link">
+        Escores Clínicos
+      </a>
+    </li>
+  </ul>
+
+        <div class="user-menu-container" style="position: relative;">
+            <img src="../assets/img/perfil.jpg" 
+                 id="avatar-toggle" 
+                 alt="Perfil" 
+                 style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
+            
+            <div id="user-dropdown" class="dropdown-menu">
+                <a href="../Perfil/index.html" class="dropdown-item">
+                    Meu Perfil
+                </a>
+                <a href="#" class="dropdown-item">
+                   Ajuda
+                </a>
+                <a href="../Perfil/sobre.html" class="dropdown-item">
+                    Sobre
+                </a>
+                <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
+                <a href="../auth/login.html" class="dropdown-item" style="color: #ef4444;">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<main class="container">
+    <div class="profile-card"> <h2 class="profile-title">Ajuda</h2>
+
+        <section class="help-section">
+            <h3 class="help-subtitle">Perguntas frequentes</h3>
+            <p class="help-description">
+                Descubra as respostas às perguntas mais frequentes sobre a Cirurgic3D no respetivo website clicando no botão abaixo.
+            </p>
+            <a href="https://cirurgic3d.com/faq" target="_blank" class="btn-help">
+               ABRIR PÁGINA
+            </a>
+        </section>
+
+        <hr class="help-divider">
+
+        <section class="help-section">
+            <h3 class="help-subtitle">Manual do Utilizador</h3>
+            <p class="help-description">
+                Transfira o Manual do Utilizador da Cirurgic3D clicando no botão abaixo.
+            </p>
+            <button class="btn-help" id="btn-download-manual">
+                TRANSFERIR FICHEIRO
+            </button>
+        </section>
+
+        <hr class="help-divider">
+
+        <section class="help-section">
+            <h3 class="help-subtitle">Contacte-nos</h3>
+            <p class="help-description">
+                Para suporte adicional, envie um e-mail para <a href="mailto:support@cirurgic3d.com" class="help-link">support@cirurgic3d.com</a>, ou clique no botão abaixo.
+            </p>
+            <a href="mailto:support@cirurgic3d.com" class="btn-help">
+             ENVIAR E-MAIL PARA SUPORTE
+            </a>
+        </section>
+    </div>
+</main>
+
+<script src="../assets/js/navigation.js"></script>
+</body>
+</html>

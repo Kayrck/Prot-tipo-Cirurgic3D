@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirurgic3D - Vista 3D</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <style>
+        body { 
+            background-color: #000; 
+            margin: 0; 
+            overflow: hidden; 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+        }
+        
+        /* Layout Principal */
+        .viewer-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Header Superior */
+        .viewer-header {
+            position: absolute;
+            top: 0; width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            z-index: 20;
+        }
+
+        .menu-toggle {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: transform 0.2s;
+            user-select: none;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Menu Lateral de Configurações (Esquerda) */
+        .settings-panel {
+            position: absolute;
+            left: -280px; /* Escondido por padrão */
+            top: 80px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            width: 220px;
+            z-index: 15;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Classe para abrir o menu */
+        .settings-panel.active {
+            left: 20px;
+        }
+
+        /* Barra de Ferramentas Circular (Direita) */
+        .tools-panel {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 5;
+        }
+
+        .tool-button {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.2s;
+        }
+
+        .tool-button:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        /* Estilização dos Switches */
+        .switch-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px; height: 20px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #475569;
+            transition: .4s; border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute; content: "";
+            height: 14px; width: 14px;
+            left: 3px; bottom: 3px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: #3b82f6; }
+        input:checked + .slider:before { transform: translateX(14px); }
+
+        .model-3d-placeholder {
+            max-width: 80%;
+            max-height: 80%;
+            filter: drop-shadow(0 0 50px rgba(59, 130, 246, 0.3));
+            transition: transform 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="viewer-header">
+        <div class="menu-toggle" id="menuBtn">☰</div>
+        
+        <div style="font-size: 1.1rem; font-weight: 500; letter-spacing: 1px;">Cirurgic3D</div>
+        
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span style="font-size: 0.8rem; color: #94a3b8;">Caso #2847-A</span>
+            <a href="index.html" style="color: white; text-decoration: none; font-size: 1.2rem;">🏠</a>
+        </div>
+    </header>
+
+    <div class="viewer-container">
+        <div class="settings-panel" id="sidePanel">
+            <h3 style="font-size: 0.9rem; margin-top: 0; margin-bottom: 20px; color: #94a3b8; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Configurações</h3>
+            
+            <div class="switch-group">
+                <span>Ecrã completo</span>
+                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+            <div class="switch-group">
+                <span>Repor vista</span>
+                <span style="cursor: pointer;" title="Resetar">🔄</span>
+            </div>
+            <div class="switch-group">
+                <span>Medição</span>
+                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+            <div class="switch-group">
+                <span>Cor de fundo</span>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+            <div class="switch-group">
+                <span>Sobreposição</span>
+                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+        </div>
+
+        <img src="../assets/img/kidney-model.png" class="model-3d-placeholder" id="mainModel" alt="Modelo 3D Rim">
+
+        <div class="tools-panel">
+            <button class="tool-button" style="background: #ef4444;" title="Sistema Vascular">❤️</button>
+            <button class="tool-button" style="background: #3b82f6;" title="Sistema Excretor">💧</button>
+            <button class="tool-button" style="background: #eab308;" title="Nervos">⚡</button>
+            <button class="tool-button" style="background: #9a3412;" title="Tumor/Lesão">⬤</button>
+            <button class="tool-button" style="background: #94a3b8;" title="Estrutura Óssea">🦴</button>
+            <button class="tool-button" style="background: #1e293b; border: 1px solid #475569;" title="Ocultar Outros">👁️</button>
+        </div>
+    </div>
+
+    <script>
+        // Lógica para abrir/fechar menu lateral
+        const menuBtn = document.getElementById('menuBtn');
+        const sidePanel = document.getElementById('sidePanel');
+
+        menuBtn.addEventListener('click', (e) => {
+            sidePanel.classList.toggle('active');
+            e.stopPropagation(); // Evita fechar imediatamente ao clicar no botão
+        });
+
+        // Fechar menu ao clicar fora dele (melhora a UX)
+        document.addEventListener('click', (e) => {
+            if (!sidePanel.contains(e.target) && sidePanel.classList.contains('active')) {
+                sidePanel.classList.remove('active');
+            }
+        });
+
+        // Simulação básica de interatividade no modelo
+        const model = document.getElementById('mainModel');
+        document.querySelectorAll('.tool-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                model.style.transform = 'scale(1.05)';
+                setTimeout(() => model.style.transform = 'scale(1)', 200);
+            });
+        });
+    </script>
+</body>
+</html>

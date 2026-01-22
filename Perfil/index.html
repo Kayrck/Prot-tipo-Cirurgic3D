@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirurgic3D - Perfil do Usuário</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 35px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .profile-avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #f1f5f9;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 25px;
+        }
+
+        .stats-card {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stats-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="../Home/index.html" class="navbar-logo">
+            <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+        </a>
+    </div>
+    
+     <ul class="navbar-menu">
+    <li>
+      <a href="../Home/index.html" class="nav-link active">
+        Casos Clínicos
+      </a>
+    </li>
+    <li>
+      <a href="../Escores/index.html" class="nav-link">
+        Escores Clínicos
+      </a>
+    </li>
+  </ul>
+
+        <div class="user-menu-container" style="position: relative;">
+            <img src="../assets/img/perfil.jpg" 
+                 id="avatar-toggle" 
+                 alt="Perfil" 
+                 style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
+            
+            <div id="user-dropdown" class="dropdown-menu">
+                <a href="../Perfil/index.html" class="dropdown-item">
+                    Meu Perfil
+                </a>
+                <a href="#" class="dropdown-item">
+                   Ajuda
+                </a>
+                <a href="../Perfil/sobre.html" class="dropdown-item">
+                    Sobre
+                </a>
+                <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
+                <a href="../auth/login.html" class="dropdown-item" style="color: #ef4444;">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+    <div class="profile-card">
+        <h2 class="profile-title">Perfil</h2>
+        <div class="email-badge">
+            <span class="check-icon">✓</span> E-mail verificado
+        </div>
+
+        <section class="profile-section">
+            <h3 class="section-label">Dados pessoais</h3>
+            
+            <div class="form-group full-width">
+                <label>E-mail</label>
+                <input type="email" value="joao.silva@cirurgic3d.com" readonly>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nome próprio</label>
+                    <input type="text" value="João">
+                </div>
+                <div class="form-group">
+                    <label>Apelido</label>
+                    <input type="text" value="Silva">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Hospital</label>
+                    <input type="text" value="São Camilo">
+                </div>
+                <div class="form-group">
+                    <label>Especialidade Cirúrgica</label>
+                    <input type="text" placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Número de telefone</label>
+                <input type="text" value="+351 912 345 678">
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <h3 class="section-label">Idioma</h3>
+            <div class="language-options">
+                <button class="lang-btn active">Português</button>
+                <button class="lang-btn">English</button>
+                <button class="lang-btn">Español</button>
+                <button class="lang-btn">Deutsch</button>
+                <button class="lang-btn">Français</button>
+            </div>
+        </section>
+
+        <section class="profile-section center-content">
+            <h3 class="section-label align-left">Foto</h3>
+            <div class="avatar-upload-container">
+                <img src="../assets/img/perfil.jpg" alt="Avatar" class="avatar-preview">
+                <button class="btn-upload">
+                  Carregar foto
+                </button>
+            </div>
+        </section>
+        <section class="profile-section">
+    <h3 class="section-label">Ações disponíveis</h3>
+    <button class="btn-delete-account" id="btn-eliminar">
+        <span class="icon-trash">🗑️</span> Eliminar conta
+    </button>
+</section>
+
+<section class="profile-section">
+    <h3 class="section-label">Preferências de notificações</h3>
+    <p class="section-description">Escolha como deseja receber notificações importantes sobre seus casos.</p>
+    
+    <div class="notification-table">
+        <div class="table-header">
+            <span>Notificar quando</span>
+            <span class="center">Email</span>
+            <span class="center">SMS</span>
+        </div>
+        
+        <div class="table-row">
+            <span>Um modelo estiver pronto</span>
+            <label class="custom-checkbox center">
+                <input type="checkbox" checked>
+                <span class="checkmark"></span>
+            </label>
+            <label class="custom-checkbox center">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+        <div class="table-row">
+            <span>A data limite de uma operação for hoje</span>
+            <label class="custom-checkbox center">
+                <input type="checkbox" checked>
+                <span class="checkmark"></span>
+            </label>
+            <label class="custom-checkbox center">
+                <input type="checkbox" checked>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+</section>
+
+<section class="profile-section teams-section">
+    <h3 class="section-label">As minhas equipes</h3>
+
+    <div class="team-container">
+        <h4 class="team-name">Monte Klinikum</h4>
+        
+        <div class="member-row">
+            <img src="../assets/img/dr-carlos.png" class="member-img">
+            <div class="member-details">
+                <span class="name">Dr. Carlos Mendes</span>
+                <span class="email">carlos.mendes@monteklinikum.de</span>
+            </div>
+            <button class="delete-member">🗑️</button>
+        </div>
+
+        <div class="member-row">
+            <img src="../assets/img/dra-anna.png" class="member-img">
+            <div class="member-details">
+                <span class="name">Dra. Anna Schmidt</span>
+                <span class="email">anna.schmidt@monteklinikum.de</span>
+            </div>
+            <button class="delete-member">🗑️</button>
+        </div>
+
+        <input type="text" class="invite-field" placeholder="Convidar um colega">
+
+        <div class="team-history">
+            <h5>Histórico de casos da equipa</h5>
+            <p class="cases-count">Número total de casos no ano passado: <strong>127</strong></p>
+            <div class="chart-container">
+                <canvas id="chartMonte"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="team-container">
+        <h4 class="team-name">Santa Joana Hospital</h4>
+        
+        <div class="member-row">
+            <img src="../assets/img/dra-maria.png" class="member-img">
+            <div class="member-details">
+                <span class="name">Dra. Maria Santos</span>
+                <span class="email">maria.santos@santajoana.pt</span>
+            </div>
+            <button class="delete-member">🗑️</button>
+        </div>
+
+        <div class="pending-invite">
+            <div class="clock-icon">🕒</div>
+            <div class="member-details">
+                <span class="name">Dr. Pedro Costa</span>
+                <span class="status">Convite pendente</span>
+            </div>
+        </div>
+
+        <input type="text" class="invite-field" placeholder="Convidar um colega">
+
+        <div class="team-history">
+            <h5>Histórico de casos da equipa</h5>
+            <p class="cases-count">Número total de casos no ano passado: <strong>89</strong></p>
+            <div class="chart-container">
+                <canvas id="chartJoana"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    // 1. Lógica do Seletor de Idioma
+    const langButtons = document.querySelectorAll('.lang-btn');
+    
+    langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove a classe 'active' de todos os botões
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            // Adiciona ao botão clicado
+            button.classList.add('active');
+            console.log(`Idioma alterado para: ${button.textContent}`);
+        });
+    });
+
+    // 2. Lógica de Upload de Foto
+    const btnUpload = document.querySelector('.btn-upload');
+    const avatarPreview = document.querySelector('.avatar-preview');
+
+    // Cria um input de arquivo invisível
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+
+    btnUpload.addEventListener('click', () => {
+        fileInput.click(); // Dispara o seletor de arquivos do sistema
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                // Atualiza a imagem de visualização com o novo arquivo
+                avatarPreview.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnEliminar = document.getElementById('btn-eliminar');
+
+    if (btnEliminar) {
+        btnEliminar.addEventListener('click', () => {
+            const confirmar = confirm("Tem certeza que deseja eliminar sua conta? Esta ação não pode ser desfeita.");
+            if (confirmar) {
+                console.log("Conta eliminada");
+                // Lógica de logout ou redirecionamento aqui
+                window.location.href = "../auth/login.html";
+            }
+        });
+    }
+});
+function initChart(id, points) {
+    const ctx = document.getElementById(id).getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 120);
+    gradient.addColorStop(0, 'rgba(34, 211, 238, 0.2)');
+    gradient.addColorStop(1, 'rgba(34, 211, 238, 0.05)');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['', '', '', '', '', '', '', ''],
+            datasets: [{
+                data: points,
+                borderColor: '#22d3ee', // Azul Ciano
+                borderWidth: 2,
+                fill: true,
+                backgroundColor: gradient,
+                tension: 0.4,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { display: false }, y: { display: false } }
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initChart('chartMonte', [30, 45, 38, 55, 42, 60, 48, 52]);
+    initChart('chartJoana', [20, 35, 30, 40, 35, 50, 40, 45]);
+});
+
+</script>
+
+</body>
+</html>
