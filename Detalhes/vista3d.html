@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cirurgic3D - Vista 3D</title>
     <link rel="stylesheet" href="../assets/css/global.css">
+    <script type="module" src="viewer.js"></script>
+
     <style>
         body { 
             background-color: #000; 
@@ -135,6 +137,13 @@
             filter: drop-shadow(0 0 50px rgba(59, 130, 246, 0.3));
             transition: transform 0.5s ease;
         }
+
+        canvas#scene {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -176,7 +185,7 @@
             </div>
         </div>
 
-        <img src="../assets/img/kidney-model.png" class="model-3d-placeholder" id="mainModel" alt="Modelo 3D Rim">
+        <canvas id="scene"></canvas>
 
         <div class="tools-panel">
             <button class="tool-button" style="background: #ef4444;" title="Sistema Vascular">❤️</button>

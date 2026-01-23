@@ -79,21 +79,44 @@
             margin: 30px 0;
             flex-wrap: wrap;
         }
+
+          .case-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .case-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .action-bar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .search-container {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
-  
-  <!-- LOGO -->
-  <div class="navbar-left">
-    <a href="../Home/index.html" class="navbar-logo">
-      <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
-    </a>
-  </div>
-
-  <!-- MENU CENTRAL -->
-  <ul class="navbar-menu">
+    <div class="navbar-left">
+        <a href="../Home/index.html" class="navbar-logo">
+            <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+        </a>
+    </div>
+    
+     <ul class="navbar-menu">
     <li>
       <a href="../Home/index.html" class="nav-link active">
         Casos Clínicos
@@ -106,17 +129,29 @@
     </li>
   </ul>
 
-  <!-- PERFIL -->
-  <div class="navbar-right">
-    <div class="user-menu">
-      <span class="user-name">Dr. Silva</span>
-      <img
-        src="../assets/img/perfil.jpg"
-        alt="Usuário"
-        class="user-avatar"
-      />
+        <div class="user-menu-container" style="position: relative;">
+            <img src="../assets/img/perfil.jpg" 
+                 id="avatar-toggle" 
+                 alt="Perfil" 
+                 style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
+            
+            <div id="user-dropdown" class="dropdown-menu">
+                <a href="../Perfil/index.html" class="dropdown-item">
+                    Meu Perfil
+                </a>
+                <a href="../Perfil/ajuda.html" class="dropdown-item">
+                   Ajuda
+                </a>
+                <a href="../Perfil/sobre.html" class="dropdown-item">
+                    Sobre
+                </a>
+                <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
+                <a href="../auth/login.html" class="dropdown-item" style="color: #ef4444;">
+                    Sair
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
 
 <main class="container">
@@ -125,7 +160,7 @@
     </nav>
 
    <div class="viewer-3d" style="position: relative; display: flex; justify-content: center; align-items: center; background: #1a233a; border-radius: 12px; height: 400px; overflow: hidden;">
-    <a href="vista3d.html" style="text-decoration: none;">
+    <a href="../viewer3d/index.html" style="text-decoration: none;">
         <button style="position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 5px 12px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 5px; z-index: 10; transition: background 0.3s;">
             <span>📦</span> Vista 3D
         </button>
@@ -167,7 +202,7 @@
                 <div>
                     <label style="color: #64748b; font-size: 0.85rem; display: block; margin-bottom: 4px;">Criado por</label>
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <img src="../assets/img/avatar-doctor.png" style="width: 24px; height: 24px; border-radius: 50%; background: #eee;" alt="Avatar">
+                        <img src="../assets/img/drcarlos.jpg" style="width: 24px; height: 24px; border-radius: 50%; background: #eee;" alt="Avatar">
                         <span style="font-weight: 600; color: #1e293b;">Dr. Carlos Silva</span>
                     </div>
                 </div>
@@ -209,7 +244,7 @@
         <div id="chat-history" style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 25px;">
             
             <div style="display: flex; gap: 12px;">
-                <img src="../assets/img/avatar-doctor-2.png" style="width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0;" alt="Dra. Ana">
+                <img src="../assets/img/DraAnaCosta.jpg" style="width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0;" alt="Dra. Ana">
                 <div>
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                         <span style="font-weight: 600; font-size: 0.9rem; color: #1e293b;">Dra. Ana Costa</span>
@@ -417,6 +452,27 @@
     }
 
     window.onload = carregarDadosDoCaso;
+
+    // --- FUNÇÕES / EVENTOS DA NAVBAR ---
+document.addEventListener('DOMContentLoaded', () => {
+    const avatarToggle = document.getElementById('avatar-toggle');
+    const userDropdown = document.getElementById('user-dropdown');
+
+    if (avatarToggle && userDropdown) {
+        // Abre/Fecha o menu ao clicar no avatar
+        avatarToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('show');
+        });
+
+        // Fecha o menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!userDropdown.contains(e.target) && e.target !== avatarToggle) {
+                userDropdown.classList.remove('show');
+            }
+        });
+    }
+});
 </script>
 
 </body>
