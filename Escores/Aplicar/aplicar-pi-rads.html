@@ -6,7 +6,7 @@
     <title>Aplicar PI-RADS - Cirurgic3D</title>
     <link rel="stylesheet" href="../../assets/css/global.css">
 
-     <style>
+    <style>
         .case-img {
             width: 80px;
             height: 80px;
@@ -35,173 +35,180 @@
     </style>
 </head>
 <body>
-     <nav class="navbar">
+
+<nav class="navbar">
     <div class="navbar-left">
         <a href="../../Home/index.html" class="navbar-logo">
             <img src="../../assets/img/logo.svg" alt="Cirurgic3D" />
         </a>
     </div>
-    
-     <ul class="navbar-menu">
-    <li>
-      <a href="../../Home/index.html" class="nav-link">
-        Casos Clínicos
-      </a>
-    </li>
-    <li>
-      <a href="../Escores/index.html" class="nav-link active">
-        Escores Clínicos
-      </a>
-    </li>
-  </ul>
 
-        <div class="user-menu-container" style="position: relative;">
-            <img src="../../assets/img/perfil.jpg" 
-                 id="avatar-toggle" 
-                 alt="Perfil" 
-                 style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
-            
-            <div id="user-dropdown" class="dropdown-menu">
-                <a href="../../Perfil/index.html" class="dropdown-item">
-                    Meu Perfil
-                </a>
-                <a href="../../Perfil/ajuda.html" class="dropdown-item">
-                   Ajuda
-                </a>
-                <a href="../../Perfil/sobre.html" class="dropdown-item">
-                    Sobre
-                </a>
-                <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
-                <a href="../../auth/login.html" class="dropdown-item" style="color: #ef4444;">
-                    Sair
-                </a>
-            </div>
+    <ul class="navbar-menu">
+        <li>
+            <a href="../../Home/index.html" class="nav-link">Casos Clínicos</a>
+        </li>
+        <li>
+            <a href="../Escores/index.html" class="nav-link active">Escores Clínicos</a>
+        </li>
+    </ul>
+
+    <div class="user-menu-container" style="position: relative;">
+        <img src="../../assets/img/perfil.jpg"
+             id="avatar-toggle"
+             alt="Perfil"
+             style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
+        <div id="user-dropdown" class="dropdown-menu">
+            <a href="../../Perfil/index.html" class="dropdown-item">Meu Perfil</a>
+            <a href="../../Perfil/ajuda.html" class="dropdown-item">Ajuda</a>
+            <a href="../../Perfil/sobre.html" class="dropdown-item">Sobre</a>
+            <hr>
+            <a href="../../auth/login.html" class="dropdown-item" style="color:#ef4444;">Sair</a>
         </div>
     </div>
 </nav>
 
-    <main class="container">
-        <nav class="breadcrumb">
-            <a href="../index.html" style="color: #00b8a9;">Escores Clínicos</a> <span>&gt;</span> 
-            <a href="../detalhes-pi-rads.html" style="color: #00b8a9;">PI-RADS</a> <span>&gt;</span> 
-            <strong>Aplicar escore</strong>
-        </nav>
+<main class="container">
 
-        <section class="score-header-card">
-            <div class="score-title-group">
-                <h1>Aplicar PI-RADS v2.1 a um caso</h1>
-                <p>Categorização de probabilidade de câncer de próstata clinicamente significativo em RM.</p>
-            </div>
-            <div class="score-action-group">
-                <span class="badge-organ" style="background: rgba(124, 58, 237, 0.1); color: #7c3aed; border: none;">Próstata</span>
-                <div class="scale-info" style="margin-left: 15px;">
-                    <span class="scale-label">CATEGORIA</span>
-                    <span class="scale-value">1 – 5</span>
-                </div>
-            </div>
-        </section>
+<nav class="breadcrumb">
+    <a href="../index.html" style="color:#00b8a9;">Escores Clínicos</a> <span>&gt;</span>
+    <a href="../detalhes-pi-rads.html" style="color:#00b8a9;">PI-RADS</a> <span>&gt;</span>
+    <strong>Aplicar escore</strong>
+</nav>
 
-        <section class="info-section">
-            <h2>Caso clínico</h2>
-            <select class="filter-select" style="width: 100%; max-width: none;">
-                <option value="" disabled selected>Selecione um caso clínico</option>
-                <option value="1">Paciente: Ricardo Alves - ID: #9876</option>
-            </select>
-        </section>
-
-        <section class="info-section">
-            <h2>Parâmetros de classificação</h2>
-            
-            <div class="criteria-item">
-                <h3>Zona de Localização</h3>
-                <div class="radio-group">
-                    <label><input type="radio" name="zona" value="PZ"> Zona Periférica (PZ)</label><br>
-                    <label><input type="radio" name="zona" value="TZ"> Zona de Transição (TZ)</label>
-                </div>
-            </div>
-
-            <div class="criteria-item">
-                <h3>Pontuação Final da Lesão</h3>
-                <p class="criteria-subtext">Baseado nas sequências dominantes (DWI para PZ, T2W para TZ)</p>
-                <div class="radio-group">
-                    <label><input type="radio" name="pirads" value="1"> PI-RADS 1 → Muito baixa probabilidade</label><br>
-                    <label><input type="radio" name="pirads" value="2"> PI-RADS 2 → Baixa probabilidade</label><br>
-                    <label><input type="radio" name="pirads" value="3"> PI-RADS 3 → Probabilidade equívoca</label><br>
-                    <label><input type="radio" name="pirads" value="4"> PI-RADS 4 → Provável presença</label><br>
-                    <label><input type="radio" name="pirads" value="5"> PI-RADS 5 → Altamente provável</label>
-                </div>
-            </div>
-        </section>
-
-        <section class="interpretation-card" style="background: #fff; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; padding: 30px;">
-            <div>
-                <span class="scale-label">RESULTADO FINAL</span>
-                <div style="display: flex; align-items: baseline;">
-                    <h1 style="font-size: 48px; margin: 0; color: #7c3aed;">0</h1>
-                </div>
-                <span class="badge-complexity" style="background: #fee2e2; color: #b91c1c;">Presença de câncer provável</span>
-            </div>
-        </section>
-
-        <div class="footer-actions" style="justify-content: flex-end; gap: 15px;">
-            <button class="btn-back" style="background: #f1f5f9; color: #475569; border: none;">Cancelar</button>
-            <button class="btn-apply" style="margin: 0; ">Salvar</button>
+<section class="score-header-card">
+    <div class="score-title-group">
+        <h1>Aplicar PI-RADS v2.1 a um caso</h1>
+        <p>Categorização de probabilidade de câncer de próstata clinicamente significativo em RM.</p>
+    </div>
+    <div class="score-action-group">
+        <span class="badge-organ" style="background: rgba(124,58,237,0.1); color:#7c3aed;">Próstata</span>
+        <div class="scale-info" style="margin-left:15px;">
+            <span class="scale-label">CATEGORIA</span>
+            <span class="scale-value">1 – 5</span>
         </div>
-    </main>
-    <script>
-    const inputs = document.querySelectorAll('input[name="pirads"]');
-    const displayScore = document.querySelector('.interpretation-card h1');
-    const badge = document.querySelector('.badge-complexity');
+    </div>
+</section>
 
-    const descricoes = {
-        "1": "Muito baixa probabilidade",
-        "2": "Baixa probabilidade",
-        "3": "Probabilidade equívoca",
-        "4": "Presença de câncer provável",
-        "5": "Presença de câncer altamente provável"
+<section class="info-section">
+    <h2>Caso clínico</h2>
+    <select id="caseSelect" class="filter-select" style="width:100%; max-width:none;">
+        <option value="" disabled selected>Selecione um caso clínico</option>
+    </select>
+</section>
+
+<section class="info-section">
+    <h2>Parâmetros de classificação</h2>
+
+    <div class="criteria-item">
+        <h3>Zona de Localização</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="zona" value="PZ"> Zona Periférica (PZ)</label><br>
+            <label><input type="radio" name="zona" value="TZ"> Zona de Transição (TZ)</label>
+        </div>
+    </div>
+
+    <div class="criteria-item">
+        <h3>Pontuação Final da Lesão</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="pirads" value="1"> PI-RADS 1</label><br>
+            <label><input type="radio" name="pirads" value="2"> PI-RADS 2</label><br>
+            <label><input type="radio" name="pirads" value="3"> PI-RADS 3</label><br>
+            <label><input type="radio" name="pirads" value="4"> PI-RADS 4</label><br>
+            <label><input type="radio" name="pirads" value="5"> PI-RADS 5</label>
+        </div>
+    </div>
+</section>
+
+<section class="interpretation-card" style="background:#fff; border:1px solid #e2e8f0; padding:30px;">
+    <div>
+        <span class="scale-label">RESULTADO FINAL</span>
+        <h1 style="font-size:48px; color:#7c3aed;">0</h1>
+        <span class="badge-complexity">—</span>
+    </div>
+</section>
+
+<div class="footer-actions" style="justify-content:flex-end; gap:15px;">
+    <button class="btn-back" style="background:#f1f5f9; color:#475569;">Cancelar</button>
+    <button id="btnSalvar" class="btn-apply">Salvar</button>
+</div>
+
+</main>
+
+<script>
+// ===== BASE DE CASOS (MESMO PADRÃO) =====
+const casesData = [
+    { id:'CASO-2024-009', organ:'prostata', orgaoNome:'Próstata', desc:'Lesão prostática suspeita' }
+];
+
+function obterCasosCompletos() {
+    const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+    return [...salvos, ...casesData];
+}
+
+// ===== POPULA SELECT =====
+const select = document.getElementById('caseSelect');
+obterCasosCompletos()
+    .filter(c => c.organ === 'prostata')
+    .forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = `${c.id} - ${c.desc} (${c.orgaoNome})`;
+        select.appendChild(opt);
+    });
+
+// ===== SCORE (INTACTO) =====
+const inputs = document.querySelectorAll('input[name="pirads"]');
+const displayScore = document.querySelector('.interpretation-card h1');
+const badge = document.querySelector('.badge-complexity');
+
+const descricoes = {
+    "1": "Muito baixa probabilidade",
+    "2": "Baixa probabilidade",
+    "3": "Probabilidade equívoca",
+    "4": "Presença de câncer provável",
+    "5": "Presença de câncer altamente provável"
+};
+
+function updatePIRADS() {
+    inputs.forEach(input => {
+        if (input.checked) {
+            const valor = input.value;
+            displayScore.innerText = valor;
+            badge.innerText = descricoes[valor];
+
+            if (valor <= 2) {
+                badge.style.background = "#dcfce7"; badge.style.color = "#166534";
+            } else if (valor == 3) {
+                badge.style.background = "#fef9c3"; badge.style.color = "#854d0e";
+            } else {
+                badge.style.background = "#fee2e2"; badge.style.color = "#b91c1c";
+            }
+        }
+    });
+}
+inputs.forEach(i => i.addEventListener('change', updatePIRADS));
+
+// ===== SALVAR (MESMO PADRÃO DOS OUTROS) =====
+document.getElementById('btnSalvar').addEventListener('click', () => {
+    if (!select.value) return alert('Selecione um caso clínico');
+
+    const zona = document.querySelector('input[name="zona"]:checked');
+    const pirads = document.querySelector('input[name="pirads"]:checked');
+
+    if (!zona || !pirads) return alert('Preencha todos os critérios');
+
+    const piRadsScores = JSON.parse(localStorage.getItem('piRadsScores')) || {};
+    piRadsScores[select.value] = {
+        score: Number(pirads.value),
+        zona: zona.value,
+        descricao: descricoes[pirads.value],
+        dataAplicacao: new Date().toISOString().split('T')[0]
     };
 
-    function updatePIRADS() {
-        inputs.forEach(input => {
-            if (input.checked) {
-                const valor = input.value;
-                displayScore.innerText = valor;
-                badge.innerText = descricoes[valor];
-
-                // Ajuste de cores conforme a gravidade
-                if (valor <= 2) {
-                    badge.style.background = "#dcfce7"; badge.style.color = "#166534";
-                } else if (valor == 3) {
-                    badge.style.background = "#fef9c3"; badge.style.color = "#854d0e";
-                } else {
-                    badge.style.background = "#fee2e2"; badge.style.color = "#b91c1c";
-                }
-            }
-        });
-    }
-
-    inputs.forEach(input => input.addEventListener('change', updatePIRADS));
-
-       // --- FUNÇÕES / EVENTOS DA NAVBAR ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const avatarToggle = document.getElementById('avatar-toggle');
-            const userDropdown = document.getElementById('user-dropdown');
-
-            if (avatarToggle && userDropdown) {
-                // Abre/Fecha o menu ao clicar no avatar
-                avatarToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    userDropdown.classList.toggle('show');
-                });
-
-                // Fecha o menu ao clicar fora
-                document.addEventListener('click', (e) => {
-                    if (!userDropdown.contains(e.target) && e.target !== avatarToggle) {
-                        userDropdown.classList.remove('show');
-                    }
-                });
-            }
-        });
+    localStorage.setItem('piRadsScores', JSON.stringify(piRadsScores));
+    window.location.href = '../../Home/index.html';
+});
 </script>
+
 </body>
 </html>

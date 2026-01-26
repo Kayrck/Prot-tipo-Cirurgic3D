@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplicar Gleason Score - Cirurgic3D</title>
     <link rel="stylesheet" href="../../assets/css/global.css">
-    
+
     <style>
         .case-img {
             width: 80px;
@@ -35,137 +35,169 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
+
+<nav class="navbar">
     <div class="navbar-left">
         <a href="../../Home/index.html" class="navbar-logo">
             <img src="../../assets/img/logo.svg" alt="Cirurgic3D" />
         </a>
     </div>
-    
-     <ul class="navbar-menu">
-    <li>
-      <a href="../../Home/index.html" class="nav-link">
-        Casos Clínicos
-      </a>
-    </li>
-    <li>
-      <a href="../Escores/index.html" class="nav-link active">
-        Escores Clínicos
-      </a>
-    </li>
-  </ul>
 
-        <div class="user-menu-container" style="position: relative;">
-            <img src="../../assets/img/perfil.jpg" 
-                 id="avatar-toggle" 
-                 alt="Perfil" 
-                 style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
-            
-            <div id="user-dropdown" class="dropdown-menu">
-                <a href="../../Perfil/index.html" class="dropdown-item">
-                    Meu Perfil
-                </a>
-                <a href="../../Perfil/ajuda.html" class="dropdown-item">
-                   Ajuda
-                </a>
-                <a href="../../Perfil/sobre.html" class="dropdown-item">
-                    Sobre
-                </a>
-                <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
-                <a href="../../auth/login.html" class="dropdown-item" style="color: #ef4444;">
-                    Sair
-                </a>
-            </div>
+    <ul class="navbar-menu">
+        <li><a href="../../Home/index.html" class="nav-link">Casos Clínicos</a></li>
+        <li><a href="../Escores/index.html" class="nav-link active">Escores Clínicos</a></li>
+    </ul>
+
+    <div class="user-menu-container" style="position: relative;">
+        <img src="../../assets/img/perfil.jpg"
+             id="avatar-toggle"
+             alt="Perfil"
+             style="width:35px; height:35px; border-radius:50%; cursor:pointer; border:2px solid #e2e8f0;">
+        <div id="user-dropdown" class="dropdown-menu">
+            <a href="../../Perfil/index.html" class="dropdown-item">Meu Perfil</a>
+            <a href="../../Perfil/ajuda.html" class="dropdown-item">Ajuda</a>
+            <a href="../../Perfil/sobre.html" class="dropdown-item">Sobre</a>
+            <hr>
+            <a href="../../auth/login.html" class="dropdown-item" style="color:#ef4444;">Sair</a>
         </div>
     </div>
 </nav>
-    <main class="container">
-        <nav class="breadcrumb">
-            <a href="../index.html" style="color: #00b8a9;">Escores Clínicos</a> <span>&gt;</span> 
-            <a href="../detalhes-gleason.html" style="color: #00b8a9;">Gleason Score</a> <span>&gt;</span> 
-            <strong>Aplicar escore</strong>
-        </nav>
 
-        <section class="score-header-card">
-            <div class="score-title-group">
-                <h1>Aplicar Gleason Score a um caso</h1>
-                <p>Graduação histopatológica baseada nos padrões arquiteturais da biópsia.</p>
-            </div>
-            <div class="score-action-group">
-                <span class="badge-organ" style="background: rgba(124, 58, 237, 0.1); color: #7c3aed; border: none;">Próstata</span>
-                <div class="scale-info" style="margin-left: 15px;">
-                    <span class="scale-label">SOMA</span>
-                    <span class="scale-value">6 – 10</span>
-                </div>
-            </div>
-        </section>
+<main class="container">
 
-        <section class="info-section">
-            <h2>Parâmetros de classificação</h2>
-            
-            <div class="criteria-item">
-                <h3>Padrão Primário</h3>
-                <p class="criteria-subtext">Padrão histológico mais predominante na amostra</p>
-                <div class="radio-group">
-                    <label><input type="radio" name="primario" value="3"> Grau 3 → Glândulas bem formadas, pequenas</label><br>
-                    <label><input type="radio" name="primario" value="4"> Grau 4 → Glândulas fundidas ou cribriformes</label><br>
-                    <label><input type="radio" name="primario" value="5"> Grau 5 → Falta de formação glandular / necrose</label>
-                </div>
-            </div>
+<nav class="breadcrumb">
+    <a href="../index.html" style="color:#00b8a9;">Escores Clínicos</a> <span>&gt;</span>
+    <a href="../detalhes-gleason.html" style="color:#00b8a9;">Gleason Score</a> <span>&gt;</span>
+    <strong>Aplicar escore</strong>
+</nav>
 
-            <div class="criteria-item">
-                <h3>Padrão Secundário</h3>
-                <p class="criteria-subtext">Segundo padrão histológico mais comum</p>
-                <div class="radio-group">
-                    <label><input type="radio" name="secundario" value="3"> Grau 3</label><br>
-                    <label><input type="radio" name="secundario" value="4"> Grau 4</label><br>
-                    <label><input type="radio" name="secundario" value="5"> Grau 5</label>
-                </div>
-            </div>
-        </section>
-
-        <section class="interpretation-card" style="background: #fff; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; padding: 30px;">
-            <div>
-                <span class="scale-label">GRUPO DE GRADUAÇÃO (ISUP)</span>
-                <div style="display: flex; align-items: baseline;">
-                    <h1 style="font-size: 48px; margin: 0; color: #7c3aed;">0</h1>
-                    <span style="font-size: 24px; color: #94a3b8; margin-left: 5px;"></span>
-                </div>
-                <span class="badge-complexity" style="background: #fef9c3; color: #854d0e;">Grupo 2: Agressividade intermediária</span>
-            </div>
-        </section>
-
-        <div class="footer-actions" style="justify-content: flex-end; gap: 15px;">
-            <button class="btn-back" style="background: #f1f5f9; color: #475569; border: none;">Cancelar</button>
-            <button class="btn-apply" style="margin: 0;">Salvar</button>
+<section class="score-header-card">
+    <div class="score-title-group">
+        <h1>Aplicar Gleason Score a um caso</h1>
+        <p>Graduação histopatológica baseada nos padrões arquiteturais da biópsia.</p>
+    </div>
+    <div class="score-action-group">
+        <span class="badge-organ" style="background:rgba(124,58,237,0.1); color:#7c3aed;">Próstata</span>
+        <div class="scale-info" style="margin-left:15px;">
+            <span class="scale-label">SOMA</span>
+            <span class="scale-value">6 – 10</span>
         </div>
-    </main>
-    <script>
-    const primarios = document.querySelectorAll('input[name="primario"]');
-    const secundarios = document.querySelectorAll('input[name="secundario"]');
-    const displaySum = document.querySelector('.interpretation-card h1');
-    const displayFormula = document.querySelector('.interpretation-card span');
-    const badge = document.querySelector('.badge-complexity');
+    </div>
+</section>
 
-    function updateGleason() {
-        let p = 0, s = 0;
-        primarios.forEach(r => { if(r.checked) p = parseInt(r.value); });
-        secundarios.forEach(r => { if(r.checked) s = parseInt(r.value); });
+<section class="info-section">
+    <h2>Caso clínico</h2>
+    <select id="caseSelect" class="filter-select" style="width:100%; max-width:none;">
+        <option value="" disabled selected>Selecione um caso clínico</option>
+    </select>
+</section>
 
-        if (p > 0 && s > 0) {
-            const sum = p + s;
-            displaySum.innerText = sum;
-            displayFormula.innerText = `(${p} + ${s})`;
+<section class="info-section">
+    <h2>Parâmetros de classificação</h2>
 
-            if (sum <= 6) { badge.innerText = "Grupo 1: Baixa agressividade"; }
-            else if (sum == 7 && p == 3) { badge.innerText = "Grupo 2: Intermediário (3+4)"; }
-            else if (sum == 7 && p == 4) { badge.innerText = "Grupo 3: Intermediário (4+3)"; }
-            else if (sum == 8) { badge.innerText = "Grupo 4: Alta agressividade"; }
-            else { badge.innerText = "Grupo 5: Muito agressivo"; }
-        }
+    <div class="criteria-item">
+        <h3>Padrão Primário</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="primario" value="3"> Grau 3</label><br>
+            <label><input type="radio" name="primario" value="4"> Grau 4</label><br>
+            <label><input type="radio" name="primario" value="5"> Grau 5</label>
+        </div>
+    </div>
+
+    <div class="criteria-item">
+        <h3>Padrão Secundário</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="secundario" value="3"> Grau 3</label><br>
+            <label><input type="radio" name="secundario" value="4"> Grau 4</label><br>
+            <label><input type="radio" name="secundario" value="5"> Grau 5</label>
+        </div>
+    </div>
+</section>
+
+<section class="interpretation-card" style="background:#fff; border:1px solid #e2e8f0; padding:30px;">
+    <div>
+        <span class="scale-label">GRUPO DE GRADUAÇÃO (ISUP)</span>
+        <h1 style="font-size:48px; color:#7c3aed;">0</h1>
+        <span class="badge-complexity" style="background:#fef9c3; color:#854d0e;">—</span>
+    </div>
+</section>
+
+<div class="footer-actions" style="justify-content:flex-end; gap:15px;">
+    <button class="btn-back" style="background:#f1f5f9; color:#475569;">Cancelar</button>
+    <button id="btnSalvar" class="btn-apply">Salvar</button>
+</div>
+
+</main>
+
+<script>
+// ===== BASE DE CASOS (MESMO PADRÃO) =====
+const casesData = [
+    { id:'CASO-2024-010', organ:'prostata', orgaoNome:'Próstata', desc:'Biópsia prostática' }
+];
+
+function obterCasosCompletos() {
+    const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+    return [...salvos, ...casesData];
+}
+
+// ===== POPULA SELECT =====
+const select = document.getElementById('caseSelect');
+obterCasosCompletos()
+    .filter(c => c.organ === 'prostata')
+    .forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = `${c.id} - ${c.desc} (${c.orgaoNome})`;
+        select.appendChild(opt);
+    });
+
+// ===== GLEASON (INTACTO) =====
+const primarios = document.querySelectorAll('input[name="primario"]');
+const secundarios = document.querySelectorAll('input[name="secundario"]');
+const displaySum = document.querySelector('.interpretation-card h1');
+const badge = document.querySelector('.badge-complexity');
+
+function updateGleason() {
+    let p = 0, s = 0;
+    primarios.forEach(r => r.checked && (p = Number(r.value)));
+    secundarios.forEach(r => r.checked && (s = Number(r.value)));
+
+    if (p && s) {
+        const sum = p + s;
+        displaySum.innerText = sum;
+
+        if (sum <= 6) badge.innerText = "Grupo 1: Baixa agressividade";
+        else if (sum === 7 && p === 3) badge.innerText = "Grupo 2: Intermediário (3+4)";
+        else if (sum === 7 && p === 4) badge.innerText = "Grupo 3: Intermediário (4+3)";
+        else if (sum === 8) badge.innerText = "Grupo 4: Alta agressividade";
+        else badge.innerText = "Grupo 5: Muito agressivo";
     }
+}
 
-    [...primarios, ...secundarios].forEach(i => i.addEventListener('change', updateGleason));
+[...primarios, ...secundarios].forEach(i => i.addEventListener('change', updateGleason));
+
+// ===== SALVAR (MESMO PADRÃO) =====
+document.getElementById('btnSalvar').addEventListener('click', () => {
+    if (!select.value) return alert('Selecione um caso clínico');
+
+    const p = document.querySelector('input[name="primario"]:checked');
+    const s = document.querySelector('input[name="secundario"]:checked');
+    if (!p || !s) return alert('Preencha todos os critérios');
+
+    const sum = Number(p.value) + Number(s.value);
+
+    const gleasonScores = JSON.parse(localStorage.getItem('gleasonScores')) || {};
+    gleasonScores[select.value] = {
+        score: sum,
+        primario: Number(p.value),
+        secundario: Number(s.value),
+        dataAplicacao: new Date().toISOString().split('T')[0]
+    };
+
+    localStorage.setItem('gleasonScores', JSON.stringify(gleasonScores));
+    window.location.href = '../../Home/index.html';
+});
 </script>
+
 </body>
 </html>
