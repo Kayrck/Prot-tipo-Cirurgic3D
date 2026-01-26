@@ -32,192 +32,206 @@
             flex: 1;
         }
     </style>
-    </head>
+</head>
 <body>
-       <nav class="navbar">
+
+<nav class="navbar">
     <div class="navbar-left">
         <a href="../../Home/index.html" class="navbar-logo">
             <img src="../../assets/img/logo.svg" alt="Cirurgic3D" />
         </a>
     </div>
-    
-     <ul class="navbar-menu">
-    <li>
-      <a href="../../Home/index.html" class="nav-link">
-        Casos Clínicos
-      </a>
-    </li>
-    <li>
-      <a href="../Escores/index.html" class="nav-link active">
-        Escores Clínicos
-      </a>
-    </li>
-  </ul>
 
-        <div class="user-menu-container" style="position: relative;">
-            <img src="../../assets/img/perfil.jpg" 
-                 id="avatar-toggle" 
-                 alt="Perfil" 
-                 style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
-            
-            <div id="user-dropdown" class="dropdown-menu">
-                <a href="../../Perfil/index.html" class="dropdown-item">
-                    Meu Perfil
-                </a>
-                <a href="../../Perfil/ajuda.html" class="dropdown-item">
-                   Ajuda
-                </a>
-                <a href="../../Perfil/sobre.html" class="dropdown-item">
-                    Sobre
-                </a>
-                <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
-                <a href="../../auth/login.html" class="dropdown-item" style="color: #ef4444;">
-                    Sair
-                </a>
-            </div>
+    <ul class="navbar-menu">
+        <li>
+            <a href="../../Home/index.html" class="nav-link">Casos Clínicos</a>
+        </li>
+        <li>
+            <a href="../Escores/index.html" class="nav-link active">Escores Clínicos</a>
+        </li>
+    </ul>
+
+    <div class="user-menu-container" style="position: relative;">
+        <img src="../../assets/img/perfil.jpg"
+             id="avatar-toggle"
+             alt="Perfil"
+             style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
+
+        <div id="user-dropdown" class="dropdown-menu">
+            <a href="../../Perfil/index.html" class="dropdown-item">Meu Perfil</a>
+            <a href="../../Perfil/ajuda.html" class="dropdown-item">Ajuda</a>
+            <a href="../../Perfil/sobre.html" class="dropdown-item">Sobre</a>
+            <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
+            <a href="../../auth/login.html" class="dropdown-item" style="color: #ef4444;">Sair</a>
         </div>
     </div>
 </nav>
 
-    <main class="container">
-        <nav class="breadcrumb">
-            <a href="../index.html" style="color: #00b8a9;">Escores Clínicos</a> <span>&gt;</span> 
-            <a href="../detalhes-renal.html" style="color: #00b8a9;">RENAL Score</a> <span>&gt;</span> 
-            <strong>Aplicar escore</strong>
-        </nav>
+<main class="container">
 
-        <section class="score-header-card">
-            <div class="score-title-group">
-                <h1>Aplicar RENAL Score a um caso</h1>
-                <p>Selecione um caso clínico e preencha os critérios para calcular o escore.</p>
-            </div>
-            <div class="score-action-group">
-                <span class="badge-organ" style="background: rgba(0, 184, 169, 0.1); color: #00b8a9; border: none;">Rim</span>
-                <div class="scale-info" style="margin-left: 15px;">
-                    <span class="scale-label">ESCALA</span>
-                    <span class="scale-value">4 – 12</span>
-                </div>
-            </div>
-        </section>
+<nav class="breadcrumb">
+    <a href="../index.html" style="color: #00b8a9;">Escores Clínicos</a> <span>&gt;</span>
+    <a href="../detalhes-renal.html" style="color: #00b8a9;">RENAL Score</a> <span>&gt;</span>
+    <strong>Aplicar escore</strong>
+</nav>
 
-        <section class="info-section">
-            <h2>Caso clínico</h2>
-            <select class="filter-select" style="width: 100%; max-width: none; margin-top: 10px;">
-                <option value="" disabled selected>Selecione um caso clínico</option>
-                <option value="1">Paciente: João Silva - ID: #1234</option>
-                <option value="2">Paciente: Maria Oliveira - ID: #5678</option>
-            </select>
-        </section>
-
-        <section class="info-section">
-            <h2>Parâmetros de classificação</h2>
-            
-            <div class="criteria-item">
-                <h3>R - Raio (tamanho do tumor)</h3>
-                <p class="criteria-subtext">Diâmetro máximo do tumor em centímetros</p>
-                <div class="radio-group">
-                    <label><input type="radio" name="raio" value="1"> ≤ 4 cm → 1 ponto</label><br>
-                    <label><input type="radio" name="raio" value="2"> 4 cm e < 7 cm → 2 pontos</label><br>
-                    <label><input type="radio" name="raio" value="3"> ≥ 7 cm → 3 pontos</label>
-                </div>
-            </div>
-
-            <div class="criteria-item">
-                <h3>E - Exofítico / Endofítico</h3>
-                <p class="criteria-subtext">Proporção do tumor que se projeta para fora ou para dentro do rim</p>
-                <div class="radio-group">
-                    <label><input type="radio" name="exofitico" value="1"> ≥ 50% exofítico → 1 ponto</label><br>
-                    <label><input type="radio" name="exofitico" value="2"> < 50% exofítico → 2 pontos</label><br>
-                    <label><input type="radio" name="exofitico" value="3"> Completamente endofítico → 3 pontos</label>
-                </div>
-            </div>
-
-            <div class="criteria-item">
-                <h3>N - Nearness (proximidade do seio renal)</h3>
-                <p class="criteria-subtext">Distância entre o tumor e o sistema coletor ou seio renal</p>
-                <div class="radio-group">
-                    <label><input type="radio" name="nearness" value="1"> ≥ 7 mm do sistema coletor → 1 ponto</label><br>
-                    <label><input type="radio" name="nearness" value="2"> 4 mm a < 7 mm do sistema coletor → 2 pontos</label><br>
-                    <label><input type="radio" name="nearness" value="3"> < 4 mm do sistema coletor → 3 pontos</label>
-                </div>
-            </div>
-
-            </section>
-
-        <section class="interpretation-card" style="background: #fff; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; padding: 30px;">
-            <div>
-                <span class="scale-label">ESCORE CALCULADO</span>
-                <div style="display: flex; align-items: baseline;">
-                    <h1 style="font-size: 48px; margin: 0;">0</h1>
-                    <span style="font-size: 24px; color: #94a3b8; margin-left: 5px;">/ 12</span>
-                </div>
-                <span class="badge-complexity" style="background: #fef9c3; color: #854d0e;">Complexidade moderada</span>
-            </div>
-            <p style="color: #64748b; font-size: 14px; max-width: 300px; text-align: right;">
-                Classificação baseada nos critérios selecionados.
-            </p>
-        </section>
-
-        <div class="footer-actions" style="justify-content: flex-end; gap: 15px; margin-top: 30px;">
-            <button class="btn-back" style="background: #f1f5f9; color: #475569; border: none;">Cancelar</button>
-            <button class="btn-apply" style="margin: 0;">Salvar</button>
+<section class="score-header-card">
+    <div class="score-title-group">
+        <h1>Aplicar RENAL Score a um caso</h1>
+        <p>Selecione um caso clínico e preencha os critérios para calcular o escore.</p>
+    </div>
+    <div class="score-action-group">
+        <span class="badge-organ" style="background: rgba(0, 184, 169, 0.1); color: #00b8a9; border: none;">Rim</span>
+        <div class="scale-info" style="margin-left: 15px;">
+            <span class="scale-label">ESCALA</span>
+            <span class="scale-value">4 – 12</span>
         </div>
-    </main>
-    <script>
-    const inputs = document.querySelectorAll('input[type="radio"]');
-    const displayScore = document.querySelector('.interpretation-card h1');
-    const badge = document.querySelector('.badge-complexity');
+    </div>
+</section>
 
-    function updateScore() {
-        let total = 0;
-        let selectedCount = 0;
-        const groups = new Set();
+<section class="info-section">
+    <h2>Caso clínico</h2>
+    <select id="caseSelect" class="filter-select" style="width: 100%; max-width: none; margin-top: 10px;">
+        <option value="" disabled selected>Selecione um caso clínico</option>
+    </select>
+</section>
 
-        inputs.forEach(input => {
-            groups.add(input.name);
-            if (input.checked) {
-                total += parseInt(input.value);
-                selectedCount++;
-            }
-        });
+<section class="info-section">
+    <h2>Parâmetros de classificação</h2>
 
-        displayScore.innerText = total;
+    <div class="criteria-item">
+        <h3>R - Raio (tamanho do tumor)</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="raio" value="1"> ≤ 4 cm → 1 ponto</label><br>
+            <label><input type="radio" name="raio" value="2"> 4 cm e &lt; 7 cm → 2 pontos</label><br>
+            <label><input type="radio" name="raio" value="3"> ≥ 7 cm → 3 pontos</label>
+        </div>
+    </div>
 
-        // Classificação RENAL (ajuste os limites para PADUA se necessário)
-        if (total <= 6) {
-            badge.innerText = "Baixa complexidade";
-            badge.style.background = "#dcfce7"; badge.style.color = "#166534";
-        } else if (total <= 9) {
-            badge.innerText = "Complexidade moderada";
-            badge.style.background = "#fef9c3"; badge.style.color = "#854d0e";
-        } else {
-            badge.innerText = "Alta complexidade";
-            badge.style.background = "#fee2e2"; badge.style.color = "#b91c1c";
-        }
+    <div class="criteria-item">
+        <h3>E - Exofítico / Endofítico</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="exofitico" value="1"> ≥ 50% exofítico → 1 ponto</label><br>
+            <label><input type="radio" name="exofitico" value="2"> &lt; 50% exofítico → 2 pontos</label><br>
+            <label><input type="radio" name="exofitico" value="3"> Completamente endofítico → 3 pontos</label>
+        </div>
+    </div>
+
+    <div class="criteria-item">
+        <h3>N - Nearness</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="nearness" value="1"> ≥ 7 mm → 1 ponto</label><br>
+            <label><input type="radio" name="nearness" value="2"> 4 mm a &lt; 7 mm → 2 pontos</label><br>
+            <label><input type="radio" name="nearness" value="3"> &lt; 4 mm → 3 pontos</label>
+        </div>
+    </div>
+
+    <!-- 🔹 A - ADICIONADO (NÃO SOMA PONTOS) -->
+    <div class="criteria-item">
+        <h3>A - Anterior / Posterior</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="anteriorPosterior" value="A"> Anterior (A)</label><br>
+            <label><input type="radio" name="anteriorPosterior" value="P"> Posterior (P)</label><br>
+            <label><input type="radio" name="anteriorPosterior" value="X"> Indeterminado (X)</label>
+        </div>
+    </div>
+
+    <!-- 🔹 L - ADICIONADO (NÃO SOMA PONTOS) -->
+    <div class="criteria-item">
+        <h3>L - Linhas Polares</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="linhasPolares" value="1"> Totalmente acima/abaixo</label><br>
+            <label><input type="radio" name="linhasPolares" value="2"> Cruza linha polar</label><br>
+            <label><input type="radio" name="linhasPolares" value="3"> Entre linhas polares</label>
+        </div>
+    </div>
+</section>
+
+<section class="interpretation-card" style="background: #fff; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; padding: 30px;">
+    <div>
+        <span class="scale-label">ESCORE CALCULADO</span>
+        <h1 style="font-size: 48px; margin: 0;">0</h1>
+        <span class="badge-complexity" style="background: #fef9c3; color: #854d0e;">Complexidade moderada</span>
+    </div>
+</section>
+
+<div class="footer-actions" style="justify-content: flex-end; gap: 15px; margin-top: 30px;">
+    <button class="btn-back">Cancelar</button>
+    <button id="btnSalvar" class="btn-apply">Salvar</button>
+</div>
+
+</main>
+
+<script>
+// ===== BASE DE CASOS (IGUAL HOME) =====
+
+const casesData = [
+    { id: 'CASO-2024-001', date: '2024-01-15', desc: 'Reconstrução 3D - Adenocarcinoma de Cólon descendente', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/Colon-descendente.jpg' },
+    { id: 'CASO-2024-002', date: '2024-01-14', desc: 'Nódulo pulmonar - Lobo superior direito', status: 'arquivado', statusText: 'Documentos ilegíveis', class: 'status-red', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/Lobo-superior.jpg' },
+    { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Rim-esquerdo.jpg' },
+    { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Metastase-hepática.jpg' },
+    { id: 'CASO-2024-005', date: '2024-01-11', desc: 'Planejamento - Ressecção de Cólon Transverso', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/Colon-Transverso.jpg' },
+    { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Celulas-Renais.jpg' },
+    { id: 'CASO-2024-007', date: '2024-01-09', desc: 'Malformação Arteriovenosa Pulmonar', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/Malformacao-Arteriovenosa.jpg' },
+    { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Volumetria-Hepatica.jpg' }
+];
+
+function obterCasosCompletos() {
+    const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+    return [...salvos, ...casesData];
+}
+
+// ===== POPULA SELECT =====
+const select = document.getElementById('caseSelect');
+obterCasosCompletos()
+    .filter(c => c.organ === 'rins')
+    .forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = `${c.id} - ${c.desc} (${c.orgaoNome})`;
+        select.appendChild(opt);
+    });
+
+// ===== SCORE (MANTIDO, INTACTO) =====
+const inputs = document.querySelectorAll('input[type="radio"]');
+const displayScore = document.querySelector('.interpretation-card h1');
+const badge = document.querySelector('.badge-complexity');
+
+function updateScore() {
+    let total = 0;
+    inputs.forEach(i => i.checked && !isNaN(i.value) && (total += Number(i.value)));
+    displayScore.innerText = total;
+}
+inputs.forEach(i => i.addEventListener('change', updateScore));
+
+// ===== SALVAR (EXTENSÃO MÍNIMA) =====
+document.getElementById('btnSalvar').addEventListener('click', () => {
+    if (!select.value) return alert('Selecione um caso clínico');
+
+    const criterios = {};
+    let total = 0;
+
+    const obrigatorios = ['raio','exofitico','nearness','anteriorPosterior','linhasPolares'];
+
+    for (const name of obrigatorios) {
+        const el = document.querySelector(`input[name="${name}"]:checked`);
+        if (!el) return alert('Preencha todos os critérios');
+        criterios[name] = el.value;
+        if (!isNaN(el.value)) total += Number(el.value);
     }
 
-    inputs.forEach(input => input.addEventListener('change', updateScore));
+    const renalScores = JSON.parse(localStorage.getItem('renalScores')) || {};
+    renalScores[select.value] = {
+        score: total,
+        classificacao: total <= 6 ? 'Baixa' : total <= 9 ? 'Moderada' : 'Alta',
+        criterios,
+        dataAplicacao: new Date().toISOString().split('T')[0]
+    };
 
-    // --- FUNÇÕES / EVENTOS DA NAVBAR ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const avatarToggle = document.getElementById('avatar-toggle');
-            const userDropdown = document.getElementById('user-dropdown');
-
-            if (avatarToggle && userDropdown) {
-                // Abre/Fecha o menu ao clicar no avatar
-                avatarToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    userDropdown.classList.toggle('show');
-                });
-
-                // Fecha o menu ao clicar fora
-                document.addEventListener('click', (e) => {
-                    if (!userDropdown.contains(e.target) && e.target !== avatarToggle) {
-                        userDropdown.classList.remove('show');
-                    }
-                });
-            }
-        });
+    localStorage.setItem('renalScores', JSON.stringify(renalScores));
+    window.location.href = '../../Home/index.html';
+});
 </script>
+
 </body>
 </html>

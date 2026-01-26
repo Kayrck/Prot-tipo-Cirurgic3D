@@ -390,6 +390,11 @@
             </div>
         </div>
     </section>
+    
+    <section class="info-section">
+<h2>Escores Aplicados</h2>
+<div id="scoresContainer"></div>
+</section>
 
     <div style="display: flex; justify-content: center; gap: 15px; margin: 40px 0; flex-wrap: wrap;">
         
@@ -473,6 +478,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+
+const renalScores = JSON.parse(localStorage.getItem('renalScores')) || {};
+const container = document.getElementById('scoresContainer');
+
+if (renalScores[id]) {
+  const s = renalScores[id];
+  container.innerHTML = `
+    <p><strong>RENAL Score:</strong> ${s.score}</p>
+    <p><strong>Classificação:</strong> ${s.classificacao}</p>
+    <p><strong>Data:</strong> ${s.dataAplicacao}</p>
+  `;
+} else {
+  container.innerHTML = `<p>Nenhum escore aplicado a este caso.</p>`;
+}
 </script>
 
 </body>
