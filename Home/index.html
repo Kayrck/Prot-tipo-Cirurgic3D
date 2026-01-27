@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cirurgic3D - Gestão de Casos</title>
     <link rel="stylesheet" href="../assets/css/global.css">
     <style>
+        /* Estilos de Componentes */
         .case-img {
             width: 80px;
             height: 80px;
@@ -17,262 +19,247 @@
             justify-content: center;
             flex-shrink: 0;
         }
+
         .case-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
+        /* Barra de Ações e Busca */
         .action-bar {
             display: flex;
             align-items: center;
             gap: 20px;
             margin-bottom: 25px;
         }
+
         .search-container {
             flex: 1;
         }
     </style>
 </head>
+
 <body>
-
-<nav class="navbar">
-    <div class="navbar-left">
-        <a href="../Home/index.html" class="navbar-logo">
-            <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
-        </a>
-    </div>
-
-    <ul class="navbar-menu">
-        <li>
-            <a href="../Home/index.html" class="nav-link active">Casos Clínicos</a>
-        </li>
-        <li>
-            <a href="../Escores/index.html" class="nav-link">Escores Clínicos</a>
-        </li>
-    </ul>
-
-    <div class="user-menu-container" style="position: relative;">
-        <img src="../assets/img/perfil.jpg"
-             id="avatar-toggle"
-             alt="Perfil"
-             style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
-
-        <div id="user-dropdown" class="dropdown-menu">
-            <a href="../Perfil/index.html" class="dropdown-item">Meu Perfil</a>
-            <a href="../Perfil/ajuda.html" class="dropdown-item">Ajuda</a>
-            <a href="../Perfil/sobre.html" class="dropdown-item">Sobre</a>
-            <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
-            <a href="../auth/login.html" class="dropdown-item" style="color: #ef4444;">Sair</a>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="../Home/index.html" class="navbar-logo">
+                <img src="../assets/img/logo.svg" alt="Cirurgic3D" />
+            </a>
         </div>
-    </div>
-</nav>
 
-<main class="container">
-    <h1>Casos Clínicos</h1>
+        <ul class="navbar-menu">
+            <li><a href="../Home/index.html" class="nav-link active">Casos Clínicos</a></li>
+            <li><a href="../Escores/index.html" class="nav-link">Escores Clínicos</a></li>
+        </ul>
 
-    <div class="action-bar">
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Pesquisar por ID ou descrição...">
-        </div>
-        <a href="../Casos/novo-caso-home.html" class="btn-add" style="text-decoration: none;">
-            <span>+</span> Adicionar caso
-        </a>
-    </div>
+        <div class="user-menu-container" style="position: relative;">
+            <img src="../assets/img/perfil.jpg" id="avatar-toggle" alt="Perfil"
+                style="width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid #e2e8f0;">
 
-    <div class="filters-row">
-        <label>Data inicial</label>
-        <input type="date" id="dateStart">
-
-        <label>Data final</label>
-        <input type="date" id="dateEnd">
-
-        <label>Órgão</label>
-        <select id="organFilter">
-            <option value="todos">Todos</option>
-            <option value="colon">Cólon</option>
-            <option value="pulmao">Pulmão</option>
-            <option value="rins">Rins</option>
-            <option value="figado">Fígado</option>
-        </select>
-    </div>
-
-    <div class="tabs" id="statusTabs">
-        <div class="tab active" data-status="todos">Todos</div>
-        <div class="tab" data-status="publicado">Publicados</div>
-        <div class="tab" data-status="analise">Em análise</div>
-        <div class="tab" data-status="aguardando">Aguardando pagamento</div>
-        <div class="tab" data-status="pago">Pagamento efetuado</div>
-        <div class="tab" data-status="arquivado">Arquivados</div>
-    </div>
-
-    <div id="cases-list"></div>
-
-    <div class="pagination">
-        <button class="page-btn">&lt;</button>
-        <button class="page-btn active">1</button>
-        <button class="page-btn">2</button>
-        <button class="page-btn">&gt;</button>
-    </div>
-</main>
-
-<script>
-// 1. Banco de Dados Base
-const casesData = [
-    { id: 'CASO-2024-001', date: '2024-01-15', desc: 'Reconstrução 3D - Adenocarcinoma de Cólon descendente', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/Colon-descendente.jpg' },
-    { id: 'CASO-2024-002', date: '2024-01-14', desc: 'Nódulo pulmonar - Lobo superior direito', status: 'arquivado', statusText: 'Documentos ilegíveis', class: 'status-red', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/Lobo-superior.jpg' },
-    { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Rim-esquerdo.jpg' },
-    { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Metastase-hepática.jpg' },
-    { id: 'CASO-2024-005', date: '2024-01-11', desc: 'Planejamento - Ressecção de Cólon Transverso', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/Colon-Transverso.jpg' },
-    { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Celulas-Renais.jpg' },
-    { id: 'CASO-2024-007', date: '2024-01-09', desc: 'Malformação Arteriovenosa Pulmonar', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/Malformacao-Arteriovenosa.jpg' },
-    { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Volumetria-Hepatica.jpg' }
-];
-
-// 2. Integra LocalStorage
-function obterCasosCompletos() {
-    const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
-    const formatados = salvos.map(c => ({
-        id: c.id,
-        date: c.data,
-        desc: `Reconstrução 3D - ${c.orgao}`,
-        status: 'analise',
-        statusText: 'Em análise',
-        class: 'status-blue',
-        organ: c.orgao.toLowerCase(),
-        thumb: ''
-    }));
-    return [...formatados, ...casesData];
-}
-
-const casesContainer = document.getElementById('cases-list');
-const searchInput = document.getElementById('searchInput');
-const organFilter = document.getElementById('organFilter');
-const dateStartInput = document.getElementById('dateStart');
-const dateEndInput = document.getElementById('dateEnd');
-
-// 3. Renderização
-function renderCases(data) {
-    casesContainer.innerHTML = '';
-    
-    if (data.length === 0) {
-        casesContainer.innerHTML = '<p style="text-align:center; padding:50px; color:#999;">Nenhum caso encontrado.</p>';
-        return;
-    }
-
-    data.forEach(item => {
-        const dateObj = new Date(item.date + 'T00:00:00');
-        const formattedDate = dateObj.toLocaleDateString('pt-BR', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric'
-        });
-
-        const card = `
-            <div class="case-card">
-                <div class="case-img">
-                    <img src="${item.thumb}" 
-                         onerror="this.src='https://via.placeholder.com/80/000000/FFFFFF?text=Vista+3D'" 
-                         alt="Miniatura">
-                </div>
-
-                <div class="case-info">
-                    <span class="case-date">${formattedDate}</span>
-                    <h3>${item.id}</h3>
-                    <p>${item.desc}</p>
-                    <div class="status-badge ${item.class}">
-                        <span class="dot" style="background: currentColor;"></span>
-                        ${item.statusText}
-                    </div>
-                </div>
-
-                <div class="case-actions">
-                    <a href="../Detalhes/index.html?id=${item.id}"
-                       class="btn-outline"
-                       style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
-                        Detalhes
-                    </a>
-
-                    <a href="pagamento.html" class="btn-solid">
-                        Gerar link de pagamento
-                    </a>
-                </div>
+            <div id="user-dropdown" class="dropdown-menu">
+                <a href="../Perfil/index.html" class="dropdown-item">Meu Perfil</a>
+                <a href="../Perfil/ajuda.html" class="dropdown-item">Ajuda</a>
+                <a href="../Perfil/sobre.html" class="dropdown-item">Sobre</a>
+                <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 5px 0;">
+                <a href="../auth/login.html" class="dropdown-item" style="color: #ef4444;">Sair</a>
             </div>
-        `;
+        </div>
+    </nav>
 
-        casesContainer.innerHTML += card;
-    });
-}
+    <main class="container">
+        <h1>Casos Clínicos</h1>
 
+        <div class="action-bar">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Pesquisar por ID ou descrição...">
+            </div>
+            <a href="../Casos/novo-caso-home.html" class="btn-add" style="text-decoration: none;">
+                <span>+</span> Adicionar caso
+            </a>
+        </div>
 
-// 4. FILTROS (mantendo tudo que já existia + datas)
-function applyFilters() {
-    const allData = obterCasosCompletos();
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedOrgan = organFilter.value;
-    const activeTab = document.querySelector('.tab.active')?.dataset.status || 'todos';
+        <div class="filters-row">
+            <label>Data inicial</label>
+            <input type="date" id="dateStart">
 
-    const startDate = dateStartInput.value ? new Date(dateStartInput.value + 'T00:00:00') : null;
-    const endDate = dateEndInput.value ? new Date(dateEndInput.value + 'T23:59:59') : null;
+            <label>Data final</label>
+            <input type="date" id="dateEnd">
 
-    const filtered = allData.filter(item => {
-        const itemDate = new Date(item.date + 'T00:00:00');
+            <label>Órgão</label>
+            <select id="organFilter">
+                <option value="todos">Todos</option>
+                <option value="colon">Cólon</option>
+                <option value="pulmao">Pulmão</option>
+                <option value="rins">Rins</option>
+                <option value="figado">Fígado</option>
+            </select>
+        </div>
 
-        const matchesSearch =
-            item.id.toLowerCase().includes(searchTerm) ||
-            item.desc.toLowerCase().includes(searchTerm);
+        <div class="tabs" id="statusTabs">
+            <div class="tab active" data-status="todos">Todos</div>
+            <div class="tab" data-status="publicado">Publicados</div>
+            <div class="tab" data-status="analise">Em análise</div>
+            <div class="tab" data-status="aguardando">Aguardando pagamento</div>
+            <div class="tab" data-status="pago">Pagamento efetuado</div>
+            <div class="tab" data-status="arquivado">Arquivados</div>
+        </div>
 
-        const matchesOrgan =
-            selectedOrgan === 'todos' || item.organ === selectedOrgan;
+        <div id="cases-list"></div>
 
-        const matchesStatus =
-            activeTab === 'todos' || item.status === activeTab;
+        <div class="pagination">
+            <button class="page-btn">&lt;</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">&gt;</button>
+        </div>
+    </main>
 
-        const matchesDate =
-            (!startDate || itemDate >= startDate) &&
-            (!endDate || itemDate <= endDate);
+    <script>
+        // 1. Configuração de Dados Base
+        const casesData = [
+            { id: 'CASO-2024-001', date: '2024-01-15', desc: 'Reconstrução 3D - Adenocarcinoma de Cólon descendente', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/Colon-descendente.jpg' },
+            { id: 'CASO-2024-002', date: '2024-01-14', desc: 'Nódulo pulmonar - Lobo superior direito', status: 'arquivado', statusText: 'Documentos ilegíveis', class: 'status-red', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/Lobo-superior.jpg' },
+            { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Rim-esquerdo.jpg' },
+            { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Metastase-hepática.jpg' },
+            { id: 'CASO-2024-005', date: '2024-01-11', desc: 'Planejamento - Ressecção de Cólon Transverso', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/Colon-Transverso.jpg' },
+            { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Celulas-Renais.jpg' },
+            { id: 'CASO-2024-007', date: '2024-01-09', desc: 'Malformação Arteriovenosa Pulmonar', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/Malformacao-Arteriovenosa.jpg' },
+            { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Volumetria-Hepatica.jpg' },
+            { id: 'CASO-2024-009', date: '2024-01-07', desc: 'Lesão uterina - Avaliação pré-operatória', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'utero', orgaoNome: 'Útero', thumb: '../assets/img/casos/Lesao-uterina.jpg' }
+        ];
 
-        return matchesSearch && matchesOrgan && matchesStatus && matchesDate;
-    });
+        const casesContainer = document.getElementById('cases-list');
+        const searchInput = document.getElementById('searchInput');
+        const organFilter = document.getElementById('organFilter');
+        const dateStartInput = document.getElementById('dateStart');
+        const dateEndInput = document.getElementById('dateEnd');
 
-    renderCases(filtered);
-}
+        // 2. Lógica de Persistência
+        function obterCasosCompletos() {
+            const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+            const formatados = salvos.map(c => ({
+                id: c.id,
+                date: c.data,
+                desc: `Reconstrução 3D - ${c.orgao}`,
+                status: 'analise',
+                statusText: 'Em análise',
+                class: 'status-blue',
+                organ: c.orgao.toLowerCase(),
+                thumb: ''
+            }));
+            return [...formatados, ...casesData];
+        }
 
-// Listeners (mantidos + datas)
-searchInput.addEventListener('input', applyFilters);
-organFilter.addEventListener('change', applyFilters);
-dateStartInput.addEventListener('change', applyFilters);
-dateEndInput.addEventListener('change', applyFilters);
+        // 3. Renderização de UI
+        function renderCases(data) {
+            casesContainer.innerHTML = '';
 
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', e => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        e.target.classList.add('active');
-        applyFilters();
-    });
-});
+            if (data.length === 0) {
+                casesContainer.innerHTML = '<p style="text-align:center; padding:50px; color:#999;">Nenhum caso encontrado.</p>';
+                return;
+            }
 
-// Inicialização
-applyFilters();
+            data.forEach(item => {
+                const dateObj = new Date(item.date + 'T00:00:00');
+                const formattedDate = dateObj.toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const avatarToggle = document.getElementById('avatar-toggle');
-    const userDropdown = document.getElementById('user-dropdown');
+                const card = `
+                    <div class="case-card">
+                        <div class="case-img">
+                            <img src="${item.thumb}" 
+                                 onerror="this.src='https://via.placeholder.com/80/000000/FFFFFF?text=Vista+3D'" 
+                                 alt="Miniatura">
+                        </div>
 
-    if (avatarToggle && userDropdown) {
-        // Abre/Fecha o menu ao clicar no avatar
-        avatarToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            userDropdown.classList.toggle('show');
-        });
+                        <div class="case-info">
+                            <span class="case-date">${formattedDate}</span>
+                            <h3>${item.id}</h3>
+                            <p>${item.desc}</p>
+                            <div class="status-badge ${item.class}">
+                                <span class="dot" style="background: currentColor;"></span>
+                                ${item.statusText}
+                            </div>
+                        </div>
 
-        // Fecha o menu ao clicar fora
-        document.addEventListener('click', (e) => {
-            if (!userDropdown.contains(e.target) && e.target !== avatarToggle) {
-                userDropdown.classList.remove('show');
+                        <div class="case-actions">
+                            <a href="../Detalhes/index.html?id=${item.id}"
+                               class="btn-outline"
+                               style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
+                                Detalhes
+                            </a>
+                            <a href="pagamento.html" class="btn-solid">Gerar link de pagamento</a>
+                        </div>
+                    </div>
+                `;
+                casesContainer.innerHTML += card;
+            });
+        }
+
+        // 4. Lógica de Filtros
+        function applyFilters() {
+            const allData = obterCasosCompletos();
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedOrgan = organFilter.value;
+            const activeTab = document.querySelector('.tab.active')?.dataset.status || 'todos';
+
+            const startDate = dateStartInput.value ? new Date(dateStartInput.value + 'T00:00:00') : null;
+            const endDate = dateEndInput.value ? new Date(dateEndInput.value + 'T23:59:59') : null;
+
+            const filtered = allData.filter(item => {
+                const itemDate = new Date(item.date + 'T00:00:00');
+                const matchesSearch = item.id.toLowerCase().includes(searchTerm) || item.desc.toLowerCase().includes(searchTerm);
+                const matchesOrgan = selectedOrgan === 'todos' || item.organ === selectedOrgan;
+                const matchesStatus = activeTab === 'todos' || item.status === activeTab;
+                const matchesDate = (!startDate || itemDate >= startDate) && (!endDate || itemDate <= endDate);
+
+                return matchesSearch && matchesOrgan && matchesStatus && matchesDate;
+            });
+
+            renderCases(filtered);
+        }
+
+        // 5. Inicialização e Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            applyFilters();
+
+            // Listeners de Inputs
+            searchInput.addEventListener('input', applyFilters);
+            organFilter.addEventListener('change', applyFilters);
+            dateStartInput.addEventListener('change', applyFilters);
+            dateEndInput.addEventListener('change', applyFilters);
+
+            // Controle de Abas
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', e => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    e.target.classList.add('active');
+                    applyFilters();
+                });
+            });
+
+            // Lógica do Menu do Usuário
+            const avatarToggle = document.getElementById('avatar-toggle');
+            const userDropdown = document.getElementById('user-dropdown');
+
+            if (avatarToggle && userDropdown) {
+                avatarToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    userDropdown.classList.toggle('show');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!userDropdown.contains(e.target) && e.target !== avatarToggle) {
+                        userDropdown.classList.remove('show');
+                    }
+                });
             }
         });
-    }
-});
-</script>
+    </script>
 </body>
+
 </html>
