@@ -103,6 +103,13 @@
         </section>
 
         <section class="info-section">
+            <h2>Caso clínico</h2>
+            <select id="caseSelect" class="filter-select" style="width: 100%; max-width: none; margin-top: 10px;">
+                <option value="" disabled selected>Selecione um caso clínico</option>
+            </select>
+        </section>
+
+        <section class="info-section">
             <div class="criteria-item">
                 <h3>T - Tumor Primário</h3>
                 <select class="filter-select" style="width: 100%; max-width: none;">
@@ -142,7 +149,41 @@
             <button class="btn-apply" style="margin: 0;">Salvar</button>
         </div>
     </main>
-    <script>
+<script>
+
+    // ===== BASE DE CASOS (IGUAL HOME) =====
+    const casesData = [
+        { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Rim-esquerdo.jpg' },
+        { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Metastase-hepática.jpg' },
+        { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Celulas-Renais.jpg' },
+        { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Volumetria-Hepatica.jpg' },
+        { id: 'CASO-2024-009', date: '2024-01-07', desc: 'Lesão uterina - Avaliação pré-operatória', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'utero', orgaoNome: 'Útero', thumb: '../assets/img/casos/Lesao-uterina.jpg' },
+        { id: 'CASO-2024-010', date: '2024-01-06', desc: 'Avaliação Pancreática - Modelo 3D', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'pancreas', orgaoNome: 'pancreas', thumb: '../assets/img/casos/Pancreas.jpg'},
+        { id: 'CASO-2024-011', date: '2024-01-05', desc: 'Planejamento de Próstata - Avaliação Pré-operatória', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'prostata', orgaoNome: 'prostata', thumb: '../assets/img/casos/Prostata.jpg'}
+    ];
+
+    function obterCasosCompletos() {
+        const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+        return [...salvos, ...casesData];
+    }
+
+    const select = document.getElementById('caseSelect');
+        obterCasosCompletos()
+            .filter(c => c.organ === 'pulmao')
+            .forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id;
+                opt.textContent = `${c.id} - ${c.desc} (${c.orgaoNome})`;
+                select.appendChild(opt);
+            });
+
+        const tSelect = document.querySelectorAll('.criteria-item select')[0];
+        const nSelect = document.querySelectorAll('.criteria-item select')[1];
+        const mSelect = document.querySelectorAll('.criteria-item select')[2];
+
+        const displayEstadio = document.querySelector('.interpretation-card h1');
+        const badge = document.querySelector('.badge-complexity');
+
          document.addEventListener('DOMContentLoaded', () => {
             const avatarToggle = document.getElementById('avatar-toggle');
             const userDropdown = document.getElementById('user-dropdown');
@@ -161,6 +202,32 @@
                     }
                 });
             }
+        });
+
+// ===== SALVAR TNM PULMONAR =====
+        document.querySelector('.btn-apply').addEventListener('click', () => {
+            if (!select.value) return alert('Selecione um caso clínico');
+
+            const t = tSelect.value;
+            const n = nSelect.value;
+            const m = mSelect.value;
+
+            if (!t || !n || !m) return alert('Preencha todos os critérios');
+
+            const estadio = displayEstadio.innerText;
+
+            const tnmPulmonarScores = JSON.parse(localStorage.getItem('tnmPulmonarScores')) || {};
+
+            tnmPulmonarScores[select.value] = {
+                estadio,
+                t,
+                n,
+                m,
+                dataAplicacao: new Date().toISOString().split('T')[0]
+            };
+
+            localStorage.setItem('tnmPulmonarScores', JSON.stringify(tnmPulmonarScores));
+            window.location.href = '../../Home/index.html';
         });
     </script>
 </body>

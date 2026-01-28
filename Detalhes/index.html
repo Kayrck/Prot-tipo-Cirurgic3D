@@ -479,6 +479,7 @@
             const childPughScores = JSON.parse(localStorage.getItem('childPughScores')) || {};
             const meldScores = JSON.parse(localStorage.getItem('meldScores')) || {};
             const liRadsScores = JSON.parse(localStorage.getItem('liRadsScores')) || {};
+            const tnmPulmonarScores = JSON.parse(localStorage.getItem('tnmPulmonarScores')) || {};
 
             const container = document.getElementById('scoresContainer');
             let html = '';
@@ -574,6 +575,20 @@
                         <p><strong>Tamanho da lesão:</strong> ${l.criterios.tamanho_mm} mm</p>
                         <p><strong>Características adicionais:</strong> ${l.criterios.caracteristicas_adicionais}</p>
                         <p><strong>Data:</strong> ${l.dataAplicacao}</p>
+                    </div>
+                `;
+            }
+
+            if (tnmPulmonarScores[caseId]) {
+                const tnm = tnmPulmonarScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>TNM Pulmonar</h4>
+                        <p><strong>Estadiamento:</strong> ${tnm.estadio}</p>
+                        <p><strong>T:</strong> ${tnm.t}</p>
+                        <p><strong>N:</strong> ${tnm.n}</p>
+                        <p><strong>M:</strong> ${tnm.m}</p>
+                        <p><strong>Data:</strong> ${tnm.dataAplicacao}</p>
                     </div>
                 `;
             }
