@@ -91,6 +91,8 @@
                 <option value="todos">Todos</option>
                 <option value="colon">Cólon</option>
                 <option value="pulmao">Pulmão</option>
+                <option value="pancreas">Pâncreas</option>
+                <option value="prostata">Próstata</option>
                 <option value="rins">Rins</option>
                 <option value="figado">Fígado</option>
             </select>
@@ -118,15 +120,13 @@
     <script>
         // 1. Configuração de Dados Base
         const casesData = [
-            { id: 'CASO-2024-001', date: '2024-01-15', desc: 'Reconstrução 3D - Adenocarcinoma de Cólon descendente', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/Colon-descendente.jpg' },
-            { id: 'CASO-2024-002', date: '2024-01-14', desc: 'Nódulo pulmonar - Lobo superior direito', status: 'arquivado', statusText: 'Documentos ilegíveis', class: 'status-red', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/Lobo-superior.jpg' },
             { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Rim-esquerdo.jpg' },
             { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Metastase-hepática.jpg' },
-            { id: 'CASO-2024-005', date: '2024-01-11', desc: 'Planejamento - Ressecção de Cólon Transverso', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'colon', orgaoNome: 'Cólon', thumb: '../assets/img/casos/Colon-Transverso.jpg' },
             { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Celulas-Renais.jpg' },
-            { id: 'CASO-2024-007', date: '2024-01-09', desc: 'Malformação Arteriovenosa Pulmonar', status: 'pago', statusText: 'Pagamento efetuado', class: 'status-purple', organ: 'pulmao', orgaoNome: 'Pulmão', thumb: '../assets/img/casos/Malformacao-Arteriovenosa.jpg' },
             { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Volumetria-Hepatica.jpg' },
-            { id: 'CASO-2024-009', date: '2024-01-07', desc: 'Lesão uterina - Avaliação pré-operatória', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'utero', orgaoNome: 'Útero', thumb: '../assets/img/casos/Lesao-uterina.jpg' }
+            { id: 'CASO-2024-009', date: '2024-01-07', desc: 'Lesão uterina - Avaliação pré-operatória', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'utero', orgaoNome: 'Útero', thumb: '../assets/img/casos/Lesao-uterina.jpg' },
+            { id: 'CASO-2024-010', date: '2024-01-06', desc: 'Avaliação Pancreática - Modelo 3D', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'pancreas', orgaoNome: 'pancreas', thumb: '../assets/img/casos/Pancreas.jpg'},
+            { id: 'CASO-2024-011', date: '2024-01-05', desc: 'Planejamento de Próstata - Avaliação Pré-operatória', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'prostata', orgaoNome: 'prostata', thumb: '../assets/img/casos/Prostata.jpg'}
         ];
 
         const casesContainer = document.getElementById('cases-list');

@@ -162,13 +162,13 @@
 
         <div class="viewer-3d"
             style="position: relative; display: flex; justify-content: center; align-items: center; background: #000; border-radius: 12px; height: 400px; overflow: hidden;">
-            <a href="https://cirurgic3d.com.br/renal3dmodels/cgb/" style="text-decoration: none;">
+           <a id="link3d-btn" href="#" style="text-decoration: none;">
                 <button
                     style="position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 5px 12px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 5px; z-index: 10; transition: background 0.3s;">
                     Vista 3D
                 </button>
             </a>
-            <img id="main-3d-image" alt="3D Model" onclick="window.location.href='vista3d.html'">
+             <img id="main-3d-image" alt="3D Model">
         </div>
 
         <div
@@ -253,6 +253,11 @@
                 </span>
                 <span style="cursor: pointer; color: #64748b;">📋</span>
             </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Escores Aplicados</h2>
+            <div id="scoresContainer"></div>
         </section>
 
         <section class="info-section" style="margin-top: 25px;">
@@ -423,15 +428,13 @@
     <script>
         // Dados dos casos
         const casesData = [
-            { id: 'CASO-2024-001', date: '2024-01-15', desc: 'Reconstrução 3D - Adenocarcinoma de Cólon descendente', statusText: 'Pagamento efetuado', thumb: '../assets/img/casos/Colon-descendente.jpg' },
-            { id: 'CASO-2024-002', date: '2024-01-14', desc: 'Nódulo pulmonar - Lobo superior direito', statusText: 'Documentos ilegíveis', thumb: '../assets/img/casos/Lobo-superior.jpg' },
-            { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', statusText: 'Aguardando pagamento', thumb: '../assets/img/casos/Rim-esquerdo.jpg' },
-            { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', statusText: 'Publicado', thumb: '../assets/img/casos/Metastase-hepática.jpg' },
-            { id: 'CASO-2024-005', date: '2024-01-11', desc: 'Planejamento - Ressecção de Cólon Transverso', statusText: 'Em análise', thumb: '../assets/img/casos/Colon-Transverso.jpg' },
-            { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', statusText: 'Aguardando pagamento', thumb: '../assets/img/casos/Celulas-Renais.jpg' },
-            { id: 'CASO-2024-007', date: '2024-01-09', desc: 'Malformação Arteriovenosa Pulmonar', statusText: 'Pagamento efetuado', thumb: '../assets/img/casos/Malformacao-Arteriovenosa.jpg' },
-            { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', statusText: 'Publicado', thumb: '../assets/img/casos/Volumetria-Hepatica.jpg' },
-            { id: 'CASO-2024-009', date: '2024-01-07', desc: 'Lesão uterina - Avaliação pré-operatória', statusText: 'Em análise', thumb: '../assets/img/casos/Lesao-uterina.jpg' }
+            { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', statusText: 'Aguardando pagamento', link3d: 'https://cirurgic3d.com.br/renal3dmodels/gbs/', thumb: '../assets/img/casos/Rim-esquerdo.jpg' },
+            { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', statusText: 'Publicado', link3d: 'https://cirurgic3d.com.br/liver/cls/', thumb: '../assets/img/casos/Metastase-hepática.jpg' },
+            { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', statusText: 'Aguardando pagamento',  link3d: 'https://cirurgic3d.com.br/renal3dmodels/gbs/', thumb: '../assets/img/casos/Celulas-Renais.jpg' },
+            { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', statusText: 'Publicado',link3d: 'https://cirurgic3d.com.br/liver/cls/', thumb: '../assets/img/casos/Volumetria-Hepatica.jpg' },
+            { id: 'CASO-2024-009', date: '2024-01-07', desc: 'Lesão uterina - Avaliação pré-operatória', statusText: 'Em análise', link3d: 'https://cirurgic3d.com.br/uterus/acjsa/', thumb: '../assets/img/casos/Lesao-uterina.jpg' },
+            { id: 'CASO-2024-010', date: '2024-01-06', desc: 'Avaliação Pancreática - Modelo 3D', statusText: 'Publicado', link3d: 'https://cirurgic3d.com.br/3dmodels/sno/', thumb: '../assets/img/casos/Pancreas.jpg'},
+            { id: 'CASO-2024-011', date: '2024-01-05', desc: 'Planejamento de Próstata - Avaliação Pré-operatória', statusText: 'Aguardando pagamento', link3d: 'https://cirurgic3d.com.br/prostate/dvf/', thumb: '../assets/img/casos/Prostata.jpg'}
         ];
 
         // Carrega dados específicos do caso baseado na URL
@@ -447,6 +450,7 @@
             document.getElementById('info-model').innerText = caso.desc;
             document.getElementById('info-date').innerText = caso.date;
             document.getElementById('main-3d-image').src = caso.thumb;
+            document.getElementById('link3d-btn').href = caso.link3d;
         }
 
         // Lógica de UI e Dropdown
