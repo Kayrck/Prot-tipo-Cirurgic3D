@@ -480,6 +480,8 @@
             const meldScores = JSON.parse(localStorage.getItem('meldScores')) || {};
             const liRadsScores = JSON.parse(localStorage.getItem('liRadsScores')) || {};
             const tnmPulmonarScores = JSON.parse(localStorage.getItem('tnmPulmonarScores')) || {};
+            const figoScores = JSON.parse(localStorage.getItem('figoScores')) || {};
+
 
             const container = document.getElementById('scoresContainer');
             let html = '';
@@ -592,6 +594,19 @@
                     </div>
                 `;
             }
+
+            if (figoScores[caseId]) {
+                const f = figoScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>FIGO Uterino</h4>
+                        <p><strong>Estágio:</strong> ${f.score}</p>
+                        <p><strong>Classificação:</strong> ${f.classificacao}</p>
+                        <p><strong>Data:</strong> ${f.dataAplicacao}</p>
+                    </div>
+                `;
+            }
+
 
             container.innerHTML = html || `<p>Nenhum escore aplicado a este caso.</p>`;
         });
