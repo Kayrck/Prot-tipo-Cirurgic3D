@@ -476,6 +476,9 @@
             const paduaScores = JSON.parse(localStorage.getItem('paduaScores')) || {};
             const piRadsScores = JSON.parse(localStorage.getItem('piRadsScores')) || {};
             const gleasonScores = JSON.parse(localStorage.getItem('gleasonScores')) || {};
+            const childPughScores = JSON.parse(localStorage.getItem('childPughScores')) || {};
+            const meldScores = JSON.parse(localStorage.getItem('meldScores')) || {};
+            const liRadsScores = JSON.parse(localStorage.getItem('liRadsScores')) || {};
 
             const container = document.getElementById('scoresContainer');
             let html = '';
@@ -527,6 +530,50 @@
                         <p><strong>Padrão Primário:</strong> ${g.criterios.primario}</p>
                         <p><strong>Padrão Secundário:</strong> ${g.criterios.secundario}</p>
                         <p><strong>Data:</strong> ${g.dataAplicacao}</p>
+                    </div>
+                `;
+            }
+
+            if (childPughScores[caseId]) {
+                const c = childPughScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>Child-Pugh</h4>
+                        <p><strong>Pontuação:</strong> ${c.score}</p>
+                        <p><strong>Classe:</strong> ${c.classe}</p>
+                        <p><strong>Classificação:</strong> ${c.classificacao}</p>
+                        <p><strong>Data:</strong> ${c.dataAplicacao}</p>
+                    </div>
+                `;
+            }
+
+            if (meldScores[caseId]) {
+                const m = meldScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>MELD Score</h4>
+                        <p><strong>Pontuação:</strong> ${m.score}</p>
+                        <p><strong>Classificação:</strong> ${m.classificacao}</p>
+                        <p><strong>Bilirrubina:</strong> ${m.criterios.bilirrubina}</p>
+                        <p><strong>INR:</strong> ${m.criterios.inr}</p>
+                        <p><strong>Creatinina:</strong> ${m.criterios.creatinina}</p>
+                        <p><strong>Sódio:</strong> ${m.criterios.sodio}</p>
+                        <p><strong>Data:</strong> ${m.dataAplicacao}</p>
+                    </div>
+                `;
+            }
+
+            if (liRadsScores[caseId]) {
+                const l = liRadsScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>LI-RADS</h4>
+                        <p><strong>Categoria:</strong> ${l.score}</p>
+                        <p><strong>Classificação:</strong> ${l.classificacao}</p>
+                        <p><strong>APHE:</strong> ${l.criterios.aphe ? 'Presente' : 'Ausente'}</p>
+                        <p><strong>Tamanho da lesão:</strong> ${l.criterios.tamanho_mm} mm</p>
+                        <p><strong>Características adicionais:</strong> ${l.criterios.caracteristicas_adicionais}</p>
+                        <p><strong>Data:</strong> ${l.dataAplicacao}</p>
                     </div>
                 `;
             }

@@ -102,6 +102,13 @@
         </section>
 
         <section class="info-section">
+            <h2>Caso clínico</h2>
+            <select id="caseSelect" class="filter-select" style="width:100%; max-width:none;">
+                <option value="" disabled selected>Selecione um caso clínico</option>
+            </select>
+        </section>
+
+        <section class="info-section">
             <h2>Critérios de Imagem</h2>
             <div class="criteria-item">
                 <h3>Hiper-realce arterial não periférico</h3>
@@ -139,7 +146,35 @@
             <button class="btn-apply" style="margin: 0;">Salvar</button>
         </div>
     </main>
-    <script>
+
+
+<script>
+    const casesData = [
+    { id: 'CASO-2024-003', date: '2024-01-13', desc: 'Tumor Renal (RENAL Score 7x) - Rim esquerdo', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Rim-esquerdo.jpg' },
+    { id: 'CASO-2024-004', date: '2024-01-12', desc: 'Metástase hepática - Segmento VII', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Metastase-hepática.jpg' },
+    { id: 'CASO-2024-006', date: '2024-01-10', desc: 'Carcinoma de Células Renais - Mapeamento Vascular', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'rins', orgaoNome: 'Rins', thumb: '../assets/img/casos/Celulas-Renais.jpg' },
+    { id: 'CASO-2024-008', date: '2024-01-08', desc: 'Volumetria Hepática - Doador Vivo', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'figado', orgaoNome: 'Fígado', thumb: '../assets/img/casos/Volumetria-Hepatica.jpg' },
+    { id: 'CASO-2024-009', date: '2024-01-07', desc: 'Lesão uterina - Avaliação pré-operatória', status: 'analise', statusText: 'Em análise', class: 'status-blue', organ: 'utero', orgaoNome: 'Útero', thumb: '../assets/img/casos/Lesao-uterina.jpg' },
+    { id: 'CASO-2024-010', date: '2024-01-06', desc: 'Avaliação Pancreática - Modelo 3D', status: 'publicado', statusText: 'Publicado', class: 'status-green', organ: 'pancreas', orgaoNome: 'pancreas', thumb: '../assets/img/casos/Pancreas.jpg'},
+    { id: 'CASO-2024-011', date: '2024-01-05', desc: 'Planejamento de Próstata - Avaliação Pré-operatória', status: 'aguardando', statusText: 'Aguardando pagamento', class: 'status-orange', organ: 'prostata', orgaoNome: 'prostata', thumb: '../assets/img/casos/Prostata.jpg'}
+];
+
+    function obterCasosCompletos() {
+        const salvos = JSON.parse(localStorage.getItem('casosClinicos')) || [];
+        return [...salvos, ...casesData];
+    }
+
+    const select = document.getElementById('caseSelect');
+        obterCasosCompletos()
+        .filter(c => c.organ === 'figado')
+        .forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = `${c.id} - ${c.desc} (${c.orgaoNome})`;
+            select.appendChild(opt);
+     });
+
+
     const apheInputs = document.querySelectorAll('input[name="aphe"]');
     const sizeInput = document.querySelector('input[type="number"]');
     const checklist = document.querySelectorAll('input[type="checkbox"]');
@@ -205,6 +240,40 @@
                     }
                 });
             }
+        });
+
+
+        // ===== SALVAR LI-RADS (PADRÃO GLOBAL DE ESCORES) =====
+
+        document.querySelector('.btn-apply').addEventListener('click', () => {
+            if (!select.value) return alert('Selecione um caso clínico');
+
+            const categoria = displayScore.innerText;
+            if (!categoria) return alert('Preencha os critérios do LI-RADS');
+
+            const size = parseFloat(sizeInput.value) || 0;
+            const hasAPHE = [...apheInputs].some(i => i.checked && i.value === 'yes');
+            const extras = [...checklist].filter(i => i.checked).length;
+
+            let classificacao = 'Probabilidade intermediária';
+            if (categoria === 'LR-5') classificacao = 'Definitivamente CHC';
+            else if (categoria === 'LR-4') classificacao = 'Provável CHC';
+
+            const liRadsScores = JSON.parse(localStorage.getItem('liRadsScores')) || {};
+
+            liRadsScores[select.value] = {
+                score: categoria,
+                classificacao,
+                criterios: {
+                    aphe: hasAPHE,
+                    tamanho_mm: size,
+                    caracteristicas_adicionais: extras
+                },
+                dataAplicacao: new Date().toISOString().split('T')[0]
+            };
+
+            localStorage.setItem('liRadsScores', JSON.stringify(liRadsScores));
+            window.location.href = '../../Home/index.html';
         });
 </script>
 </body>
