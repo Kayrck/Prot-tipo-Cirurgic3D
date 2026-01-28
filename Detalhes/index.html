@@ -397,11 +397,6 @@
             </div>
         </section>
 
-        <section class="info-section">
-            <h2>Escores Aplicados</h2>
-            <div id="scoresContainer"></div>
-        </section>
-
         <div style="display: flex; justify-content: center; gap: 15px; margin: 40px 0; flex-wrap: wrap;">
             <button
                 style="display: flex; align-items: center; gap: 8px; background: #f0f9ff; color: #007bff; border: 1px solid #007bff; padding: 10px 24px; border-radius: 8px; font-weight: 500; cursor: pointer;">
@@ -473,22 +468,40 @@
                 });
             }
 
-            // Lógica de Escores (LocalStorage)
             const params = new URLSearchParams(window.location.search);
             const caseId = params.get('id');
+
             const renalScores = JSON.parse(localStorage.getItem('renalScores')) || {};
+            const paduaScores = JSON.parse(localStorage.getItem('paduaScores')) || {};
+
             const container = document.getElementById('scoresContainer');
+            let html = '';
 
             if (renalScores[caseId]) {
-                const s = renalScores[caseId];
-                container.innerHTML = `
-                    <p><strong>RENAL Score:</strong> ${s.score}</p>
-                    <p><strong>Classificação:</strong> ${s.classificacao}</p>
-                    <p><strong>Data:</strong> ${s.dataAplicacao}</p>
+                const r = renalScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>RENAL Score</h4>
+                        <p><strong>Escore:</strong> ${r.score}</p>
+                        <p><strong>Classificação:</strong> ${r.classificacao}</p>
+                        <p><strong>Data:</strong> ${r.dataAplicacao}</p>
+                    </div>
                 `;
-            } else {
-                container.innerHTML = `<p>Nenhum escore aplicado a este caso.</p>`;
             }
+
+            if (paduaScores[caseId]) {
+                const p = paduaScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>PADUA Score</h4>
+                        <p><strong>Escore:</strong> ${p.score}</p>
+                        <p><strong>Classificação:</strong> ${p.classificacao}</p>
+                        <p><strong>Data:</strong> ${p.dataAplicacao}</p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html || `<p>Nenhum escore aplicado a este caso.</p>`;
         });
     </script>
 </body>
