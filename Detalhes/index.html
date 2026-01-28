@@ -471,9 +471,11 @@
             const params = new URLSearchParams(window.location.search);
             const caseId = params.get('id');
 
+            
             const renalScores = JSON.parse(localStorage.getItem('renalScores')) || {};
             const paduaScores = JSON.parse(localStorage.getItem('paduaScores')) || {};
             const piRadsScores = JSON.parse(localStorage.getItem('piRadsScores')) || {};
+            const gleasonScores = JSON.parse(localStorage.getItem('gleasonScores')) || {};
 
             const container = document.getElementById('scoresContainer');
             let html = '';
@@ -511,6 +513,20 @@
                         <p><strong>Interpretação:</strong> ${pr.classificacao}</p>
                         <p><strong>Zona:</strong> ${pr.criterios.zona}</p>
                         <p><strong>Data:</strong> ${pr.dataAplicacao}</p>
+                    </div>
+                `;
+            }
+
+            if (gleasonScores[caseId]) {
+                const g = gleasonScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>Gleason Score</h4>
+                        <p><strong>Soma:</strong> ${g.score}</p>
+                        <p><strong>Classificação:</strong> ${g.classificacao}</p>
+                        <p><strong>Padrão Primário:</strong> ${g.criterios.primario}</p>
+                        <p><strong>Padrão Secundário:</strong> ${g.criterios.secundario}</p>
+                        <p><strong>Data:</strong> ${g.dataAplicacao}</p>
                     </div>
                 `;
             }
