@@ -473,6 +473,7 @@
 
             const renalScores = JSON.parse(localStorage.getItem('renalScores')) || {};
             const paduaScores = JSON.parse(localStorage.getItem('paduaScores')) || {};
+            const piRadsScores = JSON.parse(localStorage.getItem('piRadsScores')) || {};
 
             const container = document.getElementById('scoresContainer');
             let html = '';
@@ -497,6 +498,19 @@
                         <p><strong>Escore:</strong> ${p.score}</p>
                         <p><strong>Classificação:</strong> ${p.classificacao}</p>
                         <p><strong>Data:</strong> ${p.dataAplicacao}</p>
+                    </div>
+                `;
+            }
+
+            if (piRadsScores[caseId]) {
+                const pr = piRadsScores[caseId];
+                html += `
+                    <div style="margin-bottom:15px;">
+                        <h4>PI-RADS</h4>
+                        <p><strong>Categoria:</strong> ${pr.score}</p>
+                        <p><strong>Interpretação:</strong> ${pr.classificacao}</p>
+                        <p><strong>Zona:</strong> ${pr.criterios.zona}</p>
+                        <p><strong>Data:</strong> ${pr.dataAplicacao}</p>
                     </div>
                 `;
             }
